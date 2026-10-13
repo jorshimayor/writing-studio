@@ -1,0 +1,12 @@
+{
+  "name": "writing-studio",
+  "owner": { "name": "Joshua Obafemi" },
+  "description": "A writing and publishing skill for blogs, Substack, newsletters and YouTube.",
+  "plugins": [
+    {
+      "name": "writing-studio",
+      "source": "./",
+      "description": "End-to-end content system: reader-need-driven articles, Substack posts, newsletters and YouTube scripts with SEO titles, keyword placement and an automated SEO and voice audit."
+    }
+  ]
+}

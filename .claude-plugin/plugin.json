@@ -1,0 +1,9 @@
+{
+  "name": "writing-studio",
+  "version": "1.0.0",
+  "description": "End-to-end content system: reader-need-driven articles, Substack posts, newsletters and YouTube scripts with SEO titles, keyword placement and an automated SEO and voice audit.",
+  "author": { "name": "Joshua Obafemi" },
+  "repository": "https://github.com/jorshimayor/writing-studio",
+  "license": "MIT",
+  "keywords": ["writing", "seo", "content", "newsletter", "youtube", "substack", "blogging"]
+}
