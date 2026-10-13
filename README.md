@@ -14,6 +14,21 @@ It works in seven steps:
 
 It also enforces the [How Not to Write](https://github.com/jorshimayor/how-not-to-write) rules: no "it's not X, it's Y" cadence, no em dashes, no padding.
 
+## Three ways to use it
+
+| Mode | Ask for | You get |
+|---|---|---|
+| **Outline** | "Outline these 5 topics for my blog" | One `<slug>.outline.md` per topic (reader need, keywords, titles, intro plan and every planned section), checked against the reader need's rules, plus an index table |
+| **From outline** | "Write the article from `outlines/what-is-rag.outline.md`" | The finished piece, built section by section from the approved outline, then checked for SEO and for sticking to the outline |
+| **End to end** | "Write a post about my ReAct agent results" | Outline for your approval, then the finished piece |
+
+Each reader need has its own outline skeleton and rules. For example, a Guide Me outline must open with prerequisites, a Fix It outline must start with causes and end with where to get help, and a Compare For Me outline must plan a comparison table. `scripts/outline_check.py` enforces them:
+
+```bash
+python3 skills/writing-studio/scripts/outline_check.py outlines/*.outline.md --site yourdomain.com
+python3 skills/writing-studio/scripts/outline_check.py outlines/what-is-rag.outline.md --article drafts/what-is-rag.md
+```
+
 ## Install
 
 ### Claude Code

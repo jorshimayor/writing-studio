@@ -1,0 +1,192 @@
+{
+  "_comment": "Reader-need rules for outline_check.py. Regexes match planned H2 titles (lowercased).",
+  "needs": {
+    "Educate Me": {
+      "min_h2": 4,
+      "max_h2": 9,
+      "required_sections": [
+        {
+          "label": "How it works",
+          "match": "how\\b.*\\b(work|works|function)|under the hood|inside",
+          "severity": "warn"
+        },
+        {
+          "label": "Why it exists or where it fits",
+          "match": "\\bwhy\\b|fits?|matter|important|benefit",
+          "severity": "warn"
+        },
+        {
+          "label": "Who uses it and how (use cases or limits)",
+          "match": "use case|used (for|by)|who|when|limit|example",
+          "severity": "warn"
+        }
+      ],
+      "forbidden_sections": [
+        {
+          "label": "No generic closing heading (end on a next step)",
+          "match": "^(conclusion|final thoughts|wrapping up|summary)$",
+          "severity": "warn"
+        }
+      ],
+      "reminders": [
+        "Intro sets up the problem before naming the subject. Don't open with the definition.",
+        "First H2 delivers the core answer with one concrete example; close by pointing to an Explain It or Guide Me piece."
+      ]
+    },
+    "Explain It": {
+      "min_h2": 3,
+      "max_h2": 9,
+      "needs_visuals": true,
+      "required_sections": [
+        {
+          "label": "The central mechanism first",
+          "match": "how\\b|why\\b|inside|under the hood|mechanism|works?",
+          "severity": "fail",
+          "position": "first",
+          "within": 1
+        }
+      ],
+      "reminders": [
+        "Skip the 101: start where the subject is used and why its internals matter now.",
+        "Show the mechanism with a diagram, code, a worked example or real numbers; give each component its own section."
+      ]
+    },
+    "Compare For Me": {
+      "min_h2": 3,
+      "max_h2": 9,
+      "needs_table": true,
+      "required_sections": [
+        {
+          "label": "The key difference",
+          "match": "differ|\\bvs\\.?\\b|versus|compar|distinction",
+          "severity": "fail"
+        },
+        {
+          "label": "When to choose each option",
+          "match": "\\bwhen\\b|which|choose|should you|right for|pick",
+          "severity": "fail",
+          "position": "last",
+          "within": 2
+        }
+      ],
+      "reminders": [
+        "Don't give the verdict in the intro: make clear the right choice depends on the reader's needs.",
+        "Introduce the comparison table before it and interpret it after it; never call one option universally better."
+      ]
+    },
+    "Guide Me": {
+      "min_h2": 3,
+      "max_h2": 14,
+      "needs_steps": true,
+      "needs_visuals": true,
+      "required_sections": [
+        {
+          "label": "Prerequisites first",
+          "match": "prerequisite|requirements|before you (start|begin)|what you('ll)? need|setup|set up your",
+          "severity": "fail",
+          "position": "first",
+          "within": 1
+        },
+        {
+          "label": "Verify it works / next steps",
+          "match": "verif|test|check|confirm|next steps|what's next|troubleshoot",
+          "severity": "warn",
+          "position": "last",
+          "within": 2
+        }
+      ],
+      "reminders": [
+        "Intro says what the reader will have at the end and roughly how long it takes.",
+        "One heading per major step, minor steps numbered; show the expected output after key steps."
+      ]
+    },
+    "Fix It": {
+      "min_h2": 3,
+      "max_h2": 12,
+      "needs_steps": true,
+      "required_sections": [
+        {
+          "label": "Likely causes first",
+          "match": "why|cause|reason|common|what causes|symptom",
+          "severity": "fail",
+          "position": "first",
+          "within": 1
+        },
+        {
+          "label": "Where to get help if nothing works",
+          "match": "still|escalat|contact|support|nothing work|none of|get help|next steps",
+          "severity": "fail",
+          "position": "last",
+          "within": 2
+        }
+      ],
+      "reminders": [
+        "One section per fix, from most likely or easiest to rarest; numbered steps with the expected result.",
+        "Calm, plain language: the reader is frustrated."
+      ]
+    },
+    "Give Me Perspective": {
+      "min_h2": 3,
+      "max_h2": 10,
+      "required_sections": [
+        {
+          "label": "Method (how I tested or reasoned)",
+          "match": "method|how i|setup|experiment|tested|approach|data",
+          "severity": "fail"
+        },
+        {
+          "label": "Limits or what didn't work",
+          "match": "wrong|limit|caveat|didn't|did not|failed|surpris|honest|null",
+          "severity": "fail"
+        },
+        {
+          "label": "What to do with it",
+          "match": "takeaway|lesson|what (this|it) means|what to do|implication|apply|checklist|reproduce",
+          "severity": "warn"
+        }
+      ],
+      "reminders": [
+        "Intro states the surprising result or tension concretely.",
+        "Separate what the data shows from opinion; end with how to reproduce the result."
+      ]
+    },
+    "Update Me": {
+      "min_h2": 2,
+      "max_h2": 6,
+      "required_sections": [
+        {
+          "label": "What changed (first)",
+          "match": "what('s| is)? (new|changed|happened)|what changed|release|announc|update",
+          "severity": "fail",
+          "position": "first",
+          "within": 0
+        },
+        {
+          "label": "What it means for the reader",
+          "match": "mean|affect|impact|why it matters|should you|what to do",
+          "severity": "fail"
+        }
+      ],
+      "reminders": [
+        "Lead with what happened, when and who it affects; link the primary source (release notes, announcement)."
+      ]
+    },
+    "Inspire Me": {
+      "min_h2": 3,
+      "max_h2": 8,
+      "required_sections": [
+        {
+          "label": "Transferable lesson at the end",
+          "match": "lesson|takeaway|learn|what (you|i) can|your turn|first step|apply",
+          "severity": "fail",
+          "position": "last",
+          "within": 2
+        }
+      ],
+      "reminders": [
+        "Open in the middle of the story at the moment of tension.",
+        "Concrete details: dates, tools, numbers, failures, the turning point."
+      ]
+    }
+  }
+}

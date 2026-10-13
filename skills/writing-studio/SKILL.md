@@ -1,6 +1,6 @@
 ---
 name: writing-studio
-description: End-to-end content system for writing and publishing across a blog, Substack, email newsletters and YouTube. Use it whenever the user wants to plan, title, outline, write, edit, SEO-optimize, or repurpose an article, blog post, Substack post, newsletter issue, YouTube script or video description, or asks for catchy or trending titles, keyword placement, internal linking, or a content brief. It decides what the reader needs from the piece, researches search intent, writes ranking-friendly titles, drafts in a human voice, runs an automated SEO and style audit, and adapts one piece into every channel.
+description: End-to-end content system for writing and publishing across a blog, Substack, email newsletters and YouTube. Use it whenever the user wants to plan, title, outline, write, edit, SEO-optimize, or repurpose an article, blog post, Substack post, newsletter issue, YouTube script or video description, or asks for catchy or trending titles, keyword placement, internal linking, or a content brief. It works in three modes: topic(s) to reader-need outlines, outline to finished piece, or topic straight to a finished piece. It decides what the reader needs, researches keywords and search intent, writes ranking-friendly titles, builds a checked outline, drafts in a human voice, runs automated outline, SEO and style audits, and adapts one piece into every channel.
 ---
 
 # Writing Studio
@@ -15,12 +15,37 @@ Turn a topic into a finished piece for any channel: a search-optimized article, 
 | `references/reader-needs.md` | The 8 reader needs, how to pick one, and how each shapes the piece | Step 1, Step 4 |
 | `references/keyword-research.md` | Free autocomplete ideas, OpenSEO (open-source Ahrefs alternative) and Search Console; choosing keywords; reading competitor titles | Step 2 |
 | `references/titles.md` | Titles, subject lines and YouTube titles that rank and get clicked; finding trending angles | Step 3 |
+| `references/outline-template.md` | Outline file format and a skeleton for each reader need | Step 4 |
 | `references/structure.md` | Intros, ordering, headings, transitions, lists, tables, length | Step 4, Step 5 |
 | `references/voice.md` | Voice and style rules, including the hard bans | Step 5, Step 6 |
 | `references/seo.md` | On-page SEO checklist, linking and metadata | Step 2, Step 4, Step 6 |
 | `references/channels.md` | Format rules for blog, Substack, newsletter and YouTube, plus repurposing | Step 0, Step 5, Step 7 |
 | `scripts/keyword_ideas.py` | Free keyword and question ideas from Google and YouTube autocomplete | Step 2 |
+| `scripts/outline_check.py` | Checks an outline against its reader-need rules, and a draft against its outline | Step 4, Step 6 |
 | `scripts/seo_check.py` | Automated SEO and voice audit for Markdown drafts | Step 6 |
+
+## Modes
+
+Pick the mode from the request:
+
+| Mode | Trigger | Steps |
+|---|---|---|
+| **A. Outline** | "Outline...", "plan these topics", a list of topics, "give me outlines" | 0 to 4, then stop and deliver the outline file(s) |
+| **B. Piece from outline** | "Write it from this outline", an `.outline.md` file or a pasted outline | Load and check the outline, then 5 to 7 |
+| **C. End to end** | "Write an article / post / script about..." | 0 to 7, pausing after Step 4 for approval unless asked for a one-shot draft |
+
+**Batch outlines (Mode A with several topics).** Run Steps 0 to 4 for each topic. Save each as `outlines/<slug>.outline.md` (in the user's working folder when files can be written, otherwise return each outline in full). Then deliver an index:
+
+| # | Topic | Reader need | Channel | Primary keyword | Recommended title | Outline file | Check result |
+|---|---|---|---|---|---|---|---|
+
+Flag topics that overlap or would compete for the same keyword, and suggest merging them or giving each a different reader need and keyword. Suggest an order that chains the needs (Educate Me, then Explain It, then Guide Me), so each piece links to the next.
+
+**Piece from an outline (Mode B).**
+1. Read the outline. Run `python3 scripts/outline_check.py <outline> --site "<profile domains>" --strict`. If anything fails, fix the outline first, tell the user what changed, and get approval if the change is substantive (a different reader need, keyword or section order).
+2. Treat the outline as the contract: the same reader need, title, keywords, H2 order and links. Turn each `### H2:` and `#### H3:` into a real `##` / `###` heading, and cover every `Key points` bullet.
+3. If writing shows a section should change, make the change, update the outline file to match, and say so in the delivery notes.
+4. Continue with Steps 5 to 7. In Step 6, also run the alignment check (`--article`).
 
 ## Workflow
 
@@ -73,13 +98,21 @@ Read `references/titles.md`. For the chosen channel produce 8 to 10 options acro
 
 ### Step 4: Outline
 
-Build the outline from the reader need (`references/reader-needs.md`), the structure rules (`references/structure.md`) and the channel format (`references/channels.md`):
+Write the outline in the file format from `references/outline-template.md`, starting from the skeleton for the chosen reader need. Then adapt it with the reader need (`references/reader-needs.md`), the structure rules (`references/structure.md`) and the channel format (`references/channels.md`):
 - An **intro plan** that sets up the problem and stakes without giving the answer away, and never says "In this article, we will".
 - The **core answer first**: the first H2 (or the first beat of a video) delivers what the title promised, using a keyword variation.
 - Headings phrased as the reader's questions where natural.
 - A **keyword map**, **link map**, **image or visual plan** (with alt text), and **CTA placement**.
 
-Show the titles and outline to the user and wait for approval before drafting, unless they asked for a one-shot draft.
+Run the outline check and fix every ✘:
+
+```bash
+python3 scripts/outline_check.py outlines/<slug>.outline.md --site "<profile domains>" [--strict]
+```
+
+It verifies the brief, the title and meta, at least 2 reader desires, the intro plan, the keyword placement in planned headings, the planned links, and the reader need's own rules (e.g. Guide Me starts with prerequisites, Fix It starts with causes and ends with where to get help, Compare For Me plans a table and ends with when to choose each, Give Me Perspective includes the method and the limits).
+
+In Mode A, stop here and deliver. In Mode C, show the titles and outline and wait for approval before drafting, unless the user asked for a one-shot draft.
 
 ### Step 5: Draft
 
@@ -101,7 +134,15 @@ Then run the manual checks:
 - `references/voice.md` final checklist.
 - Read it aloud. Does it sound like an expert explaining something clearly, or like someone performing expertise?
 
-For YouTube, use the checklist in `references/channels.md` instead of the script.
+If the piece was written from an outline, confirm it followed the plan:
+
+```bash
+python3 scripts/outline_check.py outlines/<slug>.outline.md --site "<profile domains>" --article draft.md
+```
+
+It reports planned sections missing from the draft, sections out of order, and sections that aren't in the outline.
+
+For YouTube, use the checklist in `references/channels.md` instead of the scripts.
 
 ### Step 7: Deliver (and repurpose)
 
