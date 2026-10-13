@@ -13,11 +13,13 @@ Turn a topic into a finished piece for any channel: a search-optimized article, 
 |---|---|---|
 | `profiles/<name>.md` | Brand, audience, channels, links, calls to action, spelling and capitalization | Step 0 |
 | `references/reader-needs.md` | The 8 reader needs, how to pick one, and how each shapes the piece | Step 1, Step 4 |
+| `references/keyword-research.md` | Free autocomplete ideas, OpenSEO (open-source Ahrefs alternative) and Search Console; choosing keywords; reading competitor titles | Step 2 |
 | `references/titles.md` | Titles, subject lines and YouTube titles that rank and get clicked; finding trending angles | Step 3 |
 | `references/structure.md` | Intros, ordering, headings, transitions, lists, tables, length | Step 4, Step 5 |
 | `references/voice.md` | Voice and style rules, including the hard bans | Step 5, Step 6 |
 | `references/seo.md` | On-page SEO checklist, linking and metadata | Step 2, Step 4, Step 6 |
 | `references/channels.md` | Format rules for blog, Substack, newsletter and YouTube, plus repurposing | Step 0, Step 5, Step 7 |
+| `scripts/keyword_ideas.py` | Free keyword and question ideas from Google and YouTube autocomplete | Step 2 |
 | `scripts/seo_check.py` | Automated SEO and voice audit for Markdown drafts | Step 6 |
 
 ## Workflow
@@ -55,11 +57,12 @@ State the need, the reader desires it must satisfy, and the reader's level. The 
 
 Use web search when available. Never invent data, statistics, search volumes or quotes. If you can't verify something, say so or ask the user.
 
-1. **Intent:** search the primary keyword and read what ranks. Match the format that wins (explainer, comparison, tutorial, opinion).
-2. **Questions:** collect "People also ask", forum and community questions. The best become headings.
-3. **Gap:** find what the top results miss. That's the angle.
-4. **Sources:** gather facts from primary sources (official docs, papers, standards, original data). Choose 1 to 3 as external links.
-5. **Internal links:** search `"<keyword>" site:<profile domain>` or use the profile's link list. Aim for 3 to 5 per 1,000 words. Follow the anchor rules in `references/seo.md`.
+1. **Keywords:** follow `references/keyword-research.md`. Run `scripts/keyword_ideas.py` on 1 to 3 seed phrases. If OpenSEO's MCP tools are connected, add volume, difficulty and SERP data. Pick 1 primary keyword, 2 to 5 secondary keywords and 3 to 8 questions, and say which data source backed the choice.
+2. **Intent:** search the primary keyword and read what ranks. Match the format that wins (explainer, comparison, tutorial, opinion).
+3. **Questions:** collect "People also ask", forum and community questions. The best become headings.
+4. **Gap:** find what the top results miss. That's the angle.
+5. **Sources:** gather facts from primary sources (official docs, papers, standards, original data). Choose 1 to 3 as external links.
+6. **Internal links:** search `"<keyword>" site:<profile domain>` or use the profile's link list. Aim for 3 to 5 per 1,000 words. Follow the anchor rules in `references/seo.md`.
 
 ### Step 3: Titles and hooks
 
@@ -88,10 +91,10 @@ For any Markdown draft (blog, Substack, newsletter), save it and run:
 
 ```bash
 python3 scripts/seo_check.py draft.md --keyword "<primary>" --secondary "<s1>, <s2>" \
-  --site <profile domain> --meta "<meta description>" [--strict] [--check-links]
+  --site "<profile domains>" --meta "<meta description>" --spelling <profile spelling> [--strict] [--check-links]
 ```
 
-Use `--strict` when the profile sets `strict_style: true`. `--check-links` needs network access. Fix every ✘. Fix each ⚠ unless there's a clear reason not to, and report the ones you kept. Re-run until nothing fails.
+Use `--strict` when the profile sets `strict_style: true`, and `--spelling` from the profile (british or american). `--check-links` needs network access. Fix every ✘. Fix each ⚠ unless there's a clear reason not to, and report the ones you kept. Re-run until nothing fails.
 
 Then run the manual checks:
 - The reader need's desires: does the piece satisfy at least two?

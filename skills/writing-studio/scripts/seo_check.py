@@ -9,9 +9,12 @@ Standard library only. Usage:
 Options:
     --keyword     primary keyword (required)
     --secondary   comma-separated secondary keywords
-    --site        your domain, used to tell internal links from external ones
-    --strict      apply the strict house style (American spelling, title case,
-                  unit spacing, no bold emphasis, no "Conclusion" heading)
+    --site        your domain(s), comma-separated, used to tell internal links
+                  from external ones (e.g. "example.com, example.substack.com")
+    --spelling    american | british: flag words spelled the other way
+                  (defaults to american when --strict is set)
+    --strict      apply the strict house style (spelling, title case, unit
+                  spacing, no bold emphasis, no "Conclusion" heading)
     --meta        meta description to check
     --seo-title   SEO title tag to check (defaults to the H1)
     --check-links send a request to every link and report broken ones
@@ -57,6 +60,8 @@ BRITISH = {"organisation": "organization", "organisations": "organizations", "op
            "maximise": "maximize", "realise": "realize", "recognise": "recognize", "summarise": "summarize",
            "standardise": "standardize", "initialise": "initialize", "authorise": "authorize",
            "catalogue": "catalog", "travelling": "traveling", "cancelled": "canceled"}
+# Words whose British form is also valid in American text (or vice versa) are left out.
+AMERICAN = {v: k for k, v in BRITISH.items() if v not in {"license", "program"}}
 SMALL_WORDS = {"a", "an", "the", "and", "but", "or", "nor", "for", "so", "yet", "as", "at", "by",
                "in", "of", "on", "to", "up", "via", "vs", "vs.", "with", "from", "into", "onto", "per"}
 UNITS = r"(?:KB|MB|GB|TB|PB|Kbps|Mbps|Gbps|Tbps|MHz|GHz|ms|GiB|TiB|MiB)"
@@ -234,17 +239,19 @@ def run(doc, a):
 
     # ---- links
     G = "Links"
-    site = (a.site or "").lower().removeprefix("www.")
+    sites = [x.strip().lower().removeprefix("www.") for x in (a.site or "").split(",") if x.strip()]
     internal, external = [], []
     for text, url in doc["links"]:
-        host = urlparse(url).netloc.lower().removeprefix("www.")
-        (internal if (not host and not url.startswith("#")) or (site and host.endswith(site)) else external).append((text, url))
+        parsed = urlparse(url)
+        host, path = parsed.netloc.lower().removeprefix("www."), parsed.path
+        mine = any(host == s or host.endswith("." + s) or (s.startswith(host) and (host + path).startswith(s)) for s in sites if host)
+        (internal if (not host and not url.startswith("#")) or mine else external).append((text, url))
     per_k = 1000 * len(internal) / n
     # Short articles: 3 to 5 links in total. Longer ones: 3 to 5 per 1,000 words.
     ok = 3 <= len(internal) <= 5 if n < 1000 else (3 <= len(internal) and 2.5 <= per_k <= 5.5)
     st = PASS if ok else (WARN if len(internal) >= 2 else FAIL)
     add(G, st, f"Internal links: {len(internal)} ({per_k:.1f} per 1,000 words, target 3 to 5)"
-        + ("" if site else ". Pass --site to classify links"))
+        + ("" if sites else ". Pass --site to classify links"))
     add(G, PASS if 1 <= len(external) <= 3 else WARN, f"External authoritative links: {len(external)} (target 1 to 3)")
     generic = [t for t, _ in doc["links"] if t.lower().strip(" .") in GENERIC_ANCHORS]
     add(G, PASS if not generic else FAIL, "Anchor text is descriptive" if not generic else f"Generic anchors: {generic}")
@@ -328,11 +335,19 @@ def run(doc, a):
     absl = {k: v for k, v in absl.items() if v}
     if absl: add(G, INFO, f"Absolute words to double-check: {absl}")
 
+    # ---- spelling
+    spelling = a.spelling or ("american" if a.strict else None)
+    if spelling:
+        G = "House style"
+        table = BRITISH if spelling == "american" else AMERICAN
+        wrong = sorted({w for w in re.findall(r"[a-z]+", low) if w in table})
+        other = "British" if spelling == "american" else "American"
+        add(G, PASS if not wrong else FAIL, f"{spelling.title()} spelling" if not wrong
+            else f"{other} spellings: " + ", ".join(f"{w}→{table[w]}" for w in wrong))
+
     # ---- house style (strict)
     if a.strict:
         G = "House style"
-        brit = sorted({w for w in re.findall(r"[a-z]+", low) if w in BRITISH})
-        add(G, PASS if not brit else FAIL, "American spelling" if not brit else "British spellings: " + ", ".join(f"{w}→{BRITISH[w]}" for w in brit))
         units = re.findall(r"\b\d+(?:\.\d+)?" + UNITS + r"\b", doc["prose"])
         add(G, PASS if not units else FAIL, "Space between numbers and units" if not units else f"Missing space before unit: {sorted(set(units))}")
         ords = re.findall(r"\b\d+(?:st|nd|rd|th)\b", doc["prose"])
@@ -358,7 +373,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("file"); ap.add_argument("--keyword", required=True); ap.add_argument("--secondary")
     ap.add_argument("--site"); ap.add_argument("--meta"); ap.add_argument("--seo-title")
-    ap.add_argument("--strict", action="store_true"); ap.add_argument("--check-links", action="store_true")
+    ap.add_argument("--strict", action="store_true"); ap.add_argument("--spelling", choices=["american", "british"]); ap.add_argument("--check-links", action="store_true")
     ap.add_argument("--json", action="store_true")
     a = ap.parse_args()
     with open(a.file, encoding="utf-8") as f:
