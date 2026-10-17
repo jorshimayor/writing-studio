@@ -44,7 +44,7 @@ Use these for internal links and next-step CTAs. Add new pieces as they're publi
 - Portfolio of articles and videos by category: https://jorshimayor.is-a.dev/work
 - Projects with code: https://jorshimayor.is-a.dev/projects
 - AI engineering series code: https://github.com/jorshimayor/AI-Engineering-Flow_Research
-- Writing skills: https://github.com/jorshimayor/how-not-to-write and https://github.com/jorshimayor/writing-studio
+- Writing skills (Writing Studio and How Not to Write): https://github.com/jorshimayor/writing-studio
 
 ## Visual branding
 

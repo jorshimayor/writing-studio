@@ -1,9 +1,16 @@
 {
   "name": "how-not-to-write",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Writing guardrail: removes the 'it's not X, it's Y' AI cadence, bans em dashes, and keeps prose conversational without padding.",
-  "author": { "name": "Joshua Obafemi" },
-  "repository": "https://github.com/jorshimayor/how-not-to-write",
+  "author": {
+    "name": "Joshua Obafemi"
+  },
+  "repository": "https://github.com/jorshimayor/writing-studio",
   "license": "MIT",
-  "keywords": ["writing", "editing", "style", "prose"]
+  "keywords": [
+    "writing",
+    "editing",
+    "style",
+    "prose"
+  ]
 }

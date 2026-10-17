@@ -15,8 +15,8 @@ The full reasoning, examples and the one narrow exception are in [`skills/how-no
 ### Claude Code (plugin)
 
 ```
-/plugin marketplace add jorshimayor/how-not-to-write
-/plugin install how-not-to-write@how-not-to-write
+/plugin marketplace add jorshimayor/writing-studio
+/plugin install how-not-to-write@writing-studio
 ```
 
 ### Claude Code (manual)
@@ -24,13 +24,13 @@ The full reasoning, examples and the one narrow exception are in [`skills/how-no
 Copy the skill folder into your personal skills directory:
 
 ```bash
-git clone https://github.com/jorshimayor/how-not-to-write.git
-cp -r how-not-to-write/skills/how-not-to-write ~/.claude/skills/
+git clone https://github.com/jorshimayor/writing-studio.git
+cp -r writing-studio/plugins/how-not-to-write/skills/how-not-to-write ~/.claude/skills/
 ```
 
 ### Claude.ai and the Claude desktop app
 
-Download `how-not-to-write.zip` from the [latest release](https://github.com/jorshimayor/how-not-to-write/releases/latest) and upload it under **Settings → Capabilities → Skills**.
+Download `how-not-to-write.zip` from the [latest release](https://github.com/jorshimayor/writing-studio/releases/latest) and upload it under **Settings → Capabilities → Skills**.
 
 ## Use
 

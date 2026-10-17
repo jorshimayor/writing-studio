@@ -1,12 +1,19 @@
 {
   "name": "writing-studio",
-  "owner": { "name": "Joshua Obafemi" },
-  "description": "A writing and publishing skill for blogs, Substack, newsletters and YouTube.",
+  "owner": {
+    "name": "Joshua Obafemi"
+  },
+  "description": "Writing skills for developer content in Web3, AI, ZK and Web2: a full writing and publishing system, and a prose guardrail.",
   "plugins": [
     {
       "name": "writing-studio",
-      "source": "./",
-      "description": "End-to-end content system: reader-need-driven articles, Substack posts, newsletters and YouTube scripts with SEO titles, keyword placement and an automated SEO and voice audit."
+      "source": "./plugins/writing-studio",
+      "description": "End-to-end content system: reader-need outlines, SEO titles, drafts and audits for blogs, Substack, newsletters and YouTube, tuned for Web3, AI, ZK and Web2."
+    },
+    {
+      "name": "how-not-to-write",
+      "source": "./plugins/how-not-to-write",
+      "description": "Writing guardrail: removes the 'it's not X, it's Y' cadence, bans em dashes, and keeps prose conversational without padding."
     }
   ]
 }
