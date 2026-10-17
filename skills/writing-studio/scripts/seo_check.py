@@ -64,6 +64,31 @@ BRITISH = {"organisation": "organization", "organisations": "organizations", "op
 AMERICAN = {v: k for k, v in BRITISH.items() if v not in {"license", "program"}}
 SMALL_WORDS = {"a", "an", "the", "and", "but", "or", "nor", "for", "so", "yet", "as", "at", "by",
                "in", "of", "on", "to", "up", "via", "vs", "vs.", "with", "from", "into", "onto", "per"}
+# Terms that are spelled more than one way. Mixing forms in one piece looks careless.
+VARIANTS = [("onchain", "on-chain", "on chain"), ("offchain", "off-chain", "off chain"),
+            ("zk-snark", "zksnark", "zk snark"), ("zk-stark", "zkstark", "zk stark"),
+            ("zkevm", "zk-evm"), ("rollup", "roll-up"), ("fine-tuning", "fine tuning", "finetuning"),
+            ("dataset", "data set"), ("email", "e-mail"), ("frontend", "front-end"), ("backend", "back-end"),
+            ("codebase", "code base"), ("blockchain", "block chain")]
+CASE_VARIANTS = [("Web3", "web3"), ("Web2", "web2"), ("dApp", "dapp", "Dapp", "DApp")]
+
+
+def proper_term(w):
+    """Mixed-case or numbered technical terms (zk-SNARK, zkVM, dApp, ERC-20) keep their own casing."""
+    return any(c.isupper() for c in w[1:]) or bool(re.search(r"\d", w))
+
+
+def uncapitalized(text):
+    """Words (or halves of hyphenated words) that start lowercase, ignoring proper technical terms."""
+    out = []
+    for w in re.findall(r"[A-Za-z][\w'’\-]*(?:\.[A-Za-z]\w*)*", text):
+        if proper_term(w):
+            continue
+        if any(part and part[0].islower() for part in w.split("-")):
+            out.append(w)
+    return out
+
+
 UNITS = r"(?:KB|MB|GB|TB|PB|Kbps|Mbps|Gbps|Tbps|MHz|GHz|ms|GiB|TiB|MiB)"
 
 
@@ -298,7 +323,7 @@ def run(doc, a):
         add(G, st, f'Title is {len(title)} characters (aim for 50 to 60 so it is not truncated): "{title}"')
         add(G, PASS if kp.search(title) or is_variation(title, kw) else FAIL, "Primary keyword in the title")
         if a.strict:
-            low = [w for w in re.findall(r"[A-Za-z][\w'’]*", title) if w[0].islower()]
+            low = uncapitalized(title)
             add(G, PASS if not low else FAIL, "Every title word is capitalized" if not low else f"Lowercase words in title: {low}")
     else:
         add(G, FAIL, "No H1 or title found")
@@ -331,6 +356,16 @@ def run(doc, a):
     add(G, PASS if not fil else WARN, "No filler phrases" if not fil else f"Filler: {fil}")
     hype = [h for h in HYPE + SUPERLATIVES if re.search(r"(?<![\w-])" + re.escape(h) + r"(?![\w-])", low)]
     add(G, PASS if not hype else WARN, "No hype words" if not hype else f"Hype or unsupported claims: {hype}")
+    mixed = []
+    for group in VARIANTS:
+        used = {v: len(re.findall(r"(?<![\w-])" + re.escape(v) + r"(?![\w-])", low)) for v in group}
+        used = {k: v for k, v in used.items() if v}
+        if len(used) > 1: mixed.append(" and ".join(f'"{k}" ({v})' for k, v in used.items()))
+    for group in CASE_VARIANTS:
+        used = {v: len(re.findall(r"(?<![\w-])" + re.escape(v) + r"(?![\w-])", doc["prose"])) for v in group}
+        used = {k: v for k, v in used.items() if v}
+        if len(used) > 1: mixed.append(" and ".join(f'"{k}" ({v})' for k, v in used.items()))
+    add(G, PASS if not mixed else WARN, "Terminology is consistent" if not mixed else "Mixed term forms: " + "; ".join(mixed))
     absl = {w: len(re.findall(r"\b" + w + r"\b", low)) for w in ABSOLUTES}
     absl = {k: v for k, v in absl.items() if v}
     if absl: add(G, INFO, f"Absolute words to double-check: {absl}")
@@ -361,7 +396,7 @@ def run(doc, a):
         for l, t, _ in doc["headings"]:
             if l < 2: continue
             for i, w in enumerate(re.findall(r"[A-Za-z][\w'’\-]*", t)):
-                if w[0].islower() and (len(w) >= 5 or w in {"is", "are", "be", "was", "were", "do", "does"}) and not (i and w in SMALL_WORDS):
+                if w[0].islower() and not proper_term(w) and (len(w) >= 5 or w in {"is", "are", "be", "was", "were", "do", "does"}) and not (i and w in SMALL_WORDS):
                     bad_heads.append(f'"{w}" in "{t}"')
         add(G, PASS if not bad_heads else WARN, "Heading capitalization" if not bad_heads else f"Capitalize: {bad_heads[:5]}")
         if any(re.fullmatch(r"(?i)conclusions?|final thoughts|wrapping up|summary", t.strip()) for _, t, _ in doc["headings"]):

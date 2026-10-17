@@ -61,6 +61,12 @@ Cut throat-clearing, doubled phrasing and sentences that restate the one before.
 - **Numbers and units:** numerals for measurements with a space before the unit (16 GB, 10 ms). Keep formatting consistent through the piece.
 - **Consistency:** once you choose a spelling, term, capitalization or format, keep it everywhere.
 
+## Domain terminology
+
+Each domain has its own spelling and capitalisation conventions (Web3, smart contract, ERC-20, zk-SNARK, zkVM, LLM, fine-tuning, Next.js, PostgreSQL). Use the forms in `domains.md`, and keep one form per piece. The checker warns when a piece mixes variants such as "on-chain" and "onchain", "Web3" and "web3", or "dataset" and "data set".
+
+Write mixed-case technical names exactly as their owners do, even in title case: zk-SNARK, zkVM, dApp, iOS. The checker treats these as proper names.
+
 ## Final checklist
 
 - [ ] No antithesis cadence, no em dashes, no padding phrases.

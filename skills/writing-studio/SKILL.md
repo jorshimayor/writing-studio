@@ -1,6 +1,6 @@
 ---
 name: writing-studio
-description: End-to-end content system for writing and publishing across a blog, Substack, email newsletters and YouTube. Use it whenever the user wants to plan, title, outline, write, edit, SEO-optimize, or repurpose an article, blog post, Substack post, newsletter issue, YouTube script or video description, or asks for catchy or trending titles, keyword placement, internal linking, or a content brief. It works in three modes: topic(s) to reader-need outlines, outline to finished piece, or topic straight to a finished piece. It decides what the reader needs, researches keywords and search intent, writes ranking-friendly titles, builds a checked outline, drafts in a human voice, runs automated outline, SEO and style audits, and adapts one piece into every channel.
+description: End-to-end content system for writing and publishing across a blog, Substack, email newsletters and YouTube, tuned for Web3, AI, zero-knowledge (ZK) and Web2 developer topics. Use it whenever the user wants to plan, title, outline, write, edit, SEO-optimize, or repurpose an article, blog post, Substack post, newsletter issue, YouTube script or video description, or asks for catchy or trending titles, keyword placement, internal linking, or a content brief. It works in three modes: topic(s) to reader-need outlines, outline to finished piece, or topic straight to a finished piece. It decides what the reader needs, researches keywords and search intent, writes ranking-friendly titles, builds a checked outline, drafts in a human voice, runs automated outline, SEO and style audits, and adapts one piece into every channel.
 ---
 
 # Writing Studio
@@ -13,6 +13,7 @@ Turn a topic into a finished piece for any channel: a search-optimized article, 
 |---|---|---|
 | `profiles/<name>.md` | Brand, audience, channels, links, calls to action, spelling and capitalization | Step 0 |
 | `references/reader-needs.md` | The 8 reader needs, how to pick one, and how each shapes the piece | Step 1, Step 4 |
+| `references/domains.md` | Web3, AI, ZK and Web2: sources, terminology, accuracy rules, example topics | Step 0, Step 2, Step 5 |
 | `references/keyword-research.md` | Free autocomplete ideas, OpenSEO (open-source Ahrefs alternative) and Search Console; choosing keywords; reading competitor titles | Step 2 |
 | `references/titles.md` | Titles, subject lines and YouTube titles that rank and get clicked; finding trending angles | Step 3 |
 | `references/outline-template.md` | Outline file format and a skeleton for each reader need | Step 4 |
@@ -20,6 +21,8 @@ Turn a topic into a finished piece for any channel: a search-optimized article, 
 | `references/voice.md` | Voice and style rules, including the hard bans | Step 5, Step 6 |
 | `references/seo.md` | On-page SEO checklist, linking and metadata | Step 2, Step 4, Step 6 |
 | `references/channels.md` | Format rules for blog, Substack, newsletter and YouTube, plus repurposing | Step 0, Step 5, Step 7 |
+| `examples/outlines/` | 8 complete outlines, one per reader need, across Web3, AI, ZK and Web2 | Step 4 |
+| `templates/` | Fill-in templates: article, Substack post, newsletter issue, YouTube package | Step 5, Step 7 |
 | `scripts/keyword_ideas.py` | Free keyword and question ideas from Google and YouTube autocomplete | Step 2 |
 | `scripts/outline_check.py` | Checks an outline against its reader-need rules, and a draft against its outline | Step 4, Step 6 |
 | `scripts/seo_check.py` | Automated SEO and voice audit for Markdown drafts | Step 6 |
@@ -53,7 +56,8 @@ Flag topics that overlap or would compete for the same keyword, and suggest merg
 
 1. **Profile.** Use the profile the user names. Otherwise use the default profile (`profiles/jorshimayor.md`), or the only one that exists. If its required fields are empty, ask for them once, and in Claude Code offer to save the answers into the profile file. To create a new profile, copy `profiles/_template.md`.
 2. **Channel.** Blog article, Substack post, newsletter issue, YouTube video, or "all of them" (see Step 7). Read the channel's section in `references/channels.md`.
-3. **Brief.** Ask only for what's missing, in one message:
+3. **Domain.** Classify the topic as Web3, AI, ZK, Web2 or a bridge between two of them, and read its section in `references/domains.md`. Its accuracy rules apply to every later step.
+4. **Brief.** Ask only for what's missing, in one message:
    - Topic, and for search channels the **primary keyword** plus 2 to 5 **secondary keywords**.
    - The **reader**: who they are and their level.
    - Source material: notes, data, results, code, a transcript or an earlier piece to adapt.
@@ -98,7 +102,7 @@ Read `references/titles.md`. For the chosen channel produce 8 to 10 options acro
 
 ### Step 4: Outline
 
-Write the outline in the file format from `references/outline-template.md`, starting from the skeleton for the chosen reader need. Then adapt it with the reader need (`references/reader-needs.md`), the structure rules (`references/structure.md`) and the channel format (`references/channels.md`):
+Write the outline in the file format from `references/outline-template.md`, starting from the skeleton for the chosen reader need. Use the matching example in `examples/outlines/` as the quality bar (same need, ideally the same domain). Then adapt it with the reader need (`references/reader-needs.md`), the structure rules (`references/structure.md`) and the channel format (`references/channels.md`):
 - An **intro plan** that sets up the problem and stakes without giving the answer away, and never says "In this article, we will".
 - The **core answer first**: the first H2 (or the first beat of a video) delivers what the title promised, using a keyword variation.
 - Headings phrased as the reader's questions where natural.
@@ -116,7 +120,7 @@ In Mode A, stop here and deliver. In Mode C, show the titles and outline and wai
 
 ### Step 5: Draft
 
-Write the piece following the reader need, the structure rules, the channel format, `references/voice.md` and the profile's style settings. For search channels, place keywords as `references/seo.md` describes: in the first 50 words, the first H2 and its first paragraph, spread through the body, and in the closing section, at a density of about 1% to 2% (primary) and 0.5% to 1% (secondary). Readability always wins over keyword count.
+Start from the channel's template in `templates/`. Write the piece following the reader need, the structure rules, the channel format, `references/voice.md` and the profile's style settings. For search channels, place keywords as `references/seo.md` describes: in the first 50 words, the first H2 and its first paragraph, spread through the body, and in the closing section, at a density of about 1% to 2% (primary) and 0.5% to 1% (secondary). Readability always wins over keyword count.
 
 ### Step 6: Audit and fix
 

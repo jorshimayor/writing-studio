@@ -137,7 +137,9 @@ def check(path, a, rules):
         add(G, PASS if 30 <= len(title) <= 60 else WARN, f'SEO title is {len(title)} characters (50 to 60): "{title}"')
         add(G, PASS if kw and variation(title, kw) else FAIL, "Primary keyword in the title")
         if a.strict:
-            low = [w for w in re.findall(r"[A-Za-z][\w'’]*", str(meta.get("title", ""))) if w[0].islower()]
+            low = [w for w in re.findall(r"[A-Za-z][\w'’\-]*(?:\.[A-Za-z]\w*)*", str(meta.get("title", "")))
+                   if not (any(c.isupper() for c in w[1:]) or re.search(r"\d", w))
+                   and any(part and part[0].islower() for part in w.split("-"))]
             add(G, PASS if not low else FAIL, "Every title word capitalized" if not low else f"Lowercase title words: {low}")
     md = str(meta.get("meta_description", ""))
     if md:

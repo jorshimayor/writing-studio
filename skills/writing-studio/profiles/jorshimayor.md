@@ -7,8 +7,13 @@ Default profile. All links come from [jorshimayor.is-a.dev](https://jorshimayor.
 - **Name:** jorshimayor (Josh)
 - **Author:** Joshua Obafemi
 - **Role:** technical writer and blockchain developer
-- **What I publish:** AI engineering and Web3, and the infrastructure in between: AI agents and LLM internals, smart contracts and dApps, validator nodes and server infrastructure, security analysis, and experiments with real results and code. Formats: technical articles, guides, research write-ups, tutorials and videos.
-- **Audience:** developers and technical builders working across AI and Web3, from curious beginners to practising engineers. Assume programming literacy, not deep ML or protocol background.
+- **What I publish:** four domains and the bridges between them:
+  - **Web3:** smart contracts and dApps, rollups and L2s, validator nodes, security analysis.
+  - **AI:** AI engineering, LLM internals, agents and tool use, evaluation, experiments with real results.
+  - **ZK:** zero-knowledge proofs, circuits (Circom, Noir), zkVMs and ZK rollups.
+  - **Web2:** backend and full-stack infrastructure, databases, frameworks, servers.
+  Formats: technical articles, guides, research write-ups, tutorials and videos. Domain rules live in `references/domains.md`.
+- **Audience:** developers and technical builders working across Web3, AI, ZK and Web2, from curious beginners to practising engineers. Assume programming literacy, not deep ML, cryptography or protocol background.
 - **Positioning:** make complex systems simple, and back every piece with something I built, ran or measured. Show the code, the data and what broke.
 
 ## Channels

@@ -28,6 +28,8 @@ This framework adapts the "user needs" idea from newsroom audience research (fir
 
 If two fit, choose the one that matches what currently ranks or what the audience asked for, name the runner-up, and borrow one section from it at most. A piece that tries to serve every need serves none.
 
+**Domains.** Each need below lists an example in Web3, AI, ZK and Web2. Before drafting, read that domain's section in `domains.md` for its primary sources, terminology and accuracy rules (no financial advice in Web3, dated model facts in AI, stated security assumptions in ZK, versioned fixes in Web2). Complete example outlines for every need are in `examples/outlines/`.
+
 Reader needs also chain together. Someone who has been *educated* on a topic wants it *explained*, then *guided*, then helped to *fix* it. End each piece by pointing to the next need in the chain.
 
 ---
@@ -37,6 +39,8 @@ Reader needs also chain together. Someone who has been *educated* on a topic wan
 ### Educate Me
 
 **Question:** "What is X?" The reader is new to the topic.
+
+**Examples:** Web3: What is account abstraction? · AI: What is RAG? · ZK: What is a zero-knowledge proof? · Web2: What is connection pooling?
 
 **They want:** a solid foundation, terms explained, bite-size sections, and the confidence to talk about it.
 
@@ -51,6 +55,8 @@ Reader needs also chain together. Someone who has been *educated* on a topic wan
 ### Explain It
 
 **Question:** "How does X actually work?" or "Why does X behave like this?" The reader knows the basics and wants depth.
+
+**Examples:** Web3: How do blobs lower rollup fees? · AI: How does a context window work? · ZK: How does a zk-SNARK prove without revealing? · Web2: How does Next.js caching work?
 
 **They want:** their knowledge respected, mechanisms instead of summaries, concrete examples, and links to go deeper.
 
@@ -70,6 +76,8 @@ Reader needs also chain together. Someone who has been *educated* on a topic wan
 
 **Question:** "Which option should I pick?"
 
+**Examples:** Web3: Optimistic vs ZK rollups · AI: Fine-tuning vs RAG · ZK: zk-SNARK vs zk-STARK · Web2: REST vs GraphQL
+
 **They want:** transparency, differences at a glance, and an answer that fits *their* situation.
 
 **Shape it like this:**
@@ -83,6 +91,8 @@ Reader needs also chain together. Someone who has been *educated* on a topic wan
 ### Give Me Perspective
 
 **Question:** "What do you think?" or "What did you find?" This is where original research, experiments, results and lessons live.
+
+**Examples:** Web3: 30 days running a validator · AI: 140 few-shot experiments · ZK: benchmarking 3 zkVMs · Web2: serverless to VPS, the real costs
 
 **They want:** a clear point of view, evidence for it, honesty about limits, and something they can apply.
 
@@ -101,6 +111,8 @@ Reader needs also chain together. Someone who has been *educated* on a topic wan
 
 **Question:** "How do I do X?"
 
+**Examples:** Web3: deploy an ERC-20 with Foundry · AI: build a ReAct agent · ZK: write a first Noir circuit · Web2: add rate limiting to a Node.js API
+
 **They want:** clear steps, follow-up questions answered before they ask them, and confidence it worked.
 
 **Shape it like this:**
@@ -114,6 +126,8 @@ Reader needs also chain together. Someone who has been *educated* on a topic wan
 ### Fix It
 
 **Question:** "Why isn't X working?" The reader is frustrated.
+
+**Examples:** Web3: stuck transactions and nonce errors · AI: an LLM ignoring instructions · ZK: Circom constraint errors · Web2: PostgreSQL too many connections
 
 **They want:** the likely causes, several actionable fixes, and a fallback if none work.
 
@@ -131,6 +145,8 @@ Reader needs also chain together. Someone who has been *educated* on a topic wan
 
 **Question:** "What changed, and does it affect me?"
 
+**Examples:** Web3: a network upgrade · AI: a new protocol such as MCP · ZK: new zkVM releases · Web2: Next.js 15 caching defaults
+
 **They want:** the news in the first lines, what it means for them, and what to do about it.
 
 **Shape it like this:**
@@ -146,6 +162,8 @@ Reader needs also chain together. Someone who has been *educated* on a topic wan
 ### Inspire Me
 
 **Question:** "Show me it's possible," or "Tell me the story."
+
+**Examples:** Web3: the reentrancy bug that changed how I code · AI: Solidity to AI engineering · ZK: learning ZK from zero · Web2: a weekend script that grew
 
 **They want:** a real person or project, the obstacle, the turning point, and a takeaway they can use.
 

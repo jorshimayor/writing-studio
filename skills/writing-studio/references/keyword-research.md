@@ -36,6 +36,25 @@ If OpenSEO's MCP tools are available in the session, use them in Step 2 to:
 2. Pull the **current SERP** for the top candidate: which pages rank, their titles, and the SERP features (featured snippet, "People also ask", videos).
 3. Find **keywords competitors rank for** that you don't cover yet (content gaps).
 
+## Seeds and question sources by domain
+
+Start `keyword_ideas.py` with 2 to 3 seeds. Good seeds are the thing plus the reader's intent:
+
+| Domain | Example seeds | Where the real questions are |
+|---|---|---|
+| Web3 | "erc-4337", "deploy smart contract", "optimistic rollup", "solana validator requirements" | Ethereum Stack Exchange, ethresear.ch, r/ethdev, project Discords and GitHub issues |
+| AI | "context window", "rag vs fine tuning", "react agent", "few shot prompting" | Hugging Face forums, r/LocalLLaMA, Hacker News, framework GitHub issues |
+| ZK | "zero knowledge proof", "zk snark vs stark", "noir circuit", "zkvm" | zkresear.ch, ethresear.ch, Circom and Noir GitHub issues, project Discords |
+| Web2 | "postgres too many connections", "next.js 15 caching", "rest vs graphql" | Stack Overflow, GitHub discussions, Hacker News, framework Discords |
+
+Domain notes:
+- **Web3 and ZK** queries are often phrased with tool or standard names ("foundry", "erc-20", "circom"). Include them in seeds.
+- **ZK** has low search volume but high intent. Long-tail, tool-specific keywords usually beat broad ones.
+- **AI** terms move fast. Re-run autocomplete close to publishing, since new model and framework names appear monthly.
+- **Web2** fix queries often contain the exact error string. Use the error text as a seed and as a heading.
+
+See `domains.md` for each domain's primary sources and accuracy rules.
+
 ## Choosing the primary keyword
 
 Score each candidate on:

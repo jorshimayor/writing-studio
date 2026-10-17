@@ -14,28 +14,36 @@ A title makes one promise and has to win against everything else on the screen. 
 
 ## Patterns by reader need
 
-| Need | Patterns |
-|---|---|
-| Educate Me | "What Is X? A Plain-English Guide", "X Explained in 5 Minutes" |
-| Explain It | "How X Actually Works", "Why X Does Y (And What It Means for Z)" |
-| Compare For Me | "X vs Y: Which Should You Use for Z?", "I Tested 4 X Tools: Here's the Winner for Z" |
-| Guide Me | "How To Build X in 100 Lines", "Set Up X on Y in 15 Minutes" |
-| Fix It | "X Not Working? 6 Fixes That Actually Work", "How To Fix the X Error" |
-| Give Me Perspective | "I Ran 140 Experiments on X. Here's What Mattered", "My Agent Got the Math Right and the Answer Wrong" |
-| Update Me | "X 2.0 Is Out: What Changes for Y", "What the New X Means for Z" |
-| Inspire Me | "From X to Y in 90 Days: What Worked", "How a 0.5B Model Beat My Expectations" |
+| Need | Pattern | Web3 | AI | ZK | Web2 |
+|---|---|---|---|---|---|
+| Educate Me | "What Is X? A ... Guide" | What Is Account Abstraction (ERC-4337)? | What Is RAG? A Developer's Guide | What Is A Zero-Knowledge Proof? A Developer's Guide | What Is Connection Pooling? |
+| Explain It | "How X Actually Works" | How Blobs Lower Rollup Fees | How Does A Context Window Work In LLMs? | How A zk-SNARK Proves Without Revealing | How Next.js Caching Actually Works |
+| Compare For Me | "X Vs Y: Which Should You ...?" | Optimistic Vs ZK Rollups: Which Should You Build On? | Fine-Tuning Vs RAG: Which Fits Your App? | zk-SNARK Vs zk-STARK: Trade-Offs For Developers | REST Vs GraphQL: Which Fits Your API? |
+| Guide Me | "How To X In N Steps / Minutes" | How To Deploy An ERC-20 Token With Foundry | How To Build A ReAct Agent In 100 Lines | How To Write Your First Noir Circuit | How To Add Rate Limiting To A Node.js API |
+| Fix It | "X Not Working? N Fixes" | Transaction Stuck Pending? 5 Nonce Fixes | LLM Ignoring Instructions? 6 Prompt Fixes | Circom Constraint Errors: 5 Causes And Fixes | PostgreSQL Too Many Connections? 5 Fixes That Work |
+| Give Me Perspective | "I Ran / Tested X: Here's What ..." | 30 Days Running A Solana Validator: The Numbers | I Ran 140 Few-Shot Experiments: Here's What Matters | I Benchmarked 3 zkVMs On The Same Program | I Moved From Serverless To A VPS: The Costs |
+| Update Me | "X Is Out: What Changes For Y" | What The Latest Ethereum Upgrade Means For Developers | What MCP Means For Agent Builders | What The New zkVM Releases Mean For Rollups | Next.js 15 Caching Changes: What Breaks And How To Fix It |
+| Inspire Me | "From X To Y: What Worked" | How A Reentrancy Bug Made Me A Safer Solidity Dev | From Solidity To AI Engineering In Three Weeks | Learning Zero-Knowledge Proofs: From Solidity To A ZK App | How A Weekend Script Became My Most-Used Tool |
+
+More example titles and topics per domain are in `domains.md`.
 
 ## Hook toolkit
 
 Mix these to generate options:
-- **Number:** "7 ...", "140 experiments", "in 100 lines".
-- **Result or surprise:** "...was worse than a coin flip", "...barely noticed".
-- **Question the reader is asking:** "Do You Really Need X?"
-- **Comparison:** "X vs Y".
-- **Mistake or warning:** "The X Mistake That ...".
-- **Audience callout:** "for Beginners", "for Data Engineers".
-- **Timeframe or freshness:** "in 2026", "in 10 Minutes". Add the year only when freshness matters.
-- **First-person proof:** "I Built", "I Tested", "I Spent a Week". Strong for creator channels.
+- **Number:** "5 Fixes", "140 Experiments", "In 100 Lines", "30 Days Running A Validator".
+- **Result or surprise:** "...Was Worse Than A Coin Flip", "...Proved The Wrong Thing Perfectly".
+- **Question the reader is asking:** "Do You Need A ZK Rollup?", "Is Fine-Tuning Worth It?"
+- **Comparison:** "Optimistic Vs ZK Rollups", "REST Vs GraphQL".
+- **Mistake or warning:** "The Private Key Mistake In Most Foundry Tutorials".
+- **Audience callout:** "For Solidity Devs", "For Web2 Developers", "For Agent Builders".
+- **Version or freshness:** "Next.js 15", "ERC-4337", "In 2026". Add the year only when freshness matters, and versions whenever the advice depends on them.
+- **First-person proof:** "I Built", "I Tested", "I Benchmarked". Strong for creator channels.
+
+**Domain cautions for titles:**
+- Web3: never promise returns, prices or "the next 100x". Titles describe technology, not investment.
+- AI: name the model size or setup when a result depends on it ("On A 0.5B Model").
+- ZK: avoid "unbreakable", "100% private" or "trustless" unless the system genuinely has no trust assumptions.
+- Web2: put the version in the title when the advice is version-specific.
 
 ## Channel limits
 

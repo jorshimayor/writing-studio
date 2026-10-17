@@ -2,6 +2,8 @@
 
 One idea, four formats. The long-form article is the **source of truth**: it holds the depth, data and links. The other channels are overviews that send people to it.
 
+Fill-in templates for every channel are in `templates/` (`article.md`, `substack-post.md`, `newsletter-issue.md`, `youtube-package.md`). The newsletter and YouTube templates each include a filled example.
+
 ## Blog article (search)
 
 - **Goal:** rank for a keyword and fully answer the reader's question.

@@ -1,6 +1,6 @@
 # Writing Studio
 
-A Claude skill that takes a topic from idea to published piece: a search-ranked article, a Substack post, a newsletter issue or a YouTube video. I use it for everything I publish.
+A Claude skill that takes a topic from idea to published piece: a search-ranked article, a Substack post, a newsletter issue or a YouTube video. It's tuned for developer content in **Web3, AI, zero-knowledge (ZK) and Web2**, and I use it for everything I publish.
 
 It works in seven steps:
 
@@ -28,6 +28,13 @@ Each reader need has its own outline skeleton and rules. For example, a Guide Me
 python3 skills/writing-studio/scripts/outline_check.py outlines/*.outline.md --site yourdomain.com
 python3 skills/writing-studio/scripts/outline_check.py outlines/what-is-rag.outline.md --article drafts/what-is-rag.md
 ```
+
+## Built for Web3, AI, ZK and Web2
+
+- **Domain guide** (`references/domains.md`): primary sources to cite, where readers ask questions, terminology conventions and accuracy rules for each domain. For example: no financial advice in Web3, date every model fact in AI, state security assumptions in ZK, name the version in every Web2 fix.
+- **8 example outlines** (`examples/outlines/`), one per reader need, two per domain: *What Is A Zero-Knowledge Proof?*, *How Does A Context Window Work In LLMs?*, *Optimistic Vs ZK Rollups*, *How To Deploy An ERC-20 Token With Foundry*, *PostgreSQL Too Many Connections?*, *I Ran 140 Few-Shot Experiments*, *Next.js 15 Caching Changes* and *Learning Zero-Knowledge Proofs*. Each passes the outline checker with no warnings.
+- **Templates** (`templates/`): article, Substack post, newsletter issue (with a filled multi-domain example) and YouTube package (with a filled Web3 example).
+- **Terminology checks**: the SEO checker warns on mixed forms ("on-chain" and "onchain", "Web3" and "web3") and accepts mixed-case names like zk-SNARK, zkVM and dApp in title case.
 
 ## Install
 
