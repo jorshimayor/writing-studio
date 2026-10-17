@@ -1,82 +1,110 @@
 # YouTube Package Template
 
-## Title (under 70 characters, ideally under 60, keyword early)
-<title>
+Fill this in **before recording**. The full reasoning is in `references/youtube.md`.
 
-## Thumbnail text options (2 to 4 words; design comes from the brand kit)
-1. <text>
-2. <text>
-3. <text>
+## 1. The promise
+- **What the viewer clicked for:** <one sentence>
+- **What they get (the thing the video owes them):** <one sentence>
+- **Audience:** <growth video for new viewers | deep dive for existing followers>
 
-**Thumbnail concept:** <what the image shows, e.g. "terminal with a failing deploy, red highlight on the error">
+## 2. Packaging
 
-## Script outline
+**Title (stretch level, Title Case, under 70 characters, ideally under 60):**
+| Level | Title |
+|---|---|
+| Truth (literal) | <what the video is> |
+| Stretch option 1 | <one step past the truth, still delivered early> |
+| Stretch option 2 | <...> |
+| Stretch option 3 | <...> |
 
-| Time | Beat | What's on screen |
-|---|---|---|
-| 0:00 to 0:30 | **Hook:** show the result or surprise first, then the promise | <demo or result> |
-| 0:30 | Chapter 1: <idea> | <visual or live demo> |
-| <~1:30> | Re-hook: <question, reveal or "here's where it breaks"> | |
-| <...> | Chapter 2: <idea> | |
-| <...> | Chapter 3: <idea> | |
-| <end - 0:20> | **Outro:** one CTA with a reason (article, next video or subscribe) | |
+Test: does it make someone think "huh?" rather than "I don't believe that"? Can the video pay it off in the first few minutes?
 
-## Description
+**Thumbnail concept** (design comes from the designer's brand kit):
+- Idea: <the reason to stop scrolling>
+- Enemy or saviour: <recognisable secondary subject, e.g. a failed-transaction toast, a gas spike, a passing test>
+- Face: <expression matching the promise; position consistent with the channel>
+- Text: <none, or 1 to 2 big words>
+- Magnified detail: <the one line, button or number that matters>
+- Squint test passed: <yes or no>
 
-<Line 1 to 2, about 150 characters, with the keyword: what the video shows.>
+## 3. Script in four layers
+
+**Intro (15 to 20 seconds, word for word, read aloud):**
+> <What changed. Why you should care. What you'll get. Straight into the first point. Words tie back to the thumbnail.>
+
+**Framework (2 to 3 sentences on how the video delivers the promise):**
+> <e.g. "I'll deploy a token on a testnet and show the exact step where most tutorials leak your key.">
+
+**Macro points (bullets):**
+1. <point 1, lands by ~1:00>
+2. <point 2, lands by ~3:00>
+3. <point 3, lands by ~6:00>
+4. <back-half depth: stories, context, edge cases>
+
+Only one or two points? Make it a Short or an X post instead.
+
+## 4. Beat sheet
+
+| Time | Beat | On screen | Re-engagement line |
+|---|---|---|---|
+| 0:00 to 0:15 | Intro: re-confirm the click, show the promised thing | <demo or result> | |
+| ~1:00 | Finish a small first unit | | <"That's the first change, but it doesn't explain..."> |
+| ~3:00 | Second payoff | | <next reason to keep watching> |
+| ~6:00 | Third payoff, then the back half | | <bigger promise reminder> |
+| 6:00+ | Back half: depth and personality | | |
+| End | Fold the ending into the last point, closing line, cut | | |
+
+Length: over 8 minutes. 15 to 20 minutes is fine if every section earns its place.
+
+## 5. Recording notes
+- [ ] 2 to 3 intro takes
+- [ ] Ending recorded so it doesn't refer to the previous section
+- [ ] Optional back-half sections shot standalone
+- [ ] 20-second versions of long explanations
+- [ ] Spoken notes for the editor
+- [ ] Testnet only. No real keys, seed phrases or API keys on screen
+
+## 6. Description
+<One or two plain, search-friendly sentences with the keyword.>
 
 Full article: <url>
 Code: <repo url>
 Newsletter: <url>
 
-Chapters
-0:00 <descriptive title>
-<m:ss> <descriptive title>
-<m:ss> <descriptive title>
+<Chapters only for reference-style tutorials where viewers jump between steps.>
 
-<3 to 5 hashtags at most>
-
-## Tags (5 to 10, specific to broad)
-<tag>, <tag>, <tag>
-
-## Pinned comment
-<a question that invites replies, or the article link>
-
-## Checklist
-- [ ] Keyword in the title and in the first description line
-- [ ] Payoff shown within 30 seconds
-- [ ] At least 3 chapters, the first at 0:00, each at least 10 seconds long
-- [ ] Title, thumbnail and first 30 seconds make the same promise
-- [ ] Article and repo linked
-- [ ] No hype, no antithesis cadence in the script
-- [ ] Web3 or ZK demos: testnet only, no real keys on screen, "unaudited example" noted
+## 7. Launch and follow-up
+- [ ] Share unlisted with engaged community members for a day
+- [ ] Post to X and Discord at go-live
+- [ ] Pinned comment: <a question that invites replies>
+- [ ] Day 2 to 3: if packaged for core fans, test broader packaging
+- [ ] Week 1: read retention for the first six minutes and the ending
+- [ ] Later: repackage if an evergreen video flatlines
 
 ---
 
 ## Filled example (Web3)
 
-**Title:** How To Deploy An ERC-20 Token With Foundry (Testnet, Step By Step)
+**The promise:** viewers clicked to deploy their first token safely, and they get a working testnet ERC-20 plus the one habit that keeps keys out of shell history.
 
-**Thumbnail text options:** "First Token Deploy" / "No Leaked Keys" / "ERC-20 In 15 Min"
-**Thumbnail concept:** split screen: forge script output on the left, the token showing in a wallet on the right.
+| Level | Title |
+|---|---|
+| Truth | How To Deploy An ERC-20 Token With Foundry |
+| Stretch 1 | Most Token Tutorials Leak Your Private Key |
+| Stretch 2 | Deploy Your First Token Without Leaking Your Key |
+| Stretch 3 | The Foundry Command That Exposes Your Wallet |
 
-| Time | Beat | What's on screen |
-|---|---|---|
-| 0:00 to 0:30 | Hook: the token appearing in a wallet, then "here's how to do it without exposing your key" | Wallet with the new token |
-| 0:30 | Prerequisites | Foundry install, burner wallet, testnet faucet |
-| 2:00 | Write the contract with OpenZeppelin | Editor |
-| 4:00 | Re-hook: "most tutorials skip this, and it's how keys leak" | .env setup |
-| 5:00 | Test, then deploy with forge script | Terminal |
-| 7:30 | Verify on a block explorer | Explorer page |
-| 8:40 | Outro: link to the written guide | End screen |
+**Thumbnail concept:** a terminal command with the private key flag magnified and circled in red (enemy), a shocked expression on the right, one word: "LEAKED". Designer applies the brand kit.
 
-**Description:** Deploy an ERC-20 token to a testnet with Foundry and OpenZeppelin, keeping your private key out of your commands.
+**Intro:** "Most ERC-20 tutorials have you paste your private key straight into the terminal, where it sits in your shell history. In the next ten minutes we'll deploy a real token to a testnet with Foundry, and your key will never touch the command line. Here's the token we're about to ship."
+
+**Framework:** "I'll build and deploy the token live on Sepolia, and stop at the exact step where most guides leak the key."
+
+**Macro points:**
+1. The leak: what goes wrong in typical tutorials (by ~1:00)
+2. Project setup and the OpenZeppelin contract (by ~3:00)
+3. Safe deployment with environment variables and a burner wallet (by ~6:00)
+4. Back half: testing, verifying on a block explorer, common errors
+
+**Description:** Deploy an ERC-20 token to a testnet with Foundry and OpenZeppelin, without ever putting your private key on the command line.
 Full article: https://jorshimayor.is-a.dev/work · Code: https://github.com/jorshimayor
-
-Chapters
-0:00 The finished token
-0:30 Prerequisites for deploying an ERC-20 token
-2:00 Writing the contract with OpenZeppelin
-4:00 Keeping your private key safe
-5:00 Testing and deploying with Foundry
-7:30 Verifying the deployment

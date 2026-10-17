@@ -1,51 +1,58 @@
 # Writing Studio
 
-Two Claude skills for developer content in **Web3, AI, zero-knowledge (ZK) and Web2**. I use them for everything I publish.
+The all-in-one Claude writing skill for **Web3 technical writers**, covering the AI, zero-knowledge (ZK) and Web2 topics Web3 writers work across. I use it for everything I publish.
 
-| Skill | What it does | Folder |
+One skill handles three kinds of work:
+
+| Work | Examples | What you get |
 |---|---|---|
-| **Writing Studio** | Takes a topic from idea to published piece: a search-ranked article, a Substack post, a newsletter issue or a YouTube video | [`plugins/writing-studio`](plugins/writing-studio) |
-| **How Not to Write** | A prose guardrail for any writing: no "it's not X, it's Y" cadence, no em dashes, no padding | [`plugins/how-not-to-write`](plugins/how-not-to-write) |
+| **Content that ranks** | Articles, blog and Substack posts, newsletters, YouTube videos | Reader-need outlines, keyword research, stretch titles, SEO audits, repurposing across channels |
+| **Web3 documents** | Developer docs, READMEs, protocol explainers, whitepapers, governance proposals, EIP drafts, audit summaries, post-mortems, release notes, grant proposals, X threads | The right structure for each document type, a template, and safety and voice checks |
+| **Rewrites** | Drafts, emails, tweets, docs that sound AI-written or padded | A human, specific, concise version, with a list of what changed and why |
 
-Install either one or both (see [Install](#install)). Writing Studio already applies the How Not to Write rules, so install How Not to Write on its own when you want the guardrail for everyday writing too: emails, docs, posts.
+## What it enforces everywhere
 
-## Writing Studio
+**Voice** (these used to be the separate How Not to Write skill, and are now built in):
+1. No "it's not X, it's Y" cadence or its relatives. State the claim, then prove it with specifics.
+2. No em dashes, ever.
+3. Conversational, never verbose.
 
-It works in seven steps:
+**Web3 safety:**
+- No private keys, seed phrases or API keys, in text, code, screenshots or video.
+- No financial advice, price talk or yield promises. Explain mechanisms instead.
+- Testnet-first examples, with example contracts and circuits labelled as unaudited.
+- Addresses and chain IDs verified against official sources.
+- Vulnerabilities written up by class and fix, never as live exploits.
 
-1. **Load a profile and brief.** Your brand, audience, channels, links and house style live in a profile file.
-2. **Pick the reader need.** One of 8 needs (Educate Me, Explain It, Compare For Me, Guide Me, Fix It, Give Me Perspective, Update Me, Inspire Me) decides the intro, section order and ending.
-3. **Research.** Keywords from free Google and YouTube autocomplete (bundled script), plus volume and difficulty from [OpenSEO](https://github.com/every-app/open-seo), the open-source Ahrefs alternative, if you connect it. Also search intent, real reader questions, gaps in what ranks, primary sources and internal links. It never invents data.
-4. **Titles.** 8 to 10 options across hook patterns, using real trending signals, with SEO title, meta, slug, subject line or thumbnail text for the channel.
-5. **Outline**, which you approve before drafting.
-6. **Draft and audit.** A bundled checker scores the draft on keyword placement, density, headings, links, anchors, alt text and voice, and the draft gets fixed until nothing fails.
-7. **Deliver and repurpose.** The article becomes the source of truth, and the newsletter and video become overviews that link back to it.
+**Accuracy:** no invented statistics, quotes, search volumes, benchmarks or sources.
 
-It also enforces the [How Not to Write](plugins/how-not-to-write) rules: no "it's not X, it's Y" cadence, no em dashes, no padding.
+## Five modes
 
-### Three ways to use it
+| Mode | Ask for |
+|---|---|
+| **Outline** | "Outline these 5 topics for my blog" (one checked outline file per topic, plus an index) |
+| **From outline** | "Write the article from `outlines/what-is-a-zero-knowledge-proof.outline.md`" |
+| **End to end** | "Write a post about my rollup experiments" (outline for approval, then the piece) |
+| **Web3 document** | "Write a post-mortem for this incident", "Draft a governance proposal", "Write the README" |
+| **Edit and rewrite** | "Make this thread sound less AI", "Tighten this doc" |
 
-| Mode | Ask for | You get |
-|---|---|---|
-| **Outline** | "Outline these 5 topics for my blog" | One `<slug>.outline.md` per topic (reader need, keywords, titles, intro plan and every planned section), checked against the reader need's rules, plus an index table |
-| **From outline** | "Write the article from `outlines/what-is-rag.outline.md`" | The finished piece, built section by section from the approved outline, then checked for SEO and for sticking to the outline |
-| **End to end** | "Write a post about my ReAct agent results" | Outline for your approval, then the finished piece |
+## What's inside
 
-Each reader need has its own outline skeleton and rules. For example, a Guide Me outline must open with prerequisites, a Fix It outline must start with causes and end with where to get help, and a Compare For Me outline must plan a comparison table. `scripts/outline_check.py` enforces them:
+All paths are inside `plugins/writing-studio/skills/writing-studio/`.
 
-```bash
-python3 plugins/writing-studio/skills/writing-studio/scripts/outline_check.py outlines/*.outline.md --site yourdomain.com
-python3 plugins/writing-studio/skills/writing-studio/scripts/outline_check.py outlines/what-is-rag.outline.md --article drafts/what-is-rag.md
-```
-
-### Built for Web3, AI, ZK and Web2
-
-All paths below are inside `plugins/writing-studio/skills/writing-studio/`.
-
-- **Domain guide** (`references/domains.md`): primary sources to cite, where readers ask questions, terminology conventions and accuracy rules for each domain. For example: no financial advice in Web3, date every model fact in AI, state security assumptions in ZK, name the version in every Web2 fix.
-- **8 example outlines** (`examples/outlines/`), one per reader need, two per domain: *What Is A Zero-Knowledge Proof?*, *How Does A Context Window Work In LLMs?*, *Optimistic Vs ZK Rollups*, *How To Deploy An ERC-20 Token With Foundry*, *PostgreSQL Too Many Connections?*, *I Ran 140 Few-Shot Experiments*, *Next.js 15 Caching Changes* and *Learning Zero-Knowledge Proofs*. Each passes the outline checker with no warnings.
-- **Templates** (`templates/`): article, Substack post, newsletter issue (with a filled multi-domain example) and YouTube package (with a filled Web3 example).
-- **Terminology checks**: the SEO checker warns on mixed forms ("on-chain" and "onchain", "Web3" and "web3") and accepts mixed-case names like zk-SNARK, zkVM and dApp in title case.
+| Path | Contents |
+|---|---|
+| `SKILL.md` | The workflow, the five modes and the hard rules |
+| `references/voice.md` | The voice rules in full, with the reasoning, the one exception, and before/after examples for Web3, AI, ZK and Web2 |
+| `references/domains.md` | Per domain: primary sources, where readers ask questions, terminology, accuracy and safety rules, example topics |
+| `references/doc-types.md` | Web3 document types: the four kinds of developer docs (Diátaxis), README, protocol explainer, whitepaper, governance proposal, EIP draft, audit summary, post-mortem, release notes, grant proposal, X thread |
+| `references/youtube.md` | A full YouTube playbook for technical creators: strategy, packaging and "stretch" titles, scripting, the 1/3/6-minute retention beats, editing, publishing and repackaging, plus Web3 safety on screen. Distilled from [howtoyoutube.dev](https://howtoyoutube.dev/) |
+| `references/reader-needs.md`, `outline-template.md`, `structure.md` | The 8 reader needs, outline format and skeletons, and structure rules |
+| `references/keyword-research.md`, `titles.md`, `seo.md`, `channels.md` | Keywords, titles, on-page SEO, and blog, Substack, newsletter and YouTube formats |
+| `examples/outlines/` | 8 complete outlines (one per reader need, two each for Web3, AI, ZK and Web2), each passing the checker with no warnings |
+| `templates/` | 13 templates: article, Substack post, newsletter issue, YouTube package, README, reference doc, whitepaper, governance proposal, audit summary, post-mortem, release notes, grant proposal, X thread |
+| `profiles/` | Your brand, channels, links and house style (`jorshimayor.md` is mine, `_template.md` is for yours) |
+| `scripts/` | `keyword_ideas.py`, `outline_check.py`, `seo_check.py` (plain Python 3, no dependencies) |
 
 ## Install
 
@@ -54,80 +61,53 @@ All paths below are inside `plugins/writing-studio/skills/writing-studio/`.
 ```
 /plugin marketplace add jorshimayor/writing-studio
 /plugin install writing-studio@writing-studio
-/plugin install how-not-to-write@writing-studio
 ```
 
-Or copy the folders manually:
+Or copy the folder manually:
 
 ```bash
 git clone https://github.com/jorshimayor/writing-studio.git
 cp -r writing-studio/plugins/writing-studio/skills/writing-studio ~/.claude/skills/
-cp -r writing-studio/plugins/how-not-to-write/skills/how-not-to-write ~/.claude/skills/
 ```
 
 ### Claude.ai and the Claude desktop app
 
-Download `writing-studio.zip` and/or `how-not-to-write.zip` from the [latest release](https://github.com/jorshimayor/writing-studio/releases/latest) and upload each one under **Settings → Capabilities → Skills**.
+Download `writing-studio.zip` from the [latest release](https://github.com/jorshimayor/writing-studio/releases/latest) and upload it under **Settings → Capabilities → Skills**.
 
-> **Moved from jorshimayor/how-not-to-write?** That repo is archived. Re-add the marketplace with the commands above and install `how-not-to-write@writing-studio`.
+> **Used How Not to Write before?** It's now part of Writing Studio. Uninstall `how-not-to-write` (Claude Code: `/plugin uninstall how-not-to-write@writing-studio`; claude.ai: remove it in Settings) so you don't have two skills applying the same rules.
 
-### Set up your profile
+## Set up your profile
 
-Copy `plugins/writing-studio/skills/writing-studio/profiles/_template.md` to `profiles/<your-name>.md` and fill in your brand, channels, domain and style. Then ask for it by name:
+Copy `profiles/_template.md` to `profiles/<your-name>.md` and fill in your brand, channels, domains and house style, then ask for it by name:
 
-> Write a Substack post about my RAG experiments using the acme profile.
+> Write a Substack post about my ZK experiments using the acme profile.
 
-The bundled `jorshimayor` profile is mine and shows a filled-in example.
+## The scripts
 
-### Use
+Run these from inside the skill folder.
 
-> Write an SEO article on "how does a context window work" for my blog.
-
-> Turn this article into a newsletter issue and a YouTube script.
-
-> Give me 10 catchy titles for a post about my ReAct agent results.
-
-### Keyword ideas (free)
-
-`scripts/keyword_ideas.py` pulls real search phrasings, questions and comparisons from Google and YouTube autocomplete. It needs no API key:
+**Keyword ideas** from Google and YouTube autocomplete, free and with no API key. For volume and difficulty, connect [OpenSEO](https://github.com/every-app/open-seo) (see `references/keyword-research.md`):
 
 ```bash
-python3 plugins/writing-studio/skills/writing-studio/scripts/keyword_ideas.py "react agent" --source both
+python3 scripts/keyword_ideas.py "account abstraction" --source both
 ```
 
-For search volume and keyword difficulty, self-host [OpenSEO](https://github.com/every-app/open-seo) with a pay-as-you-go [DataForSEO](https://dataforseo.com/) key and connect its MCP server to Claude. The skill uses it automatically when it's available. See `references/keyword-research.md`.
-
-### The checker
-
-`scripts/seo_check.py` runs on any Markdown draft with plain Python 3 and no dependencies:
+**Outline checks** against each reader need's rules, and drafts against their outline:
 
 ```bash
-python3 plugins/writing-studio/skills/writing-studio/scripts/seo_check.py draft.md \
-  --keyword "context window" --secondary "token limit, long context" \
-  --site "yourdomain.com, you.substack.com" --meta "Your meta description" \
-  --spelling british --strict
+python3 scripts/outline_check.py outlines/*.outline.md --site yourdomain.com --strict
+python3 scripts/outline_check.py outlines/<slug>.outline.md --article drafts/<slug>.md
 ```
 
-It returns ✔, ⚠ or ✘ for each check, and exits with code 1 if anything fails, so it can gate a publishing script.
+**SEO, voice and Web3 safety audit.** Leave out `--keyword` for docs and edits:
 
-## How Not to Write
-
-Three rules for anything written for a person to read:
-
-1. **Kill the antithesis cadence.** No "it's not X, it's Y" and none of its relatives. State the claim plainly, then back it with specifics.
-2. **Never use em dashes.** Use a full stop, comma, colon or parentheses.
-3. **Conversational, never verbose.** Cut throat-clearing openers, doubled phrasing and repeated sentences.
-
-Before-and-after examples from Web3, AI, ZK and Web2, plus domain hype words to watch, are in [`plugins/how-not-to-write`](plugins/how-not-to-write).
-
-## Repository layout
-
+```bash
+python3 scripts/seo_check.py draft.md --keyword "zero-knowledge proof" \
+  --site "yourdomain.com, you.substack.com" --meta "Your meta description" --spelling british --strict
+python3 scripts/seo_check.py README.md --spelling british
 ```
-.claude-plugin/marketplace.json     lists both plugins
-plugins/
-├── writing-studio/                 the content system (skill, references, examples, templates, scripts)
-└── how-not-to-write/               the prose guardrail
-```
+
+It flags private keys and seed phrases (fail), financial-advice phrasing, unchecked addresses, contract code without an "unaudited" note and mainnet-only deploy commands, alongside the voice and SEO checks. It exits with code 1 if anything fails, so it can gate a publishing script.
 
 ## License
 

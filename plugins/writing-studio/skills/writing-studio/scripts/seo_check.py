@@ -7,7 +7,9 @@ Standard library only. Usage:
         --secondary "dedicated server, single-tenant" --site example.com
 
 Options:
-    --keyword     primary keyword (required)
+    --keyword     primary keyword. Omit it for docs, READMEs and quick edits:
+                  the keyword and meta checks are skipped and only structure,
+                  links, voice, house style and Web3 safety are checked
     --secondary   comma-separated secondary keywords
     --site        your domain(s), comma-separated, used to tell internal links
                   from external ones (e.g. "example.com, example.substack.com")
@@ -113,6 +115,7 @@ def remove_code(text):
 
 def parse(text):
     meta, body = strip_front_matter(text)
+    raw = body
     body_nocode = remove_code(body)
     headings = [(len(m.group(1)), m.group(2).strip(), m.start())
                 for m in re.finditer(r"^(#{1,6})\s+(.+?)\s*#*\s*$", body_nocode, flags=re.M)]
@@ -139,7 +142,7 @@ def parse(text):
     body_only = re.sub(r"^#{1,6}\s+.*$", " ", body_nocode, flags=re.M)
     body_only = re.sub(r"!?\[([^\]]*)\]\([^)]*\)", r"\1", body_only)
     lead_words = re.findall(r"[A-Za-z0-9][A-Za-z0-9'’\-.]*[A-Za-z0-9]|[A-Za-z0-9]", body_only)
-    return dict(meta=meta, body=body_nocode, headings=headings, images=images, links=links,
+    return dict(meta=meta, raw=raw, body=body_nocode, headings=headings, images=images, links=links,
                 paragraphs=paragraphs, prose=prose, words=words, lead_words=lead_words, h1=h1)
 
 
@@ -202,43 +205,46 @@ def run(doc, a):
     R = []
     add = lambda group, status, msg: R.append((group, status, msg))
     kw = a.keyword
-    kp = kw_pattern(kw)
+    kp = kw_pattern(kw) if kw else None
     words = doc["words"]; n = len(words) or 1
     h2s = [(i, t) for i, (l, t, _) in enumerate(doc["headings"]) if l == 2]
 
-    # ---- keyword placement
-    G = "Keyword placement"
-    first50 = " ".join(doc["lead_words"][:50])  # body text only: the H1 does not count
-    add(G, PASS if kp.search(first50) else (WARN if doc["paragraphs"] and kp.search(doc["paragraphs"][0]) else FAIL),
-        f'Primary keyword in the first 50 words ("{kw}")')
-    if h2s:
-        first_h2_var = is_variation(h2s[0][1], kw)
-        add(G, PASS if first_h2_var else FAIL, f'Keyword or a close variation in the first H2: "{h2s[0][1]}"')
-        others = sum(is_variation(t, kw) for _, t in h2s[1:])
-        add(G, PASS if others >= 1 else FAIL, f"Keyword variation in other H2s: {others} (target 1 to 2)")
-        sec = section_text(doc, h2s[0][0])
-        paras = [p for p in re.split(r"\n\s*\n", sec)[1:] if p.strip() and not p.lstrip().startswith(("#", "!", "|"))]
-        add(G, PASS if paras and (kp.search(paras[0]) or is_variation(paras[0], kw)) else FAIL,
-            "Keyword in the first paragraph under the first H2")
-        last = section_text(doc, h2s[-1][0])
-        add(G, PASS if kp.search(last) or is_variation(last, kw) else FAIL,
-            f'Keyword in the closing section ("{h2s[-1][1]}")')
+    if not kw:
+        add("Keyword placement", INFO, "No --keyword given: SEO keyword checks skipped (docs and edit mode)")
     else:
-        add(G, FAIL, "No H2 headings found")
-    hits = [m.start() for m in kp.finditer(doc["prose"])]
-    density = 100 * len(hits) / n
-    status = PASS if 1 <= density <= 2 else (WARN if 0.6 <= density <= 2.6 else FAIL)
-    add(G, status, f"Primary density {density:.2f}% ({len(hits)} uses in {n} words, target 1% to 2%)")
-    if hits:
-        L = len(doc["prose"])
-        thirds = {min(2, int(3 * h / L)) for h in hits}
-        add(G, PASS if len(thirds) == 3 else WARN, "Primary keyword spread through the start, middle and end"
-            if len(thirds) == 3 else f"Primary keyword only appears in {len(thirds)} of 3 thirds of the article")
-    for s in [x.strip() for x in (a.secondary or "").split(",") if x.strip()]:
-        c = len(kw_pattern(s).findall(doc["prose"])); d = 100 * c / n
-        in_heads = sum(is_variation(t, s) for l, t, _ in doc["headings"] if l in (2, 3))
-        st = PASS if 0.5 <= d <= 1 and in_heads else WARN
-        add(G, st, f'Secondary "{s}": {d:.2f}% ({c} uses, target 0.5% to 1%), in {in_heads} H2/H3')
+        # ---- keyword placement
+        G = "Keyword placement"
+        first50 = " ".join(doc["lead_words"][:50])  # body text only: the H1 does not count
+        add(G, PASS if kp.search(first50) else (WARN if doc["paragraphs"] and kp.search(doc["paragraphs"][0]) else FAIL),
+            f'Primary keyword in the first 50 words ("{kw}")')
+        if h2s:
+            first_h2_var = is_variation(h2s[0][1], kw)
+            add(G, PASS if first_h2_var else FAIL, f'Keyword or a close variation in the first H2: "{h2s[0][1]}"')
+            others = sum(is_variation(t, kw) for _, t in h2s[1:])
+            add(G, PASS if others >= 1 else FAIL, f"Keyword variation in other H2s: {others} (target 1 to 2)")
+            sec = section_text(doc, h2s[0][0])
+            paras = [p for p in re.split(r"\n\s*\n", sec)[1:] if p.strip() and not p.lstrip().startswith(("#", "!", "|"))]
+            add(G, PASS if paras and (kp.search(paras[0]) or is_variation(paras[0], kw)) else FAIL,
+                "Keyword in the first paragraph under the first H2")
+            last = section_text(doc, h2s[-1][0])
+            add(G, PASS if kp.search(last) or is_variation(last, kw) else FAIL,
+                f'Keyword in the closing section ("{h2s[-1][1]}")')
+        else:
+            add(G, FAIL, "No H2 headings found")
+        hits = [m.start() for m in kp.finditer(doc["prose"])]
+        density = 100 * len(hits) / n
+        status = PASS if 1 <= density <= 2 else (WARN if 0.6 <= density <= 2.6 else FAIL)
+        add(G, status, f"Primary density {density:.2f}% ({len(hits)} uses in {n} words, target 1% to 2%)")
+        if hits:
+            L = len(doc["prose"])
+            thirds = {min(2, int(3 * h / L)) for h in hits}
+            add(G, PASS if len(thirds) == 3 else WARN, "Primary keyword spread through the start, middle and end"
+                if len(thirds) == 3 else f"Primary keyword only appears in {len(thirds)} of 3 thirds of the article")
+        for s in [x.strip() for x in (a.secondary or "").split(",") if x.strip()]:
+            c = len(kw_pattern(s).findall(doc["prose"])); d = 100 * c / n
+            in_heads = sum(is_variation(t, s) for l, t, _ in doc["headings"] if l in (2, 3))
+            st = PASS if 0.5 <= d <= 1 and in_heads else WARN
+            add(G, st, f'Secondary "{s}": {d:.2f}% ({c} uses, target 0.5% to 1%), in {in_heads} H2/H3')
 
     # ---- structure
     G = "Structure"
@@ -275,16 +281,18 @@ def run(doc, a):
     # Short articles: 3 to 5 links in total. Longer ones: 3 to 5 per 1,000 words.
     ok = 3 <= len(internal) <= 5 if n < 1000 else (3 <= len(internal) and 2.5 <= per_k <= 5.5)
     st = PASS if ok else (WARN if len(internal) >= 2 else FAIL)
+    if not kw:
+        st = INFO                                   # docs and edit mode: link counts are information only
     add(G, st, f"Internal links: {len(internal)} ({per_k:.1f} per 1,000 words, target 3 to 5)"
         + ("" if sites else ". Pass --site to classify links"))
-    add(G, PASS if 1 <= len(external) <= 3 else WARN, f"External authoritative links: {len(external)} (target 1 to 3)")
+    add(G, (PASS if 1 <= len(external) <= 3 else WARN) if kw else INFO, f"External authoritative links: {len(external)} (target 1 to 3)")
     generic = [t for t, _ in doc["links"] if t.lower().strip(" .") in GENERIC_ANCHORS]
     add(G, PASS if not generic else FAIL, "Anchor text is descriptive" if not generic else f"Generic anchors: {generic}")
     by_anchor = defaultdict(set)
     for t, u in doc["links"]: by_anchor[t.lower()].add(u)
     dup = [t for t, us in by_anchor.items() if len(us) > 1]
     add(G, PASS if not dup else WARN, "No anchor text points to two different URLs" if not dup else f"Same anchor, different URLs: {dup}")
-    cannibal = [t for t, _ in internal if kp.fullmatch(t.strip())]
+    cannibal = [t for t, _ in internal if kp and kp.fullmatch(t.strip())]
     add(G, PASS if not cannibal else FAIL, "Primary keyword is not used as an internal anchor"
         if not cannibal else f"Primary keyword used as internal anchor (cannibalization risk): {cannibal}")
     if doc["links"]:
@@ -301,8 +309,9 @@ def run(doc, a):
     if doc["images"]:
         no_alt = [s for alt, s in doc["images"] if not alt.strip()]
         add(G, PASS if not no_alt else FAIL, "Every image has alt text" if not no_alt else f"Missing alt text: {no_alt}")
-        kw_alt = sum(bool(kp.search(alt) or is_variation(alt, kw)) for alt, _ in doc["images"])
-        add(G, PASS if kw_alt else WARN, f"Images with the keyword in alt text: {kw_alt} of {len(doc['images'])}")
+        if kw:
+            kw_alt = sum(bool(kp.search(alt) or is_variation(alt, kw)) for alt, _ in doc["images"])
+            add(G, PASS if kw_alt else WARN, f"Images with the keyword in alt text: {kw_alt} of {len(doc['images'])}")
         base = os.path.dirname(os.path.abspath(a.file))
         for alt, src in doc["images"]:
             if src.startswith("http"): continue
@@ -313,15 +322,16 @@ def run(doc, a):
             if a.strict and w and w != 1440:
                 add(G, WARN, f"{src}: {w}x{h} px. Screenshots should be 1440 px wide (900 px tall by default)")
     else:
-        add(G, WARN, "No images. Add at least one with descriptive alt text")
+        add(G, WARN if kw else INFO, "No images. Add at least one with descriptive alt text")
 
     # ---- metadata
     G = "Title and meta"
     title = a.seo_title or doc["h1"] or ""
     if title:
-        st = PASS if 30 <= len(title) <= 60 else WARN
+        st = (PASS if 30 <= len(title) <= 60 else WARN) if kw else INFO
         add(G, st, f'Title is {len(title)} characters (aim for 50 to 60 so it is not truncated): "{title}"')
-        add(G, PASS if kp.search(title) or is_variation(title, kw) else FAIL, "Primary keyword in the title")
+        if kw:
+            add(G, PASS if kp.search(title) or is_variation(title, kw) else FAIL, "Primary keyword in the title")
         if a.strict:
             low = uncapitalized(title)
             add(G, PASS if not low else FAIL, "Every title word is capitalized" if not low else f"Lowercase words in title: {low}")
@@ -330,7 +340,8 @@ def run(doc, a):
     if a.meta:
         st = PASS if 140 <= len(a.meta) <= 160 else WARN
         add(G, st, f"Meta description is {len(a.meta)} characters (target 140 to 160)")
-        add(G, PASS if kp.search(a.meta) or is_variation(a.meta, kw) else FAIL, "Primary keyword in the meta description")
+        if kw:
+            add(G, PASS if kp.search(a.meta) or is_variation(a.meta, kw) else FAIL, "Primary keyword in the meta description")
     else:
         add(G, INFO, "Meta description not checked (add --meta)")
 
@@ -370,6 +381,47 @@ def run(doc, a):
     absl = {k: v for k, v in absl.items() if v}
     if absl: add(G, INFO, f"Absolute words to double-check: {absl}")
 
+    # ---- Web3 safety (always on; quiet when there's no Web3 content)
+    G = "Web3 safety"
+    raw = doc["raw"]; raw_low = raw.lower()
+    web3 = bool(re.search(r"\b(solidity|smart contract|wallet|onchain|on-chain|ethereum|solana|erc-\d+|eip-\d+|"
+                          r"rollup|validator|token|defi|dapp|nft|gwei|testnet|mainnet|zk-snark|circom|noir)\b|0x[0-9a-f]{40}", raw_low))
+    leaks, hexes = [], []
+    for m in re.finditer(r"(?<![0-9a-fA-Fx])(?:0x)?[0-9a-fA-F]{64}(?![0-9a-fA-F])", raw):
+        line = raw[raw.rfind("\n", 0, m.start()) + 1: raw.find("\n", m.end()) if raw.find("\n", m.end()) != -1 else len(raw)]
+        if set(m.group(0).lower().removeprefix("0x")) <= {"0"}:
+            continue                                            # zero placeholder
+        if re.search(r"private|secret|priv_?key|mnemonic|--private-key|key\s*[:=]", line, re.I):
+            leaks.append(m.group(0)[:10] + "...")
+        else:
+            hexes.append(m.group(0)[:10] + "...")
+    for line in raw.splitlines():
+        if re.search(r"mnemonic|seed phrase|recovery phrase|secret phrase", line, re.I) and \
+                re.search(r"\b(?:[a-z]{3,8}\s+){11,23}[a-z]{3,8}\b", line):
+            leaks.append("possible seed phrase: " + line.strip()[:40] + "...")
+    add(G, PASS if not leaks else FAIL, "No private keys or seed phrases" if not leaks
+        else f"Possible secret material, remove it: {leaks[:3]}")
+    if hexes:
+        add(G, WARN, f"64-character hex values ({len(hexes)}): fine for transaction hashes, never for keys. Check: {hexes[:3]}")
+    if web3:
+        money = ["buy now", "price will", "will pump", "to the moon", "100x", "1000x", "guaranteed returns",
+                 "guaranteed yield", "guaranteed profit", "risk-free", "risk free", "can't lose", "cannot lose",
+                 "passive income", "get rich", "financial freedom", "not financial advice"]
+        found = [w for w in money if re.search(r"(?<![\w-])" + re.escape(w) + r"(?![\w-])", raw_low)]
+        add(G, PASS if not found else WARN, "No financial-advice or hype phrasing" if not found
+            else f"Financial-advice or hype phrasing (explain mechanisms instead): {found}")
+        addrs = sorted(set(re.findall(r"0x[0-9a-fA-F]{40}(?![0-9a-fA-F])", raw)))
+        if addrs:
+            unchecked = [x for x in addrs if re.search(r"[a-fA-F]", x[2:]) and (x[2:] == x[2:].lower() or x[2:] == x[2:].upper())]
+            add(G, INFO, f"{len(addrs)} address(es): verify each one and its network on a block explorer before publishing"
+                + (f". Not in EIP-55 checksum case: {[x[:10] + '...' for x in unchecked[:3]]}" if unchecked else ""))
+        if re.search(r"```\s*(solidity|sol|circom|noir|rust)\b|pragma solidity", raw_low) and \
+                not re.search(r"unaudited|not been audited|not audited", raw_low):
+            add(G, WARN, 'Contract or circuit code without an "unaudited example" note')
+        if re.search(r"forge script[^\n]*--broadcast|forge create|hardhat (run|deploy)|anchor deploy|solana program deploy", raw_low) and \
+                not re.search(r"testnet|sepolia|holesky|devnet|anvil|localhost|local node", raw_low):
+            add(G, WARN, "Deployment commands with no testnet mentioned. Show the testnet first")
+
     # ---- spelling
     spelling = a.spelling or ("american" if a.strict else None)
     if spelling:
@@ -406,7 +458,7 @@ def run(doc, a):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    ap.add_argument("file"); ap.add_argument("--keyword", required=True); ap.add_argument("--secondary")
+    ap.add_argument("file"); ap.add_argument("--keyword"); ap.add_argument("--secondary")
     ap.add_argument("--site"); ap.add_argument("--meta"); ap.add_argument("--seo-title")
     ap.add_argument("--strict", action="store_true"); ap.add_argument("--spelling", choices=["american", "british"]); ap.add_argument("--check-links", action="store_true")
     ap.add_argument("--json", action="store_true")

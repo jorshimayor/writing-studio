@@ -36,37 +36,30 @@ The newsletter is an **overview** that points to the deep dives.
 
 ## YouTube video
 
-The video is an overview with **demos**. The article holds the depth.
+The video is an overview with **demos**, and the article holds the depth. **Read `youtube.md` for the full playbook** (strategy, packaging, scripting, retention beats, editing, publishing, repackaging and Web3 safety on screen). The essentials:
 
-**Deliver:**
-1. **Title** (see `titles.md`) and **3 thumbnail text options** of 2 to 4 words.
-2. **Script outline** with timings:
-   - **0:00 to 0:30, hook:** show the result or the surprising moment first, then say what the viewer will get. No "Hey guys, welcome back" preamble.
-   - **Chapters:** one per main idea, each with one visual or live demo. Mention the article for the details.
-   - **Re-hooks** every 60 to 90 seconds: a question, a result reveal or a "here's where it breaks".
-   - **Outro (under 20 seconds):** one CTA (the article, the next video or subscribe) with a reason.
-3. **Description:**
-   - First 2 lines (about 150 characters): what the video shows, including the keyword. This is the part visible before "more".
-   - Links: the full article, the code or repo, the newsletter.
-   - **Chapters:** timestamps starting at `0:00`, at least 3 of them, each at least 10 seconds long, written as descriptive titles.
-   - 3 to 5 relevant hashtags at most.
-4. **Tags:** 5 to 10, from specific to broad.
-5. **Pinned comment:** a question that invites replies, or the article link.
+**Deliver a package (`templates/youtube-package.md`):**
+1. **Title** at the "stretch" level: one step past the literal truth and still fully paid off. Title Case. Under 70 characters, ideally under 60.
+2. **Thumbnail concept**: the idea, a recognisable enemy or saviour, and your face in a consistent spot. **No text, or one or two big words.** Passes the squint test. The designer's brand kit handles the design.
+3. **Script in four layers**: packaging, a 15 to 20 second intro written word for word, a 2 to 3 sentence framework, and the macro points as bullets.
+4. **Beat sheet**: intro to 0:15, re-engagements around 1:00, 3:00 and 6:00, payoffs front-loaded, back half for depth and personality, ending folded into the last point. Over 8 minutes.
+5. **Description**: one or two plain, search-friendly sentences, then links (article, repo, newsletter). Chapters only for reference-style tutorials where viewers jump between steps.
+6. **Launch plan**: seed the unlisted video with engaged community members, then post to X and Discord at go-live.
 
-**YouTube checklist:**
-- [ ] Keyword in the title and in the first line of the description.
-- [ ] The hook shows the payoff within 30 seconds.
-- [ ] Chapters added, starting at 0:00.
-- [ ] The title, thumbnail and first 30 seconds make the same promise.
-- [ ] The article and repo are linked in the description.
-- [ ] The same voice rules as written content apply to the script: no antithesis cadence and no hype.
+**YouTube checklist (summary):**
+- [ ] Package decided before recording, and the stretch is delivered early
+- [ ] Intro re-confirms the click within 15 to 20 seconds and shows the promised thing
+- [ ] First real point by about 3:00, re-engagements near 1, 3 and 6 minutes
+- [ ] Ends inside the last point, no separate outro
+- [ ] Web3 or ZK demos: testnet only, no keys or seed phrases on screen, unaudited code labelled, no price talk
+- [ ] Same voice rules as written content: no antithesis cadence, no hype
 
 ## Repurposing: one deep dive, every channel
 
 1. **Write the deep-dive article first.** Run the full workflow and the SEO audit.
 2. **Pull out the assets:** the 3 most surprising findings, the best chart, one quotable line and one demo.
 3. **Newsletter:** a hook from finding 1, one paragraph per article, and links.
-4. **YouTube:** each finding becomes a chapter, the demo becomes the visual, and the article goes in the description.
+4. **YouTube:** the most surprising finding becomes the stretch title and the intro, the next findings land by 1, 3 and 6 minutes, the demo is the visual, and the article goes in the description.
 5. **Substack:** either the newsletter itself, or the article with a personal intro.
 6. **Social (optional):** a short thread or post per finding, each linking to the article or video.
 

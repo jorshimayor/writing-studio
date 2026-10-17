@@ -55,8 +55,8 @@ Mix these to generate options:
 | Substack | Subtitle | 1 sentence | Shown under the title and in previews. Adds the "why read" |
 | Newsletter | Subject line | Under 50 characters | Front-load the hook. Most inboxes cut the rest on mobile |
 | Newsletter | Preview text | 40 to 90 characters | Completes the subject line. Never repeat it |
-| YouTube | Title | Under 70 characters, ideally under 60 | Keyword early. The title and thumbnail work as one unit |
-| YouTube | Thumbnail text | 2 to 4 words | Complements the title instead of repeating it |
+| YouTube | Title | Under 70 characters, ideally under 60 | Aim at the "stretch" (see `youtube.md`). Title and thumbnail do different jobs |
+| YouTube | Thumbnail text | None, or 1 to 2 words | Decoration, not the reason to click. See `youtube.md` |
 
 ## Finding trending angles
 

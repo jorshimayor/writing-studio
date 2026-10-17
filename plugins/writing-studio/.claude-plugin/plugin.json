@@ -1,19 +1,24 @@
 {
   "name": "writing-studio",
-  "version": "2.0.0",
-  "description": "End-to-end content system: reader-need-driven articles, Substack posts, newsletters and YouTube scripts with SEO titles, keyword placement and an automated SEO and voice audit.",
+  "version": "3.0.0",
+  "description": "All-in-one writing skill for Web3 technical writers: articles, newsletters, YouTube, docs, READMEs, proposals, post-mortems and threads, with a human voice, Web3 safety rules and automated SEO, voice and safety checks.",
   "author": {
     "name": "Joshua Obafemi"
   },
   "repository": "https://github.com/jorshimayor/writing-studio",
   "license": "MIT",
   "keywords": [
-    "writing",
-    "seo",
+    "ai",
+    "blogging",
     "content",
+    "documentation",
     "newsletter",
-    "youtube",
+    "seo",
     "substack",
-    "blogging"
+    "technical-writing",
+    "web3",
+    "writing",
+    "youtube",
+    "zk"
   ]
 }

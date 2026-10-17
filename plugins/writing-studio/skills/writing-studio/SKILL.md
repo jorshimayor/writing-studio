@@ -1,62 +1,88 @@
 ---
 name: writing-studio
-description: End-to-end content system for writing and publishing across a blog, Substack, email newsletters and YouTube, tuned for Web3, AI, zero-knowledge (ZK) and Web2 developer topics. Use it whenever the user wants to plan, title, outline, write, edit, SEO-optimize, or repurpose an article, blog post, Substack post, newsletter issue, YouTube script or video description, or asks for catchy or trending titles, keyword placement, internal linking, or a content brief. It works in three modes: topic(s) to reader-need outlines, outline to finished piece, or topic straight to a finished piece. It decides what the reader needs, researches keywords and search intent, writes ranking-friendly titles, builds a checked outline, drafts in a human voice, runs automated outline, SEO and style audits, and adapts one piece into every channel.
+description: All-in-one writing skill for Web3 technical writers, also covering AI, zero-knowledge (ZK) and Web2. Use it for any writing or editing task. Articles, blog and Substack posts, newsletters and YouTube scripts get reader-need outlines, keyword research, ranking titles, SEO audits and repurposing. Web3 documents covered include developer docs, tutorials, READMEs, protocol explainers, whitepapers, governance proposals, EIP drafts, audit summaries, incident post-mortems, release notes, grant proposals and X threads. Also use it for quick rewrites when text sounds AI-written, generic or padded. It enforces a human voice everywhere (no "it's not X, it's Y" cadence, no em dashes, no padding) plus Web3 safety rules (no keys or seed phrases, no financial advice, testnet-first code, unaudited code labelled), and runs automated outline, SEO, voice and safety checks.
 ---
 
 # Writing Studio
 
-Turn a topic into a finished piece for any channel: a search-optimized article, a Substack post, a newsletter issue or a YouTube video. Every piece is shaped by **what the reader needs from it**, written in a plain human voice, and checked before it ships.
+The all-in-one writing skill for **Web3 technical writers**, and for the AI, ZK and Web2 topics Web3 writers cover. It handles three kinds of work:
+
+1. **Content that has to rank and get read:** articles, Substack posts, newsletters and YouTube videos, shaped by what the reader needs, with keyword research, titles, outlines and SEO audits.
+2. **Web3 documents:** developer docs, READMEs, protocol explainers, whitepapers, governance proposals, audit summaries, post-mortems, release notes, grant proposals and threads.
+3. **Any rewrite:** making a draft, email, tweet or doc sound human, specific and concise.
+
+Every piece follows the same voice rules and Web3 safety rules, and gets checked before it ships.
 
 ## Reference files
 
 | File | Contains | Read at |
 |---|---|---|
-| `profiles/<name>.md` | Brand, audience, channels, links, calls to action, spelling and capitalization | Step 0 |
+| `profiles/<name>.md` | Brand, audience, channels, links, calls to action, spelling and capitalisation | Step 0 |
+| `references/voice.md` | The voice rules: the three hard rules (with the reasoning behind them), domain before/after examples, defaults, terminology | Every mode |
+| `references/domains.md` | Web3, AI, ZK and Web2: sources, terminology, accuracy and safety rules, example topics | Step 0, Step 2, Step 5 |
+| `references/doc-types.md` | Web3 document types: docs (tutorial, how-to, reference, explanation), README, explainer, whitepaper, governance proposal, audit summary, post-mortem, release notes, grant proposal, thread | Mode D |
 | `references/reader-needs.md` | The 8 reader needs, how to pick one, and how each shapes the piece | Step 1, Step 4 |
-| `references/domains.md` | Web3, AI, ZK and Web2: sources, terminology, accuracy rules, example topics | Step 0, Step 2, Step 5 |
 | `references/keyword-research.md` | Free autocomplete ideas, OpenSEO (open-source Ahrefs alternative) and Search Console; choosing keywords; reading competitor titles | Step 2 |
 | `references/titles.md` | Titles, subject lines and YouTube titles that rank and get clicked; finding trending angles | Step 3 |
 | `references/outline-template.md` | Outline file format and a skeleton for each reader need | Step 4 |
 | `references/structure.md` | Intros, ordering, headings, transitions, lists, tables, length | Step 4, Step 5 |
-| `references/voice.md` | Voice and style rules, including the hard bans | Step 5, Step 6 |
 | `references/seo.md` | On-page SEO checklist, linking and metadata | Step 2, Step 4, Step 6 |
-| `references/channels.md` | Format rules for blog, Substack, newsletter and YouTube, plus repurposing | Step 0, Step 5, Step 7 |
+| `references/channels.md` | Blog, Substack, newsletter and YouTube formats, plus repurposing | Step 0, Step 5, Step 7 |
+| `references/youtube.md` | The full YouTube playbook: strategy, packaging, scripting, retention beats, editing, publishing, repackaging, Web3 safety on screen | YouTube work |
 | `examples/outlines/` | 8 complete outlines, one per reader need, across Web3, AI, ZK and Web2 | Step 4 |
-| `templates/` | Fill-in templates: article, Substack post, newsletter issue, YouTube package | Step 5, Step 7 |
+| `templates/` | Fill-in templates for every channel and Web3 document type | Step 5, Mode D |
 | `scripts/keyword_ideas.py` | Free keyword and question ideas from Google and YouTube autocomplete | Step 2 |
 | `scripts/outline_check.py` | Checks an outline against its reader-need rules, and a draft against its outline | Step 4, Step 6 |
-| `scripts/seo_check.py` | Automated SEO and voice audit for Markdown drafts | Step 6 |
+| `scripts/seo_check.py` | SEO, voice and Web3 safety audit for Markdown. Without `--keyword` it runs voice and safety checks only | Step 6, Modes D and E |
 
 ## Modes
 
 Pick the mode from the request:
 
-| Mode | Trigger | Steps |
+| Mode | Trigger | What to do |
 |---|---|---|
-| **A. Outline** | "Outline...", "plan these topics", a list of topics, "give me outlines" | 0 to 4, then stop and deliver the outline file(s) |
-| **B. Piece from outline** | "Write it from this outline", an `.outline.md` file or a pasted outline | Load and check the outline, then 5 to 7 |
-| **C. End to end** | "Write an article / post / script about..." | 0 to 7, pausing after Step 4 for approval unless asked for a one-shot draft |
+| **A. Outline** | "Outline...", "plan these topics", a list of topics | Steps 0 to 4, then deliver the outline file(s) |
+| **B. Piece from outline** | "Write it from this outline", an `.outline.md` file | Load and check the outline, then Steps 5 to 7 |
+| **C. End to end** | "Write an article / post / script / video about..." | Steps 0 to 7, pausing after Step 4 for approval unless asked for a one-shot draft |
+| **D. Web3 document** | Docs, a README, a whitepaper, a governance proposal, an EIP draft, an audit summary, a post-mortem, release notes, a grant proposal, a thread | Follow **Mode D** below |
+| **E. Edit and rewrite** | "Make this sound less AI", "tighten this", "edit my draft", any text to improve | Follow **Mode E** below |
 
-**Batch outlines (Mode A with several topics).** Run Steps 0 to 4 for each topic. Save each as `outlines/<slug>.outline.md` (in the user's working folder when files can be written, otherwise return each outline in full). Then deliver an index:
+### Batch outlines (Mode A with several topics)
+Run Steps 0 to 4 for each topic. Save each as `outlines/<slug>.outline.md` (in the user's working folder when files can be written, otherwise return each outline in full). Then deliver an index:
 
-| # | Topic | Reader need | Channel | Primary keyword | Recommended title | Outline file | Check result |
-|---|---|---|---|---|---|---|---|
+| # | Topic | Reader need | Domain | Channel | Primary keyword | Recommended title | Outline file | Check result |
+|---|---|---|---|---|---|---|---|---|
 
 Flag topics that overlap or would compete for the same keyword, and suggest merging them or giving each a different reader need and keyword. Suggest an order that chains the needs (Educate Me, then Explain It, then Guide Me), so each piece links to the next.
 
-**Piece from an outline (Mode B).**
+### Piece from an outline (Mode B)
 1. Read the outline. Run `python3 scripts/outline_check.py <outline> --site "<profile domains>" --strict`. If anything fails, fix the outline first, tell the user what changed, and get approval if the change is substantive (a different reader need, keyword or section order).
 2. Treat the outline as the contract: the same reader need, title, keywords, H2 order and links. Turn each `### H2:` and `#### H3:` into a real `##` / `###` heading, and cover every `Key points` bullet.
 3. If writing shows a section should change, make the change, update the outline file to match, and say so in the delivery notes.
 4. Continue with Steps 5 to 7. In Step 6, also run the alignment check (`--article`).
 
-## Workflow
+### Web3 documents (Mode D)
+1. Identify the document type and read its section in `references/doc-types.md`, plus the Web3 section of `references/domains.md`.
+2. Ask only for what's missing: audience, network(s), versions, audit status, contract addresses (verified), deadlines, and links to the code, spec or incident data.
+3. Start from the matching template in `templates/` and follow the document type's structure and rules.
+4. Write in `references/voice.md`. Docs and specs favour precision and consistent terms over variety.
+5. Run `python3 scripts/seo_check.py <file> --spelling <profile spelling>` (no `--keyword`) for voice and Web3 safety. Add `--keyword` only if the document is meant to rank in search, such as a public tutorial.
+6. Deliver the document plus a short list of facts the author must verify (addresses, versions, dates, figures).
+
+### Edit and rewrite (Mode E)
+1. Keep the author's meaning, facts and structure unless asked to change them.
+2. Apply `references/voice.md`: remove the antithesis cadence, em dashes and padding; replace abstractions with specifics (ask for the specifics if they're missing, never invent them); fix terminology consistency.
+3. Apply the Web3 safety rules below if the text touches Web3.
+4. If it's Markdown or plain text, run `python3 scripts/seo_check.py <file> --spelling <profile spelling>` and fix what it flags.
+5. Return the edited text, then a short list of what changed and why, grouped by rule.
+
+## Workflow (Modes A to C)
 
 ### Step 0: Load the profile and the brief
 
 1. **Profile.** Use the profile the user names. Otherwise use the default profile (`profiles/jorshimayor.md`), or the only one that exists. If its required fields are empty, ask for them once, and in Claude Code offer to save the answers into the profile file. To create a new profile, copy `profiles/_template.md`.
-2. **Channel.** Blog article, Substack post, newsletter issue, YouTube video, or "all of them" (see Step 7). Read the channel's section in `references/channels.md`.
-3. **Domain.** Classify the topic as Web3, AI, ZK, Web2 or a bridge between two of them, and read its section in `references/domains.md`. Its accuracy rules apply to every later step.
+2. **Channel.** Blog article, Substack post, newsletter issue, YouTube video, or "all of them" (see Step 7). Read the channel's section in `references/channels.md`, and `references/youtube.md` for any video.
+3. **Domain.** Classify the topic as Web3, AI, ZK, Web2 or a bridge between two of them, and read its section in `references/domains.md`. Its accuracy and safety rules apply to every later step.
 4. **Brief.** Ask only for what's missing, in one message:
    - Topic, and for search channels the **primary keyword** plus 2 to 5 **secondary keywords**.
    - The **reader**: who they are and their level.
@@ -90,7 +116,7 @@ Use web search when available. Never invent data, statistics, search volumes or 
 2. **Intent:** search the primary keyword and read what ranks. Match the format that wins (explainer, comparison, tutorial, opinion).
 3. **Questions:** collect "People also ask", forum and community questions. The best become headings.
 4. **Gap:** find what the top results miss. That's the angle.
-5. **Sources:** gather facts from primary sources (official docs, papers, standards, original data). Choose 1 to 3 as external links.
+5. **Sources:** gather facts from primary sources (EIPs, protocol and client docs, audit reports, papers, official release notes, original data). Choose 1 to 3 as external links.
 6. **Internal links:** search `"<keyword>" site:<profile domain>` or use the profile's link list. Aim for 3 to 5 per 1,000 words. Follow the anchor rules in `references/seo.md`.
 
 ### Step 3: Titles and hooks
@@ -98,15 +124,16 @@ Use web search when available. Never invent data, statistics, search volumes or 
 Read `references/titles.md`. For the chosen channel produce 8 to 10 options across different hook patterns, recommend one, and give the channel's metadata:
 - **Blog / Substack:** SEO title (50 to 60 characters), meta description (140 to 160), slug; Substack also gets a subtitle.
 - **Newsletter:** subject line (under 50 characters) and preview text (40 to 90).
-- **YouTube:** title (under 70 characters, ideally under 60), 3 thumbnail text options (2 to 4 words each).
+- **YouTube:** the truth version plus 3 "stretch" titles (under 70 characters, ideally under 60) and a thumbnail concept with no text or 1 to 2 words (see `references/youtube.md`).
 
 ### Step 4: Outline
 
 Write the outline in the file format from `references/outline-template.md`, starting from the skeleton for the chosen reader need. Use the matching example in `examples/outlines/` as the quality bar (same need, ideally the same domain). Then adapt it with the reader need (`references/reader-needs.md`), the structure rules (`references/structure.md`) and the channel format (`references/channels.md`):
 - An **intro plan** that sets up the problem and stakes without giving the answer away, and never says "In this article, we will".
-- The **core answer first**: the first H2 (or the first beat of a video) delivers what the title promised, using a keyword variation.
+- The **core answer first**: the first H2 (or, in a video, the first 15 to 20 seconds and the first point) delivers what the title promised, using a keyword variation.
 - Headings phrased as the reader's questions where natural.
 - A **keyword map**, **link map**, **image or visual plan** (with alt text), and **CTA placement**.
+- For video: the four layers (packaging, intro, framework, macro points) and the 1, 3 and 6-minute beats from `references/youtube.md`.
 
 Run the outline check and fix every ✘:
 
@@ -120,7 +147,7 @@ In Mode A, stop here and deliver. In Mode C, show the titles and outline and wai
 
 ### Step 5: Draft
 
-Start from the channel's template in `templates/`. Write the piece following the reader need, the structure rules, the channel format, `references/voice.md` and the profile's style settings. For search channels, place keywords as `references/seo.md` describes: in the first 50 words, the first H2 and its first paragraph, spread through the body, and in the closing section, at a density of about 1% to 2% (primary) and 0.5% to 1% (secondary). Readability always wins over keyword count.
+Start from the channel's template in `templates/`. Write the piece following the reader need, the structure rules, the channel format, `references/voice.md`, the domain rules and the profile's style settings. For search channels, place keywords as `references/seo.md` describes: in the first 50 words, the first H2 and its first paragraph, spread through the body, and in the closing section, at a density of about 1% to 2% (primary) and 0.5% to 1% (secondary). Readability always wins over keyword count.
 
 ### Step 6: Audit and fix
 
@@ -144,9 +171,7 @@ If the piece was written from an outline, confirm it followed the plan:
 python3 scripts/outline_check.py outlines/<slug>.outline.md --site "<profile domains>" --article draft.md
 ```
 
-It reports planned sections missing from the draft, sections out of order, and sections that aren't in the outline.
-
-For YouTube, use the checklist in `references/channels.md` instead of the scripts.
+For YouTube, use the per-video checklist in `references/youtube.md`.
 
 ### Step 7: Deliver (and repurpose)
 
@@ -157,12 +182,22 @@ Return:
 4. Audit summary and any warnings kept, with reasons.
 5. Open questions and claims that need the author's verification.
 
-If the user wants the piece on more channels, follow **Repurposing** in `references/channels.md`. The long-form article is the source of truth, and the newsletter and video are overviews that link back to it.
+If the user wants the piece on more channels, follow **Repurposing** in `references/channels.md`. The long-form article is the source of truth, and the newsletter, thread and video are overviews that link back to it.
 
-## Hard rules (always apply)
+## Hard rules (every mode)
 
-1. **No antithesis cadence.** Never write "it's not X, it's Y", "not just X, but Y", "this wasn't a product. It was a movement." or any short-negation-then-grander-claim pattern. State the point plainly and back it with specifics.
+### Voice
+1. **No antithesis cadence.** Never write "it's not X, it's Y", "not just X, but Y", "this wasn't a product. It was a movement." or any short-negation-then-grander-claim pattern. State the point plainly and back it with specifics. The reasoning and the one narrow exception are in `references/voice.md`.
 2. **No em dashes, ever.** Use a full stop, comma, colon or parentheses. Write ranges with "to" ("3 to 5").
 3. **Conversational, never verbose.** Cut throat-clearing, doubled phrasing and sentences that repeat the last one.
-4. **No invented facts.** No made-up statistics, quotes, search volumes, benchmarks or sources. Mark anything unverified.
+
+### Accuracy
+4. **No invented facts.** No made-up statistics, quotes, search volumes, benchmarks, addresses, audit results or sources. Mark anything unverified.
 5. **Deliver the title's promise early.** Never bury the answer.
+
+### Web3 safety
+6. **Never include a real private key, seed phrase, mnemonic or API key,** in text, code, screenshots or video. Use environment variables, placeholders and burner wallets.
+7. **No financial advice.** No price predictions, "buy" or "hold" calls, or yield promises. Explain mechanisms. Disclose any sponsorship or token holdings when the author has them.
+8. **Testnet first.** Example deployments target a testnet and say so. Label example contracts and circuits as unaudited.
+9. **Verify before you publish addresses.** Contract addresses, chain IDs and network names come from an official source and are marked for the author to re-check.
+10. **Responsible disclosure.** Write about vulnerabilities by class and fix. Never publish a working exploit against live, unpatched contracts.
