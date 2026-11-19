@@ -63,6 +63,8 @@ Never use the em dash, the long dash. It is one of the loudest tells of machine-
 
 ## Rule 3: conversational, but never verbose
 
+Write in a conversational and professional tone, every time. Picture a knowledgeable colleague explaining something to a peer they respect: contractions, "you" and "I", plain words, a mix of short and longer sentences, and the odd question or aside where it helps. Professional means no slang, memes, hype, sarcasm, emoji in prose, or talking down to the reader. Be confident where the evidence is strong and careful where it isn't, and let the facts carry the authority rather than the adjectives.
+
 Warm does not mean long. Say the thing in the fewest words that keep it clear and human, then stop. Cut the throat-clearing openers ("It's worth noting that," "At the end of the day," "In order to"), the doubled phrasings that say one idea twice, and any sentence that just restates the one before it. A quick test: if a sentence can lose a third of its words and still land, it was too long. Warmth comes from word choice and rhythm, not word count. When a conversational tone and brevity pull against each other, keep the tone and cut the length.
 
 ---
@@ -152,7 +154,8 @@ Write mixed-case technical names exactly as their owners do, even in title case:
 ## Final checklist
 
 - [ ] No antithesis cadence, no em dashes, no padding phrases.
-- [ ] Every claim is specific and either sourced or marked as opinion.
+- [ ] Conversational and professional: sounds like a knowledgeable colleague, with no slang, hype or condescension.
+- [ ] Every claim is specific and fact-checked (`references/fact-check.md`), or clearly marked as opinion.
 - [ ] Technical terms explained on first use, acronyms expanded.
 - [ ] Active voice by default, sentence lengths varied.
 - [ ] Consistent spelling, capitalisation, terms and number formats.

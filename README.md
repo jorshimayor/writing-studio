@@ -15,7 +15,7 @@ One skill handles three kinds of work:
 **Voice** (these used to be the separate How Not to Write skill, and are now built in):
 1. No "it's not X, it's Y" cadence or its relatives. State the claim, then prove it with specifics.
 2. No em dashes, ever.
-3. Conversational, never verbose.
+3. Conversational and professional, never verbose: a knowledgeable colleague talking to a peer, with no slang, hype or talking down.
 
 **Web3 safety:**
 - No private keys, seed phrases or API keys, in text, code, screenshots or video.
@@ -24,7 +24,7 @@ One skill handles three kinds of work:
 - Addresses and chain IDs verified against official sources.
 - Vulnerabilities written up by class and fix, never as live exploits.
 
-**Accuracy:** no invented statistics, quotes, search volumes, benchmarks or sources.
+**Fact-checking:** everything is for public readers, so every statement is checked. `claims.py` pulls each sentence of a draft into a claims ledger, and delivery is blocked until every claim is verified against a source, corrected, softened, marked as opinion or cut. It also catches sentences edited after they were checked. No invented statistics, quotes, search volumes, benchmarks or sources.
 
 ## Five modes
 
@@ -43,6 +43,7 @@ All paths are inside `plugins/writing-studio/skills/writing-studio/`.
 | Path | Contents |
 |---|---|
 | `SKILL.md` | The workflow, the five modes and the hard rules |
+| `references/fact-check.md` | How to fact-check every statement: source hierarchy, what to check per claim type, domain checks for Web3, AI, ZK and Web2, the ledger statuses and the report |
 | `references/voice.md` | The voice rules in full, with the reasoning, the one exception, and before/after examples for Web3, AI, ZK and Web2 |
 | `references/domains.md` | Per domain: primary sources, where readers ask questions, terminology, accuracy and safety rules, example topics |
 | `references/doc-types.md` | Web3 document types: the four kinds of developer docs (Diátaxis), README, protocol explainer, whitepaper, governance proposal, EIP draft, audit summary, post-mortem, release notes, grant proposal, X thread |
@@ -52,7 +53,7 @@ All paths are inside `plugins/writing-studio/skills/writing-studio/`.
 | `examples/outlines/` | 8 complete outlines (one per reader need, two each for Web3, AI, ZK and Web2), each passing the checker with no warnings |
 | `templates/` | 13 templates: article, Substack post, newsletter issue, YouTube package, README, reference doc, whitepaper, governance proposal, audit summary, post-mortem, release notes, grant proposal, X thread |
 | `profiles/` | Your brand, channels, links and house style (`jorshimayor.md` is mine, `_template.md` is for yours) |
-| `scripts/` | `keyword_ideas.py`, `outline_check.py`, `seo_check.py` (plain Python 3, no dependencies) |
+| `scripts/` | `keyword_ideas.py`, `outline_check.py`, `seo_check.py`, `claims.py` (plain Python 3, no dependencies) |
 
 ## Install
 
@@ -107,7 +108,14 @@ python3 scripts/seo_check.py draft.md --keyword "zero-knowledge proof" \
 python3 scripts/seo_check.py README.md --spelling british
 ```
 
-It flags private keys and seed phrases (fail), financial-advice phrasing, unchecked addresses, contract code without an "unaudited" note and mainnet-only deploy commands, alongside the voice and SEO checks. It exits with code 1 if anything fails, so it can gate a publishing script.
+**Fact-check gate.** Extract a claims ledger, check each row against its source, then gate on it:
+
+```bash
+python3 scripts/claims.py extract draft.md > draft.claims.md
+python3 scripts/claims.py check draft.claims.md --draft draft.md
+```
+
+The SEO audit flags private keys and seed phrases (fail), financial-advice phrasing, unchecked addresses, contract code without an "unaudited" note and mainnet-only deploy commands, alongside the voice and SEO checks. It exits with code 1 if anything fails, so it can gate a publishing script.
 
 ## License
 

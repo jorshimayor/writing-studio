@@ -1,6 +1,6 @@
 ---
 name: writing-studio
-description: All-in-one writing skill for Web3 technical writers, also covering AI, zero-knowledge (ZK) and Web2. Use it for any writing or editing task. Articles, blog and Substack posts, newsletters and YouTube scripts get reader-need outlines, keyword research, ranking titles, SEO audits and repurposing. Web3 documents covered include developer docs, tutorials, READMEs, protocol explainers, whitepapers, governance proposals, EIP drafts, audit summaries, incident post-mortems, release notes, grant proposals and X threads. Also use it for quick rewrites when text sounds AI-written, generic or padded. It enforces a human voice everywhere (no "it's not X, it's Y" cadence, no em dashes, no padding) plus Web3 safety rules (no keys or seed phrases, no financial advice, testnet-first code, unaudited code labelled), and runs automated outline, SEO, voice and safety checks.
+description: All-in-one writing skill for Web3 technical writers, also covering AI, zero-knowledge (ZK) and Web2. Use it for any writing or editing task. Articles, blog and Substack posts, newsletters and YouTube scripts get reader-need outlines, keyword research, ranking titles, SEO audits and repurposing. Web3 documents covered include developer docs, tutorials, READMEs, protocol explainers, whitepapers, governance proposals, EIP drafts, audit summaries, incident post-mortems, release notes, grant proposals and X threads. Also use it for quick rewrites when text sounds AI-written, generic or padded. It fact-checks every statement through a claims ledger before delivery, and enforces a conversational, professional, human voice everywhere (no "it's not X, it's Y" cadence, no em dashes, no padding) plus Web3 safety rules (no keys or seed phrases, no financial advice, testnet-first code, unaudited code labelled), and runs automated outline, SEO, voice and safety checks.
 ---
 
 # Writing Studio
@@ -18,6 +18,7 @@ Every piece follows the same voice rules and Web3 safety rules, and gets checked
 | File | Contains | Read at |
 |---|---|---|
 | `profiles/<name>.md` | Brand, audience, channels, links, calls to action, spelling and capitalisation | Step 0 |
+| `references/fact-check.md` | Fact-checking every statement: the procedure, source hierarchy, what to check per claim type and domain, the ledger statuses and the report | Step 2, Step 6, Modes D and E |
 | `references/voice.md` | The voice rules: the three hard rules (with the reasoning behind them), domain before/after examples, defaults, terminology | Every mode |
 | `references/domains.md` | Web3, AI, ZK and Web2: sources, terminology, accuracy and safety rules, example topics | Step 0, Step 2, Step 5 |
 | `references/doc-types.md` | Web3 document types: docs (tutorial, how-to, reference, explanation), README, explainer, whitepaper, governance proposal, audit summary, post-mortem, release notes, grant proposal, thread | Mode D |
@@ -33,6 +34,7 @@ Every piece follows the same voice rules and Web3 safety rules, and gets checked
 | `templates/` | Fill-in templates for every channel and Web3 document type | Step 5, Mode D |
 | `scripts/keyword_ideas.py` | Free keyword and question ideas from Google and YouTube autocomplete | Step 2 |
 | `scripts/outline_check.py` | Checks an outline against its reader-need rules, and a draft against its outline | Step 4, Step 6 |
+| `scripts/claims.py` | Fact-check ledger: extracts every statement from a draft, then blocks delivery until each one is verified, corrected, softened, removed or marked as opinion | Step 6, Modes D and E |
 | `scripts/seo_check.py` | SEO, voice and Web3 safety audit for Markdown. Without `--keyword` it runs voice and safety checks only | Step 6, Modes D and E |
 
 ## Modes
@@ -66,15 +68,17 @@ Flag topics that overlap or would compete for the same keyword, and suggest merg
 2. Ask only for what's missing: audience, network(s), versions, audit status, contract addresses (verified), deadlines, and links to the code, spec or incident data.
 3. Start from the matching template in `templates/` and follow the document type's structure and rules.
 4. Write in `references/voice.md`. Docs and specs favour precision and consistent terms over variety.
-5. Run `python3 scripts/seo_check.py <file> --spelling <profile spelling>` (no `--keyword`) for voice and Web3 safety. Add `--keyword` only if the document is meant to rank in search, such as a public tutorial.
-6. Deliver the document plus a short list of facts the author must verify (addresses, versions, dates, figures).
+5. Fact-check every statement with `scripts/claims.py` (Step 6). Docs and specs are held to the same gate as articles: run every command and snippet, and check every address, version and figure against its primary source.
+6. Run `python3 scripts/seo_check.py <file> --spelling <profile spelling>` (no `--keyword`) for voice and Web3 safety. Add `--keyword` only if the document is meant to rank in search, such as a public tutorial.
+7. Deliver the document with the fact-check report (`references/fact-check.md`), including the `author` rows the author must confirm (addresses, versions, dates, figures).
 
 ### Edit and rewrite (Mode E)
 1. Keep the author's meaning, facts and structure unless asked to change them.
-2. Apply `references/voice.md`: remove the antithesis cadence, em dashes and padding; replace abstractions with specifics (ask for the specifics if they're missing, never invent them); fix terminology consistency.
-3. Apply the Web3 safety rules below if the text touches Web3.
-4. If it's Markdown or plain text, run `python3 scripts/seo_check.py <file> --spelling <profile spelling>` and fix what it flags.
-5. Return the edited text, then a short list of what changed and why, grouped by rule.
+2. Fact-check the text as well as editing it. Run `scripts/claims.py` on it and check every statement. Flag anything wrong or unsupported to the author with the source, and never "fix" a fact without one.
+3. Apply `references/voice.md`: remove the antithesis cadence, em dashes and padding; replace abstractions with specifics (ask for the specifics if they're missing, never invent them); fix terminology consistency.
+4. Apply the Web3 safety rules below if the text touches Web3.
+5. If it's Markdown or plain text, run `python3 scripts/seo_check.py <file> --spelling <profile spelling>` and fix what it flags.
+6. Return the edited text, then a short list of what changed and why, grouped by rule, and the fact-check report.
 
 ## Workflow (Modes A to C)
 
@@ -116,7 +120,7 @@ Use web search when available. Never invent data, statistics, search volumes or 
 2. **Intent:** search the primary keyword and read what ranks. Match the format that wins (explainer, comparison, tutorial, opinion).
 3. **Questions:** collect "People also ask", forum and community questions. The best become headings.
 4. **Gap:** find what the top results miss. That's the angle.
-5. **Sources:** gather facts from primary sources (EIPs, protocol and client docs, audit reports, papers, official release notes, original data). Choose 1 to 3 as external links.
+5. **Sources:** gather facts from primary sources (EIPs, protocol and client docs, audit reports, papers, official release notes, original data), and keep every URL: each fact in the piece will need one in Step 6. Choose 1 to 3 as external links.
 6. **Internal links:** search `"<keyword>" site:<profile domain>` or use the profile's link list. Aim for 3 to 5 per 1,000 words. Follow the anchor rules in `references/seo.md`.
 
 ### Step 3: Titles and hooks
@@ -151,7 +155,17 @@ Start from the channel's template in `templates/`. Write the piece following the
 
 ### Step 6: Audit and fix
 
-For any Markdown draft (blog, Substack, newsletter), save it and run:
+**Fact-check first.** Every statement must be checked before delivery, because everything here is for public readers. Follow `references/fact-check.md`:
+
+```bash
+python3 scripts/claims.py extract draft.md > draft.claims.md   # one row per statement
+# check each row against its source; fill in status, source and note; fix the draft
+python3 scripts/claims.py check draft.claims.md --draft draft.md
+```
+
+The gate must pass. Re-run it after every later edit, since the SEO and voice fixes below can change a claim.
+
+Then, for any Markdown draft (blog, Substack, newsletter), run:
 
 ```bash
 python3 scripts/seo_check.py draft.md --keyword "<primary>" --secondary "<s1>, <s2>" \
@@ -171,7 +185,7 @@ If the piece was written from an outline, confirm it followed the plan:
 python3 scripts/outline_check.py outlines/<slug>.outline.md --site "<profile domains>" --article draft.md
 ```
 
-For YouTube, use the per-video checklist in `references/youtube.md`.
+For YouTube, fact-check the script with `claims.py` as above, then use the per-video checklist in `references/youtube.md`.
 
 ### Step 7: Deliver (and repurpose)
 
@@ -180,19 +194,20 @@ Return:
 2. The finished piece.
 3. Link table (anchor, URL, internal or external), image or visual list with alt text.
 4. Audit summary and any warnings kept, with reasons.
-5. Open questions and claims that need the author's verification.
+5. The fact-check report and ledger (`references/fact-check.md`): the gate's summary, every correction, softening and removal, and the `author` rows the author must confirm.
+6. Open questions.
 
-If the user wants the piece on more channels, follow **Repurposing** in `references/channels.md`. The long-form article is the source of truth, and the newsletter, thread and video are overviews that link back to it.
+If the user wants the piece on more channels, follow **Repurposing** in `references/channels.md`. The long-form article is the source of truth, and the newsletter, thread and video are overviews that link back to it. Run the fact-check gate on each repurposed piece too: any reworded sentence is a new claim.
 
 ## Hard rules (every mode)
 
 ### Voice
 1. **No antithesis cadence.** Never write "it's not X, it's Y", "not just X, but Y", "this wasn't a product. It was a movement." or any short-negation-then-grander-claim pattern. State the point plainly and back it with specifics. The reasoning and the one narrow exception are in `references/voice.md`.
 2. **No em dashes, ever.** Use a full stop, comma, colon or parentheses. Write ranges with "to" ("3 to 5").
-3. **Conversational, never verbose.** Cut throat-clearing, doubled phrasing and sentences that repeat the last one.
+3. **Conversational and professional, never verbose.** Sound like a knowledgeable colleague talking to a peer: contractions, plain words, "you" and "I". No slang, hype, sarcasm or talking down. Cut throat-clearing, doubled phrasing and sentences that repeat the last one.
 
 ### Accuracy
-4. **No invented facts.** No made-up statistics, quotes, search volumes, benchmarks, addresses, audit results or sources. Mark anything unverified.
+4. **Fact-check every statement.** Everything is for public readers. No made-up statistics, quotes, search volumes, benchmarks, addresses, audit results or sources. Every statement is verified against a source, softened, marked as opinion or cut, and `scripts/claims.py check` must pass before delivery (`references/fact-check.md`).
 5. **Deliver the title's promise early.** Never bury the answer.
 
 ### Web3 safety
