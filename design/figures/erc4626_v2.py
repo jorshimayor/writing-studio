@@ -2,7 +2,7 @@
 suite in Web3-Hack-Analysis chains/evm/erc4626-inflation-attack (Foundry 1.9.0, solc 0.8.25,
 OpenZeppelin Contracts 5.4.0) and design/examples/erc4626_model.py.
 
-    python3 design/figures/erc4626_v2.py drafts/images/png [figure ...]
+    python3 design/figures/erc4626_v2.py drafts/images/v2 [figure ...]   # writes drafts/images/v2/erc4626-inflation-attack/
 """
 import os
 import sys
@@ -10,7 +10,8 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from figures.kit import E, figure, render, vault, coins, ticket, avatar, arrow, mini_vault  # noqa: E402
 
-OUT = sys.argv[1] if len(sys.argv) > 1 else "."
+SLUG = "erc4626-inflation-attack"
+OUT = os.path.join(sys.argv[1] if len(sys.argv) > 1 else "drafts/images/v2", SLUG)   # one folder per article
 ONLY = set(sys.argv[2:])
 KICK = "ERC-4626 inflation attack"
 RUN = ("Attack: 1 wei deposit, 10,000 token donation, 9,000 token victim deposit. "

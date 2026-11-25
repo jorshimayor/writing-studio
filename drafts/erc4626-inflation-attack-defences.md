@@ -52,7 +52,7 @@ Here is the vault inflation attack with the numbers from the test suite. Step 1:
 
 Step 3: the victim deposits 9,000 tokens. The formula gives 9,000 × 1 / 10,000.000…1, which is 0.8999, which rounds down to 0. The victim's tokens are in the vault and they own nothing. Step 4: the attacker redeems their single share for the entire balance, 19,000 tokens and 1 wei. Profit: the victim's 9,000.
 
-![ERC-4626 inflation attack in four illustrated steps: the attacker deposits 1 wei for the only share, sends 10,000 tokens straight to the vault so no shares are minted, the victim's 9,000 token deposit computes 0.8999 and rounds down to 0 shares (the empty ticket is circled, noted 'rounds down to 0'), and the attacker redeems the 1 share for 19,000 tokens, a 9,000 profit](images/v2/attack-flow.png)
+![ERC-4626 inflation attack in four illustrated steps: the attacker deposits 1 wei for the only share, sends 10,000 tokens straight to the vault so no shares are minted, the victim's 9,000 token deposit computes 0.8999 and rounds down to 0 shares (the empty ticket is circled, noted 'rounds down to 0'), and the attacker redeems the 1 share for 19,000 tokens, a 9,000 profit](images/v2/erc4626-inflation-attack/attack-flow.png)
 
 This is why the ERC-4626 inflation attack also goes by first depositor attack. It only works while supply is tiny, so in practice the attacker either front-runs the first real deposit or targets a vault that has drained back to near zero. Both have happened.
 
@@ -66,7 +66,7 @@ The zero-shares case is the dramatic one, but it hides something. Change the vic
 
 The missing 2,500 went to the attacker's share, which is now also worth 12,500 against a cost of 10,000. The victim received shares, the transaction looked normal, and they still lost 16.7% of their deposit. A first depositor attack does not need the zero.
 
-![A 15,000 token deposit into the inflated vault: 15,000 × 1 / 10,000 = 1.4999 (highlighted) mints 1 share (circled, noted '0.4999 never minted'), leaving 2 shares over 25,000 tokens, so each share is worth 12,500 and 2,500 moves from the victim to the attacker](images/v2/share-rounding.png)
+![A 15,000 token deposit into the inflated vault: 15,000 × 1 / 10,000 = 1.4999 (highlighted) mints 1 share (circled, noted '0.4999 never minted'), leaving 2 shares over 25,000 tokens, so each share is worth 12,500 and 2,500 moves from the victim to the attacker](images/v2/erc4626-inflation-attack/share-rounding.png)
 
 Every ERC-4626 inflation attack defence below changes one term of that formula. Keep the formula in view and the trade-offs explain themselves.
 
@@ -94,7 +94,7 @@ Now run the ERC-4626 inflation attack against it. The attacker's 1 wei buys 1 sh
 
 The victim is not quite whole, though. They get back 8,995.27 tokens, a loss of 4.73 tokens or 0.05%, because rounding still favours the vault and the dead shares absorb the difference. Against a first depositor attack that is a good outcome, and it is not zero.
 
-![Dead shares defence: with 1,000 shares burned to a dead address, total supply is 1,001, the 9,000 deposit mints 900 shares, and the attacker's 1 share redeems 9.99 tokens; the victim loses 4.73 tokens and the attacker loses 9,990](images/v2/defence-dead-shares.png)
+![Dead shares defence: with 1,000 shares burned to a dead address, total supply is 1,001, the 9,000 deposit mints 900 shares, and the attacker's 1 share redeems 9.99 tokens; the victim loses 4.73 tokens and the attacker loses 9,990](images/v2/erc4626-inflation-attack/defence-dead-shares.png)
 
 The protection also scales with the seed. 1,000 dead shares make the vault inflation attack 1,000 times more expensive, and no more. A vault that will hold tens of millions with a seed of 1,000 wei has a thin floor. Size the seed to the deposits you expect and write the step into the deployment script. This is a deploy-time defence, and a forgotten deploy step is exactly the Belong finding.
 
@@ -119,7 +119,7 @@ In my run the default vault gave the victim 1 share and returned 6,333 of their 
 
 Each step of offset multiplies the attacker's cost by 10. OpenZeppelin's own charts use 3 and 6. With offset 6 the victim in my run got 1,799,999 shares and lost 0.003 tokens, while the attacker lost 5,000 of their 10,000. Nothing is locked at deployment, the override is one function, and the share token simply gets six extra decimals.
 
-![Virtual shares defence with offset 6: 10^6 virtual shares and 1 virtual asset (highlighted) make the 9,000 deposit mint 1,799,999 shares, and the attacker redeems about 5,000 of the 10,000 donated; the victim loses 0.003 tokens and the attacker loses 5,000](images/v2/defence-virtual-shares.png)
+![Virtual shares defence with offset 6: 10^6 virtual shares and 1 virtual asset (highlighted) make the 9,000 deposit mint 1,799,999 shares, and the attacker redeems about 5,000 of the 10,000 donated; the victim loses 0.003 tokens and the attacker loses 5,000](images/v2/erc4626-inflation-attack/defence-virtual-shares.png)
 
 The trade-offs are small but real. The virtual shares take a sliver of yield that no one can redeem. Under losses, the virtual asset can make exits slightly off. Auditors sometimes need the maths explained. None of that compares with leaving the default in place and calling the ERC-4626 inflation attack handled.
 
@@ -161,7 +161,7 @@ function _withdraw(address caller, address receiver, address owner, uint256 asse
 
 Against the vault inflation attack this is the cleanest result in the suite. The victim got 9,000 × 10^18 shares for 9,000 tokens and redeemed every token back. The attacker redeemed 1 wei and lost the entire 10,000 token donation, which now sits in the vault as an unaccounted balance.
 
-![Internal accounting defence: the vault counts 1 wei of assets and ignores the 10,000 token donation, so the 9,000 deposit mints 9,000 × 10^18 shares and the attacker redeems 1 wei; the victim loses nothing and the attacker loses 10,000](images/v2/defence-internal-accounting.png)
+![Internal accounting defence: the vault counts 1 wei of assets and ignores the 10,000 token donation, so the 9,000 deposit mints 9,000 × 10^18 shares and the attacker redeems 1 wei; the victim loses nothing and the attacker loses 10,000](images/v2/erc4626-inflation-attack/defence-internal-accounting.png)
 
 The cost is bookkeeping. Every path that moves assets has to update the variable: deposits, withdrawals, fees, harvests, strategy gains and losses. Yield has to be booked explicitly, and a strategy that returns more than it was given needs a hook to recognise it or the vault under-reports forever. Donated or stranded tokens need a sweep function or they're lost.
 
@@ -169,7 +169,7 @@ Internal accounting also says nothing about rounding when supply is tiny, so pai
 
 Three ERC-4626 inflation attack defences, three different costs. Here they are side by side.
 
-![Three ERC-4626 inflation attack defences that hold, each changing one highlighted term of the share formula: dead shares add 1,000 burned shares to supply, virtual shares add 10^offset shares and 1 asset, internal accounting replaces total assets with accounted assets; the attacker loses 9,990, 5,000 and 10,000 respectively](images/v2/defences-formula.png)
+![Three ERC-4626 inflation attack defences that hold, each changing one highlighted term of the share formula: dead shares add 1,000 burned shares to supply, virtual shares add 10^offset shares and 1 asset, internal accounting replaces total assets with accounted assets; the attacker loses 9,990, 5,000 and 10,000 respectively](images/v2/erc4626-inflation-attack/defences-formula.png)
 
 ## Which ERC-4626 Inflation Attack Defence Should You Use?
 
@@ -187,7 +187,7 @@ The table compares the three ERC-4626 inflation attack defences on what they cha
 
 Three things to notice. Virtual shares with a non-zero offset is the default answer for anyone already on OpenZeppelin, because it costs one function and nothing at deployment. Dead shares are the choice when you control deployment and want a floor that anyone can verify on-chain. Internal accounting is for vaults whose share price feeds something else, such as an oracle or a lending market, where share price manipulation by donation must not move the rate even for a block.
 
-![Decision flow for choosing an ERC-4626 inflation attack defence: internal accounting if totalAssets doesn't read a live balance, a _decimalsOffset of 6 or more on OpenZeppelin, a seed deposit burned to 0xdead if you control deployment, and internal accounting plus a seed or offset if an oracle reads the share price](images/v2/defence-decision.png)
+![Decision flow for choosing an ERC-4626 inflation attack defence: internal accounting if totalAssets doesn't read a live balance, a _decimalsOffset of 6 or more on OpenZeppelin, a seed deposit burned to 0xdead if you control deployment, and internal accounting plus a seed or offset if an oracle reads the share price](images/v2/erc4626-inflation-attack/defence-decision.png)
 
 Choose dead shares if you deploy the vault yourself and want an auditable on-chain floor. Choose virtual shares if you inherit OpenZeppelin's `ERC4626`, and override the offset. Choose internal accounting if another contract reads your share price, and add a seed or offset for rounding. Combining an offset with a seed deposit is cheap and common.
 
@@ -203,7 +203,7 @@ It catches the total-loss case and nothing else. Run the 15,000 token deposit ag
 
 It also turns theft into denial of service. Once the attacker has inflated the price, every deposit smaller than the price of one share reverts. In the test the 9,000 token deposit fails with `ZERO_SHARES`. The vault stays unusable at that size until someone deposits enough to mint a whole share, and that someone takes the rounding loss. Keep the check as a sanity guard, and treat the first depositor attack as unsolved until one of the three defences is in.
 
-![Reverting on zero shares fails as a defence: a 9,000 deposit rounds to 0 shares and reverts, blocking small deposits, while a 15,000 deposit passes the check with 1 share worth 12,500 (circled, noted 'still loses 2,500')](images/v2/non-defence-revert-on-zero.png)
+![Reverting on zero shares fails as a defence: a 9,000 deposit rounds to 0 shares and reverts, blocking small deposits, while a 15,000 deposit passes the check with 1 share worth 12,500 (circled, noted 'still loses 2,500')](images/v2/erc4626-inflation-attack/non-defence-revert-on-zero.png)
 
 The test suite below shows all of this in a few hundred lines. First, the production record.
 
@@ -211,7 +211,7 @@ The test suite below shows all of this in a few hundred lines. First, the produc
 
 Six incidents, grouped by what moved the ratio. The two in blue are the textbook first depositor attack on an empty vault. The four in orange are share price manipulation by another route, and they're here because the defence is the same. Vulnerability class and fix only, no step-by-step against live contracts.
 
-![Timeline of vault share-price incidents from April 2023 to July 2026: Yearn yUSDT $11.6M (circled, the largest), Belong Staking caught in audit, Yearn yTUSD $293K, Thetanuts new vault $50K, Thetanuts legacy $105K net and Summer.fi $6.04M, coloured by first depositor attack or other ratio manipulation](images/v2/incidents-timeline.png)
+![Timeline of vault share-price incidents from April 2023 to July 2026: Yearn yUSDT $11.6M (circled, the largest), Belong Staking caught in audit, Yearn yTUSD $293K, Thetanuts new vault $50K, Thetanuts legacy $105K net and Summer.fi $6.04M, coloured by first depositor attack or other ratio manipulation](images/v2/erc4626-inflation-attack/incidents-timeline.png)
 
 Belong Staking.sol, October 2025. Belong's audit competition on Immunefi produced several critical reports, [#57401](https://reports.immunefi.com/belong/57401-sc-critical-erc4626-inflation-attack-vulnerability) among them, for a plain ERC4626 staking vault with no initial mint in the deployment script. Caught before launch, no loss. This is the textbook ERC-4626 inflation attack: a standard library, a standard pattern, and a missing deploy step.
 
@@ -256,7 +256,7 @@ function _attack(IVault vault, uint256 victimDeposit) internal returns (Result m
 
 Results from `forge test -vv` with Foundry 1.9.0, solc 0.8.25 and OpenZeppelin Contracts 5.4.0:
 
-![Foundry results for the ERC-4626 inflation attack on a 9,000 token deposit: the naive vault loses 100% and pays the attacker 9,000, OpenZeppelin offset 0 still loses 29.63% (circled, noted 'still leaks'), and dead shares (0.0526%), offset 6 and internal accounting (0%) all hold while the attacker loses money](images/v2/test-results.png)
+![Foundry results for the ERC-4626 inflation attack on a 9,000 token deposit: the naive vault loses 100% and pays the attacker 9,000, OpenZeppelin offset 0 still loses 29.63% (circled, noted 'still leaks'), and dead shares (0.0526%), offset 6 and internal accounting (0%) all hold while the attacker loses money](images/v2/erc4626-inflation-attack/test-results.png)
 
 | Vault | Victim shares | Victim gets back | Attacker profit |
 |---|---|---|---|

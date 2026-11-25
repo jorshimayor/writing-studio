@@ -74,15 +74,19 @@ def _chrome():
     raise SystemExit("Chrome or Chromium not found. Set CHROME=/path/to/chrome.")
 
 
-def shoot(html_path, png_path, w, h, scale=1):
-    """Screenshot a local HTML file at w x h CSS pixels with headless Chrome."""
-    with tempfile.TemporaryDirectory() as prof:
-        subprocess.run([_chrome(), "--headless=new", "--disable-gpu", "--hide-scrollbars", "--no-first-run",
-                        "--no-default-browser-check", f"--user-data-dir={prof}", f"--force-device-scale-factor={scale}",
-                        f"--window-size={w},{h}", "--virtual-time-budget=8000",
-                        f"--screenshot={os.path.abspath(png_path)}", "file://" + os.path.abspath(html_path)],
-                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True, timeout=180)
-    return png_path
+def shoot(html_path, png_path, w, h, scale=1, tries=3):
+    """Screenshot a local HTML file at w x h CSS pixels with headless Chrome. Headless Chrome
+    sometimes exits with status 2 for no lasting reason, so each shot is retried."""
+    for attempt in range(tries):
+        with tempfile.TemporaryDirectory() as prof:
+            r = subprocess.run([_chrome(), "--headless=new", "--disable-gpu", "--hide-scrollbars", "--no-first-run",
+                                "--no-default-browser-check", f"--user-data-dir={prof}", f"--force-device-scale-factor={scale}",
+                                f"--window-size={w},{h}", "--virtual-time-budget=8000",
+                                f"--screenshot={os.path.abspath(png_path)}", "file://" + os.path.abspath(html_path)],
+                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=180)
+        if r.returncode == 0 and os.path.exists(png_path):
+            return png_path
+    raise RuntimeError(f"Chrome failed to render {html_path} after {tries} tries (exit {r.returncode})")
 
 
 def _build_css():

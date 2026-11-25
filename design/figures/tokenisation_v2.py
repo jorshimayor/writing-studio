@@ -1,7 +1,7 @@
 """LLM tokenisation figures, v2 (illustrated). Numbers come from the author's GPT-2 notebook
 (week 1 of AI-Engineering-Flow_Research) as used in drafts/llm-tokenisation-quirks.md.
 
-    python3 design/figures/tokenisation_v2.py drafts/images/png [figure ...]
+    python3 design/figures/tokenisation_v2.py drafts/images/v2 [figure ...]   # writes drafts/images/v2/llm-tokenisation-quirks/
 """
 import os
 import sys
@@ -9,7 +9,8 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from figures.kit import E, figure, render, keycap, arrow  # noqa: E402
 
-OUT = sys.argv[1] if len(sys.argv) > 1 else "."
+SLUG = "llm-tokenisation-quirks"
+OUT = os.path.join(sys.argv[1] if len(sys.argv) > 1 else "drafts/images/v2", SLUG)   # one folder per article
 ONLY = set(sys.argv[2:])
 KICK = "LLM tokenisation"
 

@@ -25,7 +25,7 @@ I measured exactly that on GPT-2. With "The capital of France is" the model put 
 
 Every call you make to a language model goes through this step first, and it quietly sets your bill, your context budget, and a whole class of failures that get blamed on the model. I spent a week probing GPT-2's tokeniser and embedding table with [the probe notebook](https://github.com/jorshimayor/AI-Engineering-Flow_Research/tree/main/submissions/week1) to see what the model actually receives. Seven lessons came out of it, and one assumption of mine didn't survive. So what does the model see?
 
-![LLM tokenisation pipeline in four stations: the word tokenization becomes 12 UTF-8 bytes, BPE merges them into 2 tokens, token and ization (circled, noted '2 tokens, not 12 letters'), and the model receives only two integer IDs](images/v2/bpe-pipeline.png)
+![LLM tokenisation pipeline in four stations: the word tokenization becomes 12 UTF-8 bytes, BPE merges them into 2 tokens, token and ization (circled, noted '2 tokens, not 12 letters'), and the model receives only two integer IDs](images/v2/llm-tokenisation-quirks/bpe-pipeline.png)
 
 ## How Does LLM Tokenisation Work Under the Hood?
 
@@ -71,7 +71,7 @@ Every quirk that follows is a side effect of tokenisation merging whatever happe
 
 In GPT-2's vocabulary, the space belongs to the word after it. `hello` and ` hello` are different tokens with different IDs and different rows in the embedding table. Most words in running English text appear with a leading space, so the version with the space is the common one and the version without it is comparatively rare.
 
-![Two GPT-2 prompts differing by one trailing space: 'The capital of France is' puts space-Paris at rank 5 with 3.2%, while the same prompt plus a space (the circled keycap, noted 'one extra space') pushes Paris to rank 1,472 at about 0%](images/v2/trailing-space.png)
+![Two GPT-2 prompts differing by one trailing space: 'The capital of France is' puts space-Paris at rank 5 with 3.2%, while the same prompt plus a space (the circled keycap, noted 'one extra space') pushes Paris to rank 1,472 at about 0%](images/v2/llm-tokenisation-quirks/trailing-space.png)
 
 That explains the hook. "The capital of France is" ends on a clean token, and the natural next token is ` Paris`, space included. The model has seen that token after "is" thousands of times.
 
@@ -104,7 +104,7 @@ for ax, prompt in zip(axes, ["The capital of France is", "The capital of France 
 plt.tight_layout(); plt.savefig("next-token-after-space.png", dpi=150)
 ```
 
-![Top six next tokens GPT-2 predicts for each prompt on the same scale: the clean prompt has entropy 8.65 bits with space-Paris at 3.2% (circled), while the trailing-space prompt has entropy 2.55 bits and bets on a non-breaking space at 39.8% and the fragment ét at 34.2% (noted 'confident and wrong')](images/v2/next-token-after-space.png)
+![Top six next tokens GPT-2 predicts for each prompt on the same scale: the clean prompt has entropy 8.65 bits with space-Paris at 3.2% (circled), while the trailing-space prompt has entropy 2.55 bits and bets on a non-breaking space at 39.8% and the fragment ét at 34.2% (noted 'confident and wrong')](images/v2/llm-tokenisation-quirks/next-token-after-space.png)
 
 After the clean prompt the model spreads its bets across sensible English: ` the`, ` now`, ` a`, ` France`, ` Paris`. After the trailing space it puts 39.8% on a non-breaking space and 34.2% on `ét`, a fragment that only ever follows a space inside French words. Entropy drops from 8.65 bits to 2.55 bits: the model is confident, and confidently predicting garbage.
 
@@ -114,7 +114,7 @@ Spaces are the first thing that splits in a way you wouldn't guess from looking 
 
 The next three tokenisation quirks share a cause. Byte pair encoding merges follow frequency in web text, so anything rare in that text gets chopped into smaller pieces. Each piece adds to the token count you pay for, and the model has to reassemble them.
 
-![How GPT-2 splits typed text: Hello is 1 token, HELLO is 3, 1234567 is 3 tokens 123 45 67 (circled, noted 'chopped by frequency'), 2026 is 20 26, and an eight-space indent is 8 tokens](images/v2/token-splits.png)
+![How GPT-2 splits typed text: Hello is 1 token, HELLO is 3, 1234567 is 3 tokens 123 45 67 (circled, noted 'chopped by frequency'), 2026 is 20 26, and an eight-space indent is 8 tokens](images/v2/llm-tokenisation-quirks/token-splits.png)
 
 ### Capitals Split
 
@@ -142,7 +142,7 @@ Byte-level tokenisation guarantees that every string can be encoded. It does not
 
 The emoji 🙂 is 4 bytes of UTF-8 and two tokens in GPT-2. Decode either one on its own and you get �, the replacement character, because each token holds only part of the byte sequence. Decode both together and the emoji comes back intact.
 
-![One emoji is four UTF-8 bytes, f0 9f 99 82; GPT-2 holds it as two tokens of two bytes each, and each token decoded alone shows the replacement character (circled, noted 'half a character'), while both together decode to the emoji](images/v2/emoji-bytes.png)
+![One emoji is four UTF-8 bytes, f0 9f 99 82; GPT-2 holds it as two tokens of two bytes each, and each token decoded alone shows the replacement character (circled, noted 'half a character'), while both together decode to the emoji](images/v2/llm-tokenisation-quirks/emoji-bytes.png)
 
 The family emoji, three people joined with zero-width joiners, is 18 bytes and ten tokens. 你好 is 6 bytes and four tokens.
 
@@ -169,7 +169,7 @@ plt.barh(order, [counts[l] for l in order], color="#2a78d6")
 plt.xlabel("GPT-2 tokens for the same sentence"); plt.tight_layout(); plt.savefig("token-tax.png", dpi=150)
 ```
 
-![Token receipt for one sentence in seven languages under GPT-2, one tile per token: Hindi 91 (5.4× English, circled), Russian 57, Arabic 50, French 30, German 28, Chinese 28 and English 17](images/v2/token-tax.png)
+![Token receipt for one sentence in seven languages under GPT-2, one tile per token: Hindi 91 (5.4× English, circled), Russian 57, Arabic 50, French 30, German 28, Chinese 28 and English 17](images/v2/llm-tokenisation-quirks/token-tax.png)
 
 English takes 17 tokens. Hindi takes 91, which is 5.4 times as many for the same sentence. Russian needs 3.4 times, Arabic 2.9 times, French 1.8 times. Chinese is only 15 characters and still costs 28 tokens, because every character is split into partial bytes. Petrov and colleagues documented the same pattern across many tokenisers in [Language Model Tokenizers Introduce Unfairness Between Languages](https://arxiv.org/abs/2305.15425).
 
@@ -188,7 +188,7 @@ for lang, s in same_sentence.items():
     print(f"{lang:8}" + "".join(f"{len(e.encode(s)):>14}" for e in encs.values()))
 ```
 
-![Token counts for the same sentence under GPT-2, GPT-4 and GPT-4o tokenisers: Hindi falls from 91 to 62 to 16 (circled, noted 'now below English'), Russian 57 to 27 to 16, Arabic 50 to 35 to 17, while English stays at 17 under all three](images/v2/token-tax-evolution.png)
+![Token counts for the same sentence under GPT-2, GPT-4 and GPT-4o tokenisers: Hindi falls from 91 to 62 to 16 (circled, noted 'now below English'), Russian 57 to 27 to 16, Arabic 50 to 35 to 17, while English stays at 17 under all three](images/v2/llm-tokenisation-quirks/token-tax-evolution.png)
 
 | Language | GPT-2, 50k | GPT-4, cl100k_base | GPT-4o, o200k_base |
 |---|---|---|---|
@@ -222,7 +222,7 @@ The second kind is glitch tokens. ` SolidGoldMagikarp` is a single token in GPT-
 
 Rumbelow and Watkins catalogued the strange behaviour glitch tokens cause in [the SolidGoldMagikarp write-up](https://www.lesswrong.com/posts/aPeJE8bSo6rAFoLqg/solidgoldmagikarp-plus-prompt-generation).
 
-![Venn diagram of tokeniser training text and model training text: glitch tokens such as SolidGoldMagikarp (circled, noted 'a token with no meaning') sit in the part only the tokeniser saw, with an ID and an embedding row that training never updated](images/v2/data-gap.png)
+![Venn diagram of tokeniser training text and model training text: glitch tokens such as SolidGoldMagikarp (circled, noted 'a token with no meaning') sit in the part only the tokeniser saw, with an ID and an embedding row that training never updated](images/v2/llm-tokenisation-quirks/data-gap.png)
 
 The gap between the two datasets is the whole story. The tokeniser saw text the model never did, and the leftovers are glitch tokens: a name with no meaning behind it. I had a theory about where those tokens live in the model. It was wrong.
 
@@ -284,7 +284,7 @@ for w in [" king", " 7", " Paris"]:
 
 ` king` sits next to ` queen`, ` prince`, and ` monarch`, with its own case and plural variants in between. ` 7` sits next to ` 6`, ` 8`, and ` 5`.
 
-![Schematic map of GPT-2 embeddings: king sits near queen, prince and monarch, and 7 near 6, 8 and 5, while space-Paris and Paris are two separate points with different vectors (noted 'two separate rows')](images/v2/embedding-neighbours.png)
+![Schematic map of GPT-2 embeddings: king sits near queen, prince and monarch, and 7 near 6, 8 and 5, while space-Paris and Paris are two separate points with different vectors (noted 'two separate rows')](images/v2/llm-tokenisation-quirks/embedding-neighbours.png)
 
 Here's the catch. ` Paris` and `Paris` are two separate rows. They end up as each other's nearest neighbour, which means the model learned, from examples alone, that they refer to the same city. Same for `Hello` and the three fragments of `HELLO`, and for every number that splits differently depending on its neighbours.
 
