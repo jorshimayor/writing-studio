@@ -29,6 +29,7 @@ Every piece follows the same voice rules and Web3 safety rules, and gets checked
 | `references/structure.md` | Intros, ordering, headings, transitions, lists, tables, length | Step 4, Step 5 |
 | `references/seo.md` | On-page SEO checklist, linking and metadata | Step 2, Step 4, Step 6 |
 | `references/channels.md` | Blog, Substack, newsletter and YouTube formats, plus repurposing | Step 0, Step 5, Step 7 |
+| `references/visuals.md` | Figures, the annotation layer for code and pictures, article headers, thumbnails and social cards, and their checks | Step 0, Step 4, Step 7 |
 | `references/youtube.md` | The full YouTube playbook: strategy, packaging, scripting, retention beats, editing, publishing, repackaging, Web3 safety on screen | YouTube work |
 | `examples/outlines/` | 8 complete outlines, one per reader need, across Web3, AI, ZK and Web2 | Step 4 |
 | `templates/` | Fill-in templates for every channel and Web3 document type | Step 5, Mode D |
@@ -129,6 +130,7 @@ Read `references/titles.md`. For the chosen channel produce 8 to 10 options acro
 - **Blog / Substack:** SEO title (50 to 60 characters), meta description (140 to 160), slug; Substack also gets a subtitle.
 - **Newsletter:** subject line (under 50 characters) and preview text (40 to 90).
 - **YouTube:** the truth version plus 3 "stretch" titles (under 70 characters, ideally under 60) and a thumbnail concept with no text or 1 to 2 words (see `references/youtube.md`).
+- **Every channel:** the phrase to highlight on the article header, following the profile's visual branding (`references/visuals.md`).
 
 ### Step 4: Outline
 
@@ -136,7 +138,7 @@ Write the outline in the file format from `references/outline-template.md`, star
 - An **intro plan** that sets up the problem and stakes without giving the answer away, and never says "In this article, we will".
 - The **core answer first**: the first H2 (or, in a video, the first 15 to 20 seconds and the first point) delivers what the title promised, using a keyword variation.
 - Headings phrased as the reader's questions where natural.
-- A **keyword map**, **link map**, **image or visual plan** (with alt text), and **CTA placement**.
+- A **keyword map**, **link map**, **image or visual plan** (with alt text, the source of every value, and where the annotation layer points; see `references/visuals.md`), and **CTA placement**.
 - For video: the four layers (packaging, intro, framework, macro points) and the 1, 3 and 6-minute beats from `references/youtube.md`.
 
 Run the outline check and fix every ✘:
@@ -192,7 +194,7 @@ For YouTube, fact-check the script with `claims.py` as above, then use the per-v
 Return:
 1. Title options with the recommendation and the channel metadata.
 2. The finished piece.
-3. Link table (anchor, URL, internal or external), image or visual list with alt text.
+3. Link table (anchor, URL, internal or external), and the visuals: every figure and brand asset (header, thumbnail for video, social card) built with the profile's visual branding, each with alt text, checked with the list in `references/visuals.md`. Without brand tooling, deliver each image's concept and exact text instead.
 4. Audit summary and any warnings kept, with reasons.
 5. The fact-check report and ledger (`references/fact-check.md`): the gate's summary, every correction, softening and removal, and the `author` rows the author must confirm.
 6. Open questions.

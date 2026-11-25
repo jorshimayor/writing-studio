@@ -29,7 +29,7 @@ Pages, products, repos or flagship pieces to link to and promote:
 
 ## Visual branding
 
-Where your logo, colours, fonts and thumbnail style live, or who provides them. Leave it blank and the skill will only suggest image text and concepts.
+Where your brand guide lives (colours, fonts, figure style, annotation style, thumbnail and header layouts) and any tooling that renders them, or who provides them. With a guide and tooling, the skill builds figures and brand assets with them; leave it blank and the skill only suggests image text and concepts. See `references/visuals.md`.
 
 ## House style
 

@@ -111,7 +111,7 @@ How to find the stretch: write the smallest literal version, then ask what sits 
 - AI-generated art is acceptable only if it looks specific and human-made.
 - Match the facial expression to the promise, and keep a library of portrait expressions so you don't need a custom shoot each time.
 - Watch the channel page as a whole. Too many thumbnails in one style looks low-effort. If two options test about the same, pick the one that adds variety.
-- Design follows the profile's brand kit (in this profile, the designer owns it). The skill provides the **concept and any text**, not the design.
+- Design follows the profile's visual branding (`references/visuals.md`). If the profile has brand tooling, render the thumbnail with it and run the shrink test; otherwise provide the **concept and any text**, and leave the design to the brand kit or designer.
 
 ### Descriptions
 - One or two plain, search-friendly sentences, then links (article, repo, newsletter). Follow-along links go lower.
