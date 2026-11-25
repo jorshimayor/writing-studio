@@ -37,7 +37,7 @@ A figure earns its place when it shows something words can't do as quickly: a fl
 
 `scripts/figure_kit.py` builds illustrated figures as HTML and inline SVG and renders them to 2x PNG with headless Chrome. Use it for any figure that explains a mechanism, a flow, a comparison or a result. A plain chart from a plotting library is fine for dense data, but give it the same title, dek and source.
 
-**Brand.** The kit reads `profiles/<name>.brand.json`: palette, wordmark and an optional logo SVG. Copy `profiles/_template.brand.json` for a new profile. Fonts default to Bricolage Grotesque (titles), Geist (small headings), Newsreader (text), JetBrains Mono (code and numbers) and Caveat (the one marker note); a brand file can override any of them.
+**Brand.** The kit reads `profiles/<name>.brand.json`: palette, wordmark, and optional logo SVGs for light and dark backgrounds (`logo`, `logo_dark`). Copy `profiles/_template.brand.json` for a new profile. Fonts default to Bricolage Grotesque (titles), Geist (small headings), Newsreader (text), JetBrains Mono (code and numbers) and Caveat (the one marker note); a brand file can override any of them.
 
 **Frame.** `figure(kicker, title, dek, body, source)` gives every figure the same anatomy: a series label, a display title saying what it shows, a dek stating the finding (bold the one sentence that matters), the body, and a source line with the logo and wordmark. `render(page, "images/name.png")` writes the PNG and `name.html` beside it, the editable source.
 

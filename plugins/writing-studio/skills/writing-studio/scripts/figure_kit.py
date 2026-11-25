@@ -27,7 +27,7 @@ E = _h.escape
 WIDTH = 1200                      # CSS px; rendered at 2x
 
 DEFAULT_BRAND = {
-    "wordmark": "", "logo": "",
+    "wordmark": "", "logo": "", "logo_dark": "",
     "paper": "#fcfcfb", "ink": "#0b0b0b", "ink2": "#52514e", "ink3": "#8a8984",
     "blue": "#2a78d6", "blue_side": "#1d5fae", "blue_tint": "#eef3fb",
     "orange": "#eb6834", "orange_side": "#c4501f", "orange_tint": "#fdeee8",
@@ -44,17 +44,18 @@ ATT = ATT_SIDE = ATT_TINT = VIC = VIC_SIDE = VIC_TINT = GHOST = FONTS = CSS = ""
 
 
 def use_brand(path=None):
-    """Load a brand file (JSON with any DEFAULT_BRAND keys). "logo" is a path to an SVG,
-    relative to the brand file. Without a path, WRITING_STUDIO_BRAND is used if set."""
+    """Load a brand file (JSON with any DEFAULT_BRAND keys). "logo" and "logo_dark" are paths
+    to SVGs, relative to the brand file. Without a path, WRITING_STUDIO_BRAND is used if set."""
     global B, ATT, ATT_SIDE, ATT_TINT, VIC, VIC_SIDE, VIC_TINT, GHOST, FONTS, CSS
     path = path or os.environ.get("WRITING_STUDIO_BRAND")
     B = dict(DEFAULT_BRAND)
     if path:
         with open(path, encoding="utf-8") as fh:
             B.update(json.load(fh))
-        if B.get("logo"):
-            with open(os.path.join(os.path.dirname(os.path.abspath(path)), B["logo"]), encoding="utf-8") as fh:
-                B["_logo_svg"] = re.sub(r"<\?xml[^>]*>", "", fh.read()).strip()
+        for key in ("logo", "logo_dark"):
+            if B.get(key):
+                with open(os.path.join(os.path.dirname(os.path.abspath(path)), B[key]), encoding="utf-8") as fh:
+                    B[f"_{key}_svg"] = re.sub(r"<\?xml[^>]*>|<title>.*?</title>", "", fh.read()).strip()
     # Owner colours inside illustrations: orange = the attacker / odd one, blue = victim / normal.
     ATT, ATT_SIDE, ATT_TINT = B["orange"], B["orange_side"], B["orange_tint"]
     VIC, VIC_SIDE, VIC_TINT = B["blue"], B["blue_side"], B["blue_tint"]
@@ -120,9 +121,10 @@ h1{{font:800 44px/1.02 var(--display);letter-spacing:-.035em;margin-top:14px;max
 """
 
 
-def logo(size=28):
-    """The brand's logo from the brand file (an SVG with a square viewBox), or nothing."""
-    svg = B.get("_logo_svg", "")
+def logo(size=28, dark=False):
+    """The brand's logo from the brand file (an SVG with a square viewBox), or nothing.
+    dark=True uses "logo_dark" (for ink backgrounds) when the brand has one."""
+    svg = (B.get("_logo_dark_svg") if dark else "") or B.get("_logo_svg", "")
     if not svg:
         return ""
     return re.sub(r"<svg\b", f'<svg width="{size}" height="{size}" style="display:block" aria-hidden="true"', svg, count=1)

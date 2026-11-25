@@ -1,6 +1,6 @@
 {
   "wordmark": "jorshimayor",
-  "logo": "jorshimayor-logo.svg",
+  "logo": "jorshimayor-brand/mark-colour-on-paper.svg",
   "paper": "#fcfcfb",
   "ink": "#0b0b0b",
   "ink2": "#52514e",
@@ -13,5 +13,6 @@
   "orange_tint": "#fdeee8",
   "ghost": "#b9b8b1",
   "highlight": "#ffe45c",
-  "marker": "#d1203f"
+  "marker": "#d1203f",
+  "logo_dark": "jorshimayor-brand/mark-colour-on-ink.svg"
 }
