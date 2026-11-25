@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 428" width="700" height="428" role="img" aria-labelledby="t">
+<title id="t">Two overlapping circles for tokeniser training data and model training data, with glitch tokens such as SolidGoldMagikarp (circled) sitting in the part only the tokeniser saw</title>
+<rect width="700" height="428" rx="12" fill="#fcfcfb"/>
+<text x="24" y="30" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" letter-spacing="0.8" fill="#52514e">LLM TOKENISATION</text>
+<text x="24" y="60" font-family="Bricolage Grotesque, Inter, Helvetica, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="-0.4" fill="#0b0b0b">Where glitch tokens come from</text>
+<g transform="translate(0 30)">
+<circle cx="250" cy="200" r="110" fill="#eef3fb" fill-opacity="0.9" stroke="#2a78d6" stroke-width="1.5"/>
+<circle cx="420" cy="200" r="110" fill="#f1f1ee" fill-opacity="0.9" stroke="#52514e" stroke-width="1.5"/>
+<text x="200" y="66" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#2a78d6" xml:space="preserve">Text the tokeniser was trained on</text>
+<text x="470" y="66" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#52514e" xml:space="preserve">Text the model was trained on</text>
+<text x="345" y="195" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#0b0b0b" xml:space="preserve">Normal tokens</text>
+<text x="345" y="212" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12" font-weight="normal" fill="#52514e" xml:space="preserve">seen by both</text>
+<rect x="120" y="180" width="154" height="34" rx="6" fill="#fdeee8" fill-opacity="1" stroke="#eb6834" stroke-width="1.5"/>
+<text x="196.95999999999998" y="202" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="normal" fill="#eb6834" xml:space="preserve"> SolidGoldMagikarp</text>
+<polyline points="258.1,182.9 262.4,184.6 266.6,186.3 270.7,188.1 274.6,189.9 278.0,191.9 280.8,193.9 282.7,196.1 283.5,198.3 283.2,200.6 281.7,202.8 279.2,204.9 275.8,207.0 271.7,208.9 267.1,210.7 261.9,212.5 256.4,214.1 250.3,215.6 243.7,216.9 236.6,218.0 229.2,218.8 221.4,219.4 213.4,219.8 205.4,219.8 197.5,219.7 189.8,219.5 182.1,219.2 174.5,218.7 166.8,218.3 159.1,217.7 151.3,217.0 143.7,216.1 136.3,214.9 129.5,213.5 123.6,211.8 118.8,209.9 115.1,207.7 112.7,205.5 111.3,203.2 110.8,200.9 111.0,198.6 111.6,196.4 112.6,194.2 114.0,192.1 115.8,190.0 118.2,187.8 121.3,185.8 125.1,183.8 129.7,182.0 135.0,180.3 141.0,178.7 147.5,177.3 154.4,176.1 161.6,175.0 169.1,174.0 176.9,173.2 185.0,172.5 193.5,172.0 202.1,171.8 210.8,171.9 219.4,172.4 227.5,173.2 235.2,174.3 242.1,175.7 248.4,177.3 254.0,179.0 259.0,180.8 263.8,182.6 268.3,184.4 272.8,186.2 277.0,188.1 280.9,190.1 284.3,192.3 286.9,194.5" fill="none" stroke="#d1203f" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="200" y="245" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12" font-weight="normal" fill="#52514e" xml:space="preserve">Got a token.</text>
+<text x="200" y="261" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12" font-weight="normal" fill="#52514e" xml:space="preserve">Never got a meaning.</text>
+<text x="24" y="340" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#52514e" xml:space="preserve">A token the tokeniser learned from data the model never saw has an ID and an embedding, but nothing trained it.</text>
+</g>
+<line x1="24" y1="398" x2="676" y2="398" stroke="#d9d8d3" stroke-width="1"/><text x="676" y="418" text-anchor="end" font-family="Bricolage Grotesque, Inter, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing="-0.3" fill="#8a8984">jorshimayor</text>
+</svg>

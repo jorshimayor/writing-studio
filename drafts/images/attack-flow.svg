@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 538" width="720" height="538" role="img" aria-labelledby="t">
+<title id="t">ERC-4626 inflation attack in four steps: 1 wei deposit mints 1 share, 10,000 token donation lifts total assets, a 9,000 token deposit rounds to 0 shares (circled, noted 'rounds down to 0'), attacker redeems 19,000</title>
+<rect width="720" height="538" rx="12" fill="#fcfcfb"/>
+<text x="24" y="30" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" letter-spacing="0.8" fill="#52514e">ERC-4626 INFLATION ATTACK</text>
+<text x="24" y="60" font-family="Bricolage Grotesque, Inter, Helvetica, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="-0.4" fill="#0b0b0b">The inflation attack in four steps</text>
+<g transform="translate(0 30)">
+<text x="64" y="81" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="14" font-weight="normal" fill="#0b0b0b" xml:space="preserve">1. Attacker deposits 1 wei</text>
+<rect x="64" y="92" width="84" height="34" rx="6" fill="#fcfcfb" fill-opacity="1" stroke="#d9d8d3" stroke-width="1.5"/>
+<text x="106.24000000000001" y="114" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="normal" fill="#52514e" xml:space="preserve">supply 1</text>
+<rect x="154" y="92" width="117" height="34" rx="6" fill="#fcfcfb" fill-opacity="1" stroke="#d9d8d3" stroke-width="1.5"/>
+<text x="212.84000000000003" y="114" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="normal" fill="#52514e" xml:space="preserve">assets 1 wei</text>
+<text x="64" y="173" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="14" font-weight="normal" fill="#0b0b0b" xml:space="preserve">2. Attacker sends 10,000 tokens straight to the vault</text>
+<rect x="64" y="184" width="84" height="34" rx="6" fill="#fcfcfb" fill-opacity="1" stroke="#d9d8d3" stroke-width="1.5"/>
+<text x="106.24000000000001" y="206" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="normal" fill="#52514e" xml:space="preserve">supply 1</text>
+<rect x="154" y="184" width="125" height="34" rx="6" fill="#fcfcfb" fill-opacity="1" stroke="#d9d8d3" stroke-width="1.5"/>
+<text x="216.87" y="206" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="normal" fill="#52514e" xml:space="preserve">assets 10,000</text>
+<text x="64" y="265" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#0b0b0b" xml:space="preserve">3. Victim deposits 9,000 tokens</text>
+<rect x="64" y="276" width="238" height="34" rx="6" fill="#fcfcfb" fill-opacity="1" stroke="#d9d8d3" stroke-width="1.5"/>
+<text x="182.81" y="298" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="normal" fill="#52514e" xml:space="preserve">9,000 × 1 / 10,000 = 0.8999</text>
+<rect x="308" y="276" width="84" height="34" rx="6" fill="#fdeee8" fill-opacity="1" stroke="#eb6834" stroke-width="1.5"/>
+<text x="349.86" y="298" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="normal" fill="#eb6834" xml:space="preserve">0 shares</text>
+<text x="64" y="357" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="14" font-weight="normal" fill="#0b0b0b" xml:space="preserve">4. Attacker redeems the 1 share</text>
+<rect x="64" y="368" width="205" height="34" rx="6" fill="#fcfcfb" fill-opacity="1" stroke="#d9d8d3" stroke-width="1.5"/>
+<text x="166.69" y="390" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="normal" fill="#52514e" xml:space="preserve">1 share = 19,000 tokens</text>
+<polyline points="36.0,76.0 36.0,168.0 36.0,260.0 36.0,352.0" fill="none" stroke="#c3c2b7" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="36" cy="76" r="7" fill="#fcfcfb" stroke="#2a78d6" stroke-width="2.5"/>
+<circle cx="36" cy="168" r="7" fill="#fcfcfb" stroke="#2a78d6" stroke-width="2.5"/>
+<circle cx="36" cy="260" r="6" fill="#0b0b0b" fill-opacity="1"/>
+<circle cx="36" cy="260" r="2.5" fill="#fcfcfb" fill-opacity="1"/>
+<circle cx="36" cy="352" r="7" fill="#fcfcfb" stroke="#2a78d6" stroke-width="2.5"/>
+<polyline points="387.9,278.3 390.6,280.1 393.2,281.9 395.7,283.7 398.2,285.6 400.3,287.6 402.1,289.8 403.2,292.1 403.7,294.4 403.5,296.7 402.6,299.0 401.0,301.3 398.9,303.4 396.4,305.4 393.5,307.3 390.3,309.1 386.8,310.8 383.0,312.4 378.9,313.7 374.6,314.9 369.9,315.8 365.0,316.4 360.1,316.7 355.1,316.8 350.2,316.7 345.4,316.5 340.6,316.1 335.9,315.7 331.1,315.2 326.3,314.6 321.5,313.9 316.7,312.9 312.1,311.7 307.9,310.2 304.2,308.5 301.2,306.4 298.9,304.2 297.4,301.9 296.6,299.5 296.2,297.1 296.3,294.7 296.8,292.4 297.4,290.1 298.3,287.9 299.4,285.6 300.9,283.4 302.8,281.3 305.1,279.2 308.0,277.3 311.3,275.5 315.0,273.9 319.1,272.5 323.4,271.2 327.8,270.1 332.5,269.0 337.4,268.2 342.4,267.5 347.7,267.0 353.1,266.7 358.5,266.9 363.8,267.3 368.9,268.2 373.6,269.4 378.0,270.8 381.8,272.5 385.3,274.3 388.5,276.1 391.4,278.0 394.3,279.9 397.0,281.8 399.7,283.8 402.1,285.8 404.2,288.1 405.8,290.4" fill="none" stroke="#d1203f" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="452.1" y="268" text-anchor="start" font-family="Caveat, Segoe Print, Bradley Hand, cursive" font-size="21" font-weight="700" fill="#d1203f">rounds down to 0</text>
+<path d="M458.1 276.0 Q430.6 268.5 408.1 286.0" fill="none" stroke="#d1203f" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="408" y1="286" x2="412" y2="276" stroke="#d1203f" stroke-width="2.5"/>
+<line x1="408" y1="286" x2="419" y2="284" stroke="#d1203f" stroke-width="2.5"/>
+<text x="24" y="432" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#52514e" xml:space="preserve">No shares are minted in step 2, so one share now claims the whole 10,000. Step 3 rounds down to nothing.</text>
+<text x="24" y="450" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12" font-weight="normal" fill="#8a8984" xml:space="preserve">Foundry 1.9.0, OpenZeppelin Contracts 5.4.0, Web3-Hack-Analysis test suite.</text>
+</g>
+<line x1="24" y1="508" x2="696" y2="508" stroke="#d9d8d3" stroke-width="1"/><text x="696" y="528" text-anchor="end" font-family="Bricolage Grotesque, Inter, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing="-0.3" fill="#8a8984">jorshimayor</text>
+</svg>

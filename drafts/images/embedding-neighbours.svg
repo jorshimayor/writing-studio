@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 368" width="700" height="368" role="img" aria-labelledby="t">
+<title id="t">Nearest neighbours in GPT-2's embedding space: king next to queen, prince, and monarch; 7 next to 6, 8, and 5; Paris and space-Paris as two separate points, noted 'two separate rows'</title>
+<rect width="700" height="368" rx="12" fill="#fcfcfb"/>
+<text x="24" y="30" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" letter-spacing="0.8" fill="#52514e">LLM TOKENISATION</text>
+<text x="24" y="60" font-family="Bricolage Grotesque, Inter, Helvetica, Arial, sans-serif" font-size="17.8" font-weight="800" letter-spacing="-0.4" fill="#0b0b0b">Where tokens become meaning: nearest neighbours in GPT-2's embeddings</text>
+<g transform="translate(0 30)">
+<circle cx="140" cy="150" r="7" fill="#2a78d6" fill-opacity="1"/>
+<text x="140" y="136" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#0b0b0b" xml:space="preserve">king</text>
+<line x1="140" y1="150" x2="74" y2="134" stroke="#d9d8d3" stroke-width="1.5"/>
+<circle cx="74" cy="134" r="5" fill="#fcfcfb" fill-opacity="1" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="74.22151654498641" y="123.5830331203679" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="normal" fill="#52514e" xml:space="preserve">queen</text>
+<line x1="140" y1="150" x2="140" y2="102" stroke="#d9d8d3" stroke-width="1.5"/>
+<circle cx="140" cy="102" r="5" fill="#fcfcfb" fill-opacity="1" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="140.0" y="92.0" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="normal" fill="#52514e" xml:space="preserve">prince</text>
+<line x1="140" y1="150" x2="206" y2="134" stroke="#d9d8d3" stroke-width="1.5"/>
+<circle cx="206" cy="134" r="5" fill="#fcfcfb" fill-opacity="1" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="205.7784834550136" y="123.5830331203679" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="normal" fill="#52514e" xml:space="preserve">monarch</text>
+<circle cx="350" cy="150" r="7" fill="#2a78d6" fill-opacity="1"/>
+<text x="350" y="136" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#0b0b0b" xml:space="preserve">7</text>
+<line x1="350" y1="150" x2="284" y2="134" stroke="#d9d8d3" stroke-width="1.5"/>
+<circle cx="284" cy="134" r="5" fill="#fcfcfb" fill-opacity="1" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="284.2215165449864" y="123.5830331203679" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="normal" fill="#52514e" xml:space="preserve">6</text>
+<line x1="350" y1="150" x2="350" y2="102" stroke="#d9d8d3" stroke-width="1.5"/>
+<circle cx="350" cy="102" r="5" fill="#fcfcfb" fill-opacity="1" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="350.0" y="92.0" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="normal" fill="#52514e" xml:space="preserve">8</text>
+<line x1="350" y1="150" x2="416" y2="134" stroke="#d9d8d3" stroke-width="1.5"/>
+<circle cx="416" cy="134" r="5" fill="#fcfcfb" fill-opacity="1" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="415.7784834550136" y="123.5830331203679" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="normal" fill="#52514e" xml:space="preserve">5</text>
+<circle cx="520" cy="120" r="7" fill="#eb6834" fill-opacity="1"/>
+<text x="520" y="106" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#0b0b0b" xml:space="preserve">␣Paris</text>
+<circle cx="610" cy="190" r="7" fill="#eb6834" fill-opacity="1"/>
+<text x="610" y="215" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="600" fill="#0b0b0b" xml:space="preserve">Paris</text>
+<line x1="527" y1="126" x2="603" y2="184" stroke="#eb6834" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="590" y="202" text-anchor="end" font-family="Caveat, Segoe Print, Bradley Hand, cursive" font-size="21" font-weight="700" fill="#d1203f">two separate rows</text>
+<text x="24" y="262" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#52514e" xml:space="preserve">Each of the 50,257 IDs maps to a 768-dimensional vector. Similar tokens end up close together, but the</text>
+<text x="24" y="280" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#52514e" xml:space="preserve">model had to learn on its own that “ Paris” and “Paris” are the same city. Positions are schematic.</text>
+</g>
+<line x1="24" y1="338" x2="676" y2="338" stroke="#d9d8d3" stroke-width="1"/><text x="676" y="358" text-anchor="end" font-family="Bricolage Grotesque, Inter, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing="-0.3" fill="#8a8984">jorshimayor</text>
+</svg>

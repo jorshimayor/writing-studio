@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 352" width="700" height="352" role="img" aria-labelledby="t">
+<title id="t">Two prompts differing by one trailing space (circled, noted 'one extra space'), with the probability of Paris as the next token dropping from 3.2% to about 0%</title>
+<rect width="700" height="352" rx="12" fill="#fcfcfb"/>
+<text x="24" y="30" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" letter-spacing="0.8" fill="#52514e">LLM TOKENISATION</text>
+<text x="24" y="60" font-family="Bricolage Grotesque, Inter, Helvetica, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="-0.4" fill="#0b0b0b">One trailing space, two different questions</text>
+<g transform="translate(0 30)">
+<rect x="24" y="60" width="46" height="34" rx="6" fill="#eef3fb" fill-opacity="1" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="47.019999999999996" y="82" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="normal" fill="#0b0b0b" xml:space="preserve">The</text>
+<rect x="76" y="60" width="89" height="34" rx="6" fill="#eef3fb" fill-opacity="1" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="120.75999999999999" y="82" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="normal" fill="#0b0b0b" xml:space="preserve"> capital</text>
+<rect x="171" y="60" width="46" height="34" rx="6" fill="#eef3fb" fill-opacity="1" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="194.5" y="82" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="normal" fill="#0b0b0b" xml:space="preserve"> of</text>
+<rect x="224" y="60" width="81" height="34" rx="6" fill="#eef3fb" fill-opacity="1" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="263.9" y="82" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="normal" fill="#0b0b0b" xml:space="preserve"> France</text>
+<rect x="310" y="60" width="46" height="34" rx="6" fill="#eef3fb" fill-opacity="1" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="333.29999999999995" y="82" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="normal" fill="#0b0b0b" xml:space="preserve"> is</text>
+<text x="368.32" y="82" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#8a8984" xml:space="preserve">→</text>
+<rect x="392" y="60" width="72" height="34" rx="6" fill="#eef3fb" fill-opacity="1" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="428.36" y="82" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="normal" fill="#0b0b0b" xml:space="preserve">␣Paris</text>
+<text x="24" y="118" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="normal" fill="#0b0b0b" xml:space="preserve">P(' Paris') = 3.2%</text>
+<text x="220" y="118" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#2a78d6" xml:space="preserve">rank 5</text>
+<rect x="24" y="150" width="46" height="34" rx="6" fill="#eef3fb" fill-opacity="1" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="47.019999999999996" y="172" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="normal" fill="#0b0b0b" xml:space="preserve">The</text>
+<rect x="76" y="150" width="89" height="34" rx="6" fill="#eef3fb" fill-opacity="1" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="120.75999999999999" y="172" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="normal" fill="#0b0b0b" xml:space="preserve"> capital</text>
+<rect x="171" y="150" width="46" height="34" rx="6" fill="#eef3fb" fill-opacity="1" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="194.5" y="172" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="normal" fill="#0b0b0b" xml:space="preserve"> of</text>
+<rect x="224" y="150" width="81" height="34" rx="6" fill="#eef3fb" fill-opacity="1" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="263.9" y="172" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="normal" fill="#0b0b0b" xml:space="preserve"> France</text>
+<rect x="310" y="150" width="46" height="34" rx="6" fill="#eef3fb" fill-opacity="1" stroke="#2a78d6" stroke-width="1.5"/>
+<text x="333.29999999999995" y="172" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="normal" fill="#0b0b0b" xml:space="preserve"> is</text>
+<rect x="362" y="150" width="29" height="34" rx="6" fill="#fdeee8" fill-opacity="1" stroke="#eb6834" stroke-width="1.5"/>
+<text x="376.65999999999997" y="172" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="normal" fill="#eb6834" xml:space="preserve">␣</text>
+<text x="403.0" y="172" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="18" font-weight="normal" fill="#8a8984" xml:space="preserve">→</text>
+<rect x="427" y="150" width="63" height="34" rx="6" fill="#fdeee8" fill-opacity="1" stroke="#eb6834" stroke-width="1.5"/>
+<text x="458.7" y="172" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="normal" fill="#eb6834" xml:space="preserve">Paris</text>
+<text x="24" y="208" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="normal" fill="#0b0b0b" xml:space="preserve">P('Paris') ≈0%</text>
+<text x="220" y="208" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#eb6834" xml:space="preserve">rank 1,472</text>
+<polyline points="393.7,152.3 394.9,154.1 396.0,155.9 397.2,157.7 398.2,159.6 399.2,161.6 400.0,163.8 400.5,166.1 400.7,168.4 400.6,170.7 400.2,173.0 399.5,175.3 398.6,177.4 397.4,179.4 396.1,181.3 394.7,183.1 393.2,184.8 391.5,186.4 389.7,187.7 387.7,188.9 385.6,189.8 383.4,190.4 381.2,190.7 379.0,190.8 376.8,190.7 374.7,190.5 372.5,190.1 370.4,189.7 368.3,189.2 366.1,188.6 364.0,187.9 361.8,186.9 359.8,185.7 357.9,184.2 356.3,182.5 354.9,180.4 353.9,178.2 353.2,175.9 352.8,173.5 352.7,171.1 352.8,168.7 352.9,166.4 353.2,164.1 353.6,161.9 354.1,159.6 354.8,157.4 355.6,155.3 356.7,153.2 358.0,151.3 359.4,149.5 361.1,147.9 362.9,146.5 364.8,145.2 366.8,144.1 368.9,143.0 371.1,142.2 373.3,141.5 375.7,141.0 378.1,140.7 380.5,140.9 382.9,141.3 385.2,142.2 387.3,143.4 389.2,144.8 391.0,146.5 392.5,148.3 393.9,150.1 395.2,152.0 396.5,153.9 397.7,155.8 398.9,157.8 400.0,159.8 400.9,162.1 401.7,164.4" fill="none" stroke="#d1203f" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="400" y="220" text-anchor="start" font-family="Caveat, Segoe Print, Bradley Hand, cursive" font-size="21" font-weight="700" fill="#d1203f">one extra space</text>
+<path d="M406.0 202.2 Q395.4 191.7 380.7 194.0" fill="none" stroke="#d1203f" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="381" y1="194" x2="389" y2="187" stroke="#d1203f" stroke-width="2.5"/>
+<line x1="381" y1="194" x2="391" y2="198" stroke="#d1203f" stroke-width="2.5"/>
+<text x="24" y="245" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#52514e" xml:space="preserve">In GPT-2 the space belongs to the next word. “ Paris” and “Paris” are different tokens with different embeddings.</text>
+<text x="24" y="264" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#52514e" xml:space="preserve">Adding a space uses up the space token, so the model must predict the rare no-space “Paris”.</text>
+</g>
+<line x1="24" y1="322" x2="676" y2="322" stroke="#d9d8d3" stroke-width="1"/><text x="676" y="342" text-anchor="end" font-family="Bricolage Grotesque, Inter, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing="-0.3" fill="#8a8984">jorshimayor</text>
+</svg>

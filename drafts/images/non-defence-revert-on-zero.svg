@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 370" width="720" height="370" role="img" aria-labelledby="t">
+<title id="t">Reverting on zero shares: a 9,000 deposit reverts and the vault is unusable, a 15,000 deposit passes the check and still loses 2,500</title>
+<rect width="720" height="370" rx="12" fill="#fcfcfb"/>
+<text x="24" y="30" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="11" letter-spacing="0.8" fill="#52514e">ERC-4626 INFLATION ATTACK</text>
+<text x="24" y="60" font-family="Bricolage Grotesque, Inter, Helvetica, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="-0.4" fill="#0b0b0b">The non-defence: revert on zero shares</text>
+<g transform="translate(0 30)">
+<text x="24" y="66" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13.5" font-weight="normal" fill="#0b0b0b" xml:space="preserve">Vault state after the 1 wei deposit and the 10,000 donation</text>
+<rect x="24" y="80" width="141" height="34" rx="6" fill="#fcfcfb" fill-opacity="1" stroke="#d9d8d3" stroke-width="1.5"/>
+<text x="94.45" y="102" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="normal" fill="#52514e" xml:space="preserve">totalSupply = 1</text>
+<rect x="171" y="80" width="181" height="34" rx="6" fill="#fcfcfb" fill-opacity="1" stroke="#d9d8d3" stroke-width="1.5"/>
+<text x="261.5" y="102" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="normal" fill="#52514e" xml:space="preserve">totalAssets = 10,000</text>
+<rect x="358" y="80" width="181" height="34" rx="6" fill="#fcfcfb" fill-opacity="1" stroke="#d9d8d3" stroke-width="1.5"/>
+<text x="448.70000000000005" y="102" text-anchor="middle" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="normal" fill="#52514e" xml:space="preserve">require(shares != 0)</text>
+<text x="24" y="146" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="13.5" font-weight="normal" fill="#0b0b0b" xml:space="preserve">Victim deposits</text>
+<text x="24" y="176" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="normal" fill="#0b0b0b" xml:space="preserve">9,000 → 0.8999 → 0 → reverts.   15,000 → 1.4999 → 1 → passes</text>
+<text x="24" y="198" text-anchor="start" font-family="JetBrains Mono, SFMono-Regular, Menlo, Consolas, monospace" font-size="14" font-weight="normal" fill="#eb6834" xml:space="preserve">→ Small deposits are blocked. Large ones still lose 2,500.</text>
+<polyline points="24.0,205.0 35.8,206.6 47.5,206.0 59.3,204.1 71.0,203.9 82.8,205.7 94.6,207.1 106.3,206.1 118.1,204.3 129.8,204.5 141.6,206.5 153.4,207.5 165.1,206.1 176.9,204.6 188.6,205.2 200.4,207.2 212.2,207.8 223.9,206.2 235.7,204.9 247.4,205.8 259.2,207.8" fill="none" stroke="#d1203f" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="24" y="246" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#52514e" xml:space="preserve">Below the inflated share price every deposit reverts: theft becomes denial of service.</text>
+<text x="24" y="264" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="normal" fill="#52514e" xml:space="preserve">Above it the check passes and the partial loss goes through.</text>
+<text x="24" y="282" text-anchor="start" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12" font-weight="normal" fill="#8a8984" xml:space="preserve">Foundry 1.9.0, OpenZeppelin Contracts 5.4.0, Web3-Hack-Analysis test suite.</text>
+</g>
+<line x1="24" y1="340" x2="696" y2="340" stroke="#d9d8d3" stroke-width="1"/><text x="696" y="360" text-anchor="end" font-family="Bricolage Grotesque, Inter, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing="-0.3" fill="#8a8984">jorshimayor</text>
+</svg>

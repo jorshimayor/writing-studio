@@ -1,0 +1,48 @@
+<!doctype html><html lang="en-GB"><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Caveat:wght@600..700&family=Geist:wght@400..800&family=JetBrains+Mono:wght@400..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=block"><style>
+:root{--paper:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--ink3:#8a8984;--line:#e4e3dd;--card:#ffffff;
+--blue:#2a78d6;--orange:#eb6834;--hl:#ffe45c;--red:#d1203f;--btint:#eef3fb;--otint:#fdeee8;
+--display:"Bricolage Grotesque",Inter,sans-serif;--head:"Geist",Inter,Helvetica,sans-serif;--ui:"Newsreader","Times New Roman",Times,serif;--mono:"JetBrains Mono",Menlo,monospace;--hand:"Caveat",cursive}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1200px;background:#ff00ff}
+body{font-family:var(--ui);color:var(--ink);-webkit-font-smoothing:antialiased}
+.fig{width:1200px;padding:44px 52px 30px;background:var(--paper);
+  background-image:radial-gradient(#e6e5df 1.1px,transparent 1.3px);background-size:22px 22px;background-position:11px 11px}
+.kicker{display:flex;align-items:center;gap:10px;font:600 13px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.kicker i{width:9px;height:9px;border-radius:50%;border:2.5px solid var(--blue);display:inline-block}
+.kicker b{flex:none;width:28px;height:2px;background:#c3c2b7}
+h1{font:800 44px/1.02 var(--display);letter-spacing:-.035em;margin-top:14px;max-width:1000px;text-wrap:balance}
+.dek{font:400 21px/1.42 var(--ui);color:var(--ink2);margin-top:12px;max-width:900px;text-wrap:pretty}
+.dek strong{color:var(--ink);font-weight:600}
+.body{margin-top:30px}
+.foot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:28px;padding-top:14px;border-top:1px solid var(--line)}
+.src{font:400 15px/1.45 var(--ui);color:var(--ink3);max-width:900px}
+.wm{font:800 17px/1 var(--display);letter-spacing:-.03em;color:var(--ink)}
+.wm span{background:linear-gradient(transparent 58%,var(--hl) 58%,var(--hl) 92%,transparent 92%)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 1px 0 var(--line),0 12px 28px -22px rgba(11,11,11,.35)}
+.mono{font-family:var(--mono)}
+.hl{background:linear-gradient(100deg,transparent 1%,var(--hl) 3%,var(--hl) 97%,transparent 99%) 0 70%/100% 42% no-repeat;padding:0 .08em;-webkit-box-decoration-break:clone}
+.circ{position:relative;display:inline-block}
+.circ::before,.circ::after{content:"";position:absolute;inset:-12px -14px;border:3px solid var(--red);border-radius:50%;transform:rotate(-4deg);pointer-events:none}
+.circ::after{inset:-9px -17px;transform:rotate(3deg);opacity:.7}
+.note{font:700 28px/1 var(--hand);color:var(--red);white-space:nowrap}
+.pill{display:inline-flex;align-items:center;gap:6px;font:600 13px/1 var(--mono);padding:7px 10px;border-radius:999px;border:1.5px solid var(--line);background:#fff;white-space:nowrap}
+.pill.att{border-color:var(--orange);background:var(--otint);color:#a8401a}
+.pill.vic{border-color:var(--blue);background:var(--btint);color:#1d5fae}
+.pill.ok{border-color:#1baf7a;background:#e8f7f1;color:#0f7a54}
+.stamp{display:inline-block;font:800 15px/1 var(--display);letter-spacing:.06em;text-transform:uppercase;padding:8px 12px;border:2.5px solid currentColor;border-radius:8px;transform:rotate(-4deg)}
+
+.tok{display:inline-flex;align-items:center;height:40px;padding:0 12px;border-radius:10px;border:2px solid var(--blue);background:var(--btint);font:600 18px var(--mono);white-space:pre;color:var(--ink)}
+.tok.odd{border-color:var(--orange);background:var(--otint);color:#a8401a}
+.tok.n{border-color:#d6d5cf;background:#fff;color:var(--ink2)}
+.sp{color:var(--ink3)}
+.lab{font:700 12px var(--mono);letter-spacing:.1em;color:var(--ink3);text-transform:uppercase}
+.big{font:800 54px/1 var(--display);letter-spacing:-.04em}
+
+.rows{padding:10px 26px}
+.r{display:grid;grid-template-columns:220px 50px minmax(0,1fr) 120px;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.r:last-child{border-bottom:0}
+.typed{font:600 22px var(--mono);border:2px solid var(--ink);border-radius:10px;padding:8px 12px;background:#fff;white-space:pre}
+.ts{display:flex;gap:6px;flex-wrap:wrap}
+.cnt{font:800 28px var(--display);text-align:right}
+.cnt small{font:400 15px var(--ui);color:var(--ink3);margin-left:4px}
+</style><div class="fig" id="fig"><div class="kicker"><i></i><b></b>LLM tokenisation</div><h1>How GPT-2 splits what you type</h1><p class="dek">Merges follow frequency in web text. <strong>Common forms become one token; everything else is chopped.</strong></p><div class="body"><div class="card rows"><div class="r"><span class="typed">Hello</span><div style="display:flex;flex-direction:column;align-items:center"><svg width="44" height="22" viewBox="0 0 44 22"><path d="M2 11.0 H38" stroke="#0b0b0b" stroke-width="2.5" stroke-linecap="round"/><path d="M30 4.0 L40 11.0 L30 18.0" fill="none" stroke="#0b0b0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ts" style="align-items:center"><span class="tok">Hello</span></div><span class="cnt">1<small>token</small></span></div><div class="r"><span class="typed">HELLO</span><div style="display:flex;flex-direction:column;align-items:center"><svg width="44" height="22" viewBox="0 0 44 22"><path d="M2 11.0 H38" stroke="#0b0b0b" stroke-width="2.5" stroke-linecap="round"/><path d="M30 4.0 L40 11.0 L30 18.0" fill="none" stroke="#0b0b0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ts" style="align-items:center"><span class="tok">HE</span><span class="tok">LL</span><span class="tok">O</span></div><span class="cnt">3<small>tokens</small></span></div><div class="r"><span class="typed">1234567</span><div style="display:flex;flex-direction:column;align-items:center"><svg width="44" height="22" viewBox="0 0 44 22"><path d="M2 11.0 H38" stroke="#0b0b0b" stroke-width="2.5" stroke-linecap="round"/><path d="M30 4.0 L40 11.0 L30 18.0" fill="none" stroke="#0b0b0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ts" style="align-items:center"><span class="circ" style="display:flex;gap:6px"><span class="tok">123</span><span class="tok">45</span><span class="tok">67</span></span><span class="note" style="margin-left:34px;transform:rotate(-3deg)">chopped by frequency</span></div><span class="cnt">3<small>tokens</small></span></div><div class="r"><span class="typed">2026</span><div style="display:flex;flex-direction:column;align-items:center"><svg width="44" height="22" viewBox="0 0 44 22"><path d="M2 11.0 H38" stroke="#0b0b0b" stroke-width="2.5" stroke-linecap="round"/><path d="M30 4.0 L40 11.0 L30 18.0" fill="none" stroke="#0b0b0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ts" style="align-items:center"><span class="tok">20</span><span class="tok">26</span></div><span class="cnt">2<small>tokens</small></span></div><div class="r"><span class="typed">8 spaces</span><div style="display:flex;flex-direction:column;align-items:center"><svg width="44" height="22" viewBox="0 0 44 22"><path d="M2 11.0 H38" stroke="#0b0b0b" stroke-width="2.5" stroke-linecap="round"/><path d="M30 4.0 L40 11.0 L30 18.0" fill="none" stroke="#0b0b0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="ts" style="align-items:center"><span class="tok">␣</span><span class="tok">␣</span><span class="tok">␣</span><span class="tok">␣</span><span class="tok">␣</span><span class="tok">␣</span><span class="tok">␣</span><span class="tok">␣</span></div><span class="cnt">8<small>tokens</small></span></div></div></div><div class="foot"><p class="src">GPT-2 tokeniser, from the week 1 notebook. ␣ marks a space.</p><div class="wm" style="display:flex;align-items:center;gap:8px"><svg width="30" height="30" viewBox="0 0 64 64" style="display:block" aria-hidden="true"><polygon points="9,40 55,35 56,51 11,55" fill="#ffe45c"/><path d="M36 26 V44 A9.5 9.5 0 0 1 17 44" fill="none" stroke="#0b0b0b" stroke-width="9" stroke-linecap="round"/><circle cx="36" cy="13" r="5.5" fill="#0b0b0b"/><ellipse cx="36" cy="13" rx="11.5" ry="9" fill="none" stroke="#d1203f" stroke-width="2.8" transform="rotate(-10 36 13)"/></svg><span>jorshimayor</span></div></div></div></html>

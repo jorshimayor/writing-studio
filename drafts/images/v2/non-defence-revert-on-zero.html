@@ -1,0 +1,57 @@
+<!doctype html><html lang="en-GB"><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Caveat:wght@600..700&family=Geist:wght@400..800&family=JetBrains+Mono:wght@400..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=block"><style>
+:root{--paper:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--ink3:#8a8984;--line:#e4e3dd;--card:#ffffff;
+--blue:#2a78d6;--orange:#eb6834;--hl:#ffe45c;--red:#d1203f;--btint:#eef3fb;--otint:#fdeee8;
+--display:"Bricolage Grotesque",Inter,sans-serif;--head:"Geist",Inter,Helvetica,sans-serif;--ui:"Newsreader","Times New Roman",Times,serif;--mono:"JetBrains Mono",Menlo,monospace;--hand:"Caveat",cursive}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1200px;background:#ff00ff}
+body{font-family:var(--ui);color:var(--ink);-webkit-font-smoothing:antialiased}
+.fig{width:1200px;padding:44px 52px 30px;background:var(--paper);
+  background-image:radial-gradient(#e6e5df 1.1px,transparent 1.3px);background-size:22px 22px;background-position:11px 11px}
+.kicker{display:flex;align-items:center;gap:10px;font:600 13px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.kicker i{width:9px;height:9px;border-radius:50%;border:2.5px solid var(--blue);display:inline-block}
+.kicker b{flex:none;width:28px;height:2px;background:#c3c2b7}
+h1{font:800 44px/1.02 var(--display);letter-spacing:-.035em;margin-top:14px;max-width:1000px;text-wrap:balance}
+.dek{font:400 21px/1.42 var(--ui);color:var(--ink2);margin-top:12px;max-width:900px;text-wrap:pretty}
+.dek strong{color:var(--ink);font-weight:600}
+.body{margin-top:30px}
+.foot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:28px;padding-top:14px;border-top:1px solid var(--line)}
+.src{font:400 15px/1.45 var(--ui);color:var(--ink3);max-width:900px}
+.wm{font:800 17px/1 var(--display);letter-spacing:-.03em;color:var(--ink)}
+.wm span{background:linear-gradient(transparent 58%,var(--hl) 58%,var(--hl) 92%,transparent 92%)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 1px 0 var(--line),0 12px 28px -22px rgba(11,11,11,.35)}
+.mono{font-family:var(--mono)}
+.hl{background:linear-gradient(100deg,transparent 1%,var(--hl) 3%,var(--hl) 97%,transparent 99%) 0 70%/100% 42% no-repeat;padding:0 .08em;-webkit-box-decoration-break:clone}
+.circ{position:relative;display:inline-block}
+.circ::before,.circ::after{content:"";position:absolute;inset:-12px -14px;border:3px solid var(--red);border-radius:50%;transform:rotate(-4deg);pointer-events:none}
+.circ::after{inset:-9px -17px;transform:rotate(3deg);opacity:.7}
+.note{font:700 28px/1 var(--hand);color:var(--red);white-space:nowrap}
+.pill{display:inline-flex;align-items:center;gap:6px;font:600 13px/1 var(--mono);padding:7px 10px;border-radius:999px;border:1.5px solid var(--line);background:#fff;white-space:nowrap}
+.pill.att{border-color:var(--orange);background:var(--otint);color:#a8401a}
+.pill.vic{border-color:var(--blue);background:var(--btint);color:#1d5fae}
+.pill.ok{border-color:#1baf7a;background:#e8f7f1;color:#0f7a54}
+.stamp{display:inline-block;font:800 15px/1 var(--display);letter-spacing:.06em;text-transform:uppercase;padding:8px 12px;border:2.5px solid currentColor;border-radius:8px;transform:rotate(-4deg)}
+
+.duo{display:grid;grid-template-columns:330px minmax(0,1fr);gap:20px}
+.pane{padding:22px;display:flex;flex-direction:column;gap:14px}
+.lab{font:700 12px var(--mono);letter-spacing:.1em;color:var(--ink3);text-transform:uppercase}
+.pane h3{font:700 20px/1.2 var(--head)}
+.state{display:flex;flex-wrap:wrap;gap:8px}
+.calc{font:600 17px/1.5 var(--mono);background:#f6f5f1;border-radius:12px;padding:12px 14px}
+.calc small{display:block;font:500 13px var(--mono);color:var(--ink3);margin-bottom:4px}
+.res{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.who{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.who > div{border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);background:#fff}
+.who b{display:block;font:800 26px var(--display);letter-spacing:-.02em}
+.who span{font:400 16px var(--ui);color:var(--ink2)}
+.ok{color:#0f7a54} .bad{color:#a8401a}
+.lane{display:grid;grid-template-columns:200px minmax(0,1fr) 290px;align-items:center;gap:20px;padding:20px 22px}
+.lane + .lane{margin-top:14px}
+.dec{display:grid;grid-template-columns:minmax(0,1fr) 70px minmax(0,1fr);align-items:center;gap:0;row-gap:0}
+.q{padding:16px 18px;font:600 18px/1.3 var(--head);display:flex;align-items:center;gap:14px}
+.q .qn{flex:none;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font:800 15px var(--display)}
+.yes{display:flex;flex-direction:column;align-items:center;font:700 12px var(--mono);color:var(--blue)}
+.act{padding:14px 16px;display:flex;align-items:center;gap:12px;font:400 17px/1.35 var(--ui);border:2px solid var(--blue);background:var(--btint)}
+.act b{font-family:var(--head);font-weight:700}
+.down{grid-column:1;display:flex;align-items:center;gap:10px;padding:6px 0 6px 30px;font:700 12px var(--mono);color:var(--ink3)}
+.down i{display:block;width:2px;height:30px;background:#c3c2b7}
+</style><div class="fig" id="fig"><div class="kicker"><i></i><b></b>ERC-4626 inflation attack · the non-defence</div><h1>Reverting on zero shares doesn't fix it</h1><p class="dek">Below the inflated share price every deposit reverts, so theft becomes denial of service. <strong>Above it the check passes and the partial loss goes through.</strong></p><div class="body"><div style="display:flex;align-items:center;gap:12px;margin-bottom:16px"><span class="pill">totalSupply = 1</span><span class="pill">totalAssets = 10,000</span><span class="pill att">require(shares != 0)</span></div><div class="card lane"><div style="display:flex;align-items:center;gap:12px"><svg width="46" height="46" viewBox="0 0 46 46" style="display:block"><clipPath id="cvic"><circle cx="23" cy="23" r="21"/></clipPath><circle cx="23" cy="23" r="21.5" fill="#fff" stroke="#2a78d6" stroke-width="3"/><g clip-path="url(#cvic)"><circle cx="23" cy="19" r="8.5" fill="#f1d3bf"/><path d="M18 14 q5 -6 11 0" stroke="#0b0b0b" stroke-width="3" fill="none"/><path d="M8 42 C9 30 16 28 23 28 C30 28 37 30 38 42 Z" fill="#2a78d6"/></g></svg><div><div class="lab">deposit</div><div style="font:800 30px var(--display)">9,000</div></div></div><div class="calc" style="text-align:center">9,000 × 1 / 10,000 = 0.8999 → 0<br><span class="hl">require(shares != 0)</span> fails</div><div style="display:flex;flex-direction:column;align-items:center;gap:8px"><span class="stamp" style="color:var(--red)">reverts</span><span style="font:400 16px var(--ui);color:var(--ink2);text-align:center">blocked: the vault is unusable<br>for small deposits</span></div></div><div class="card lane"><div style="display:flex;align-items:center;gap:12px"><svg width="46" height="46" viewBox="0 0 46 46" style="display:block"><clipPath id="cvic"><circle cx="23" cy="23" r="21"/></clipPath><circle cx="23" cy="23" r="21.5" fill="#fff" stroke="#2a78d6" stroke-width="3"/><g clip-path="url(#cvic)"><circle cx="23" cy="19" r="8.5" fill="#f1d3bf"/><path d="M18 14 q5 -6 11 0" stroke="#0b0b0b" stroke-width="3" fill="none"/><path d="M8 42 C9 30 16 28 23 28 C30 28 37 30 38 42 Z" fill="#2a78d6"/></g></svg><div><div class="lab">deposit</div><div style="font:800 30px var(--display)">15,000</div></div></div><div class="calc" style="text-align:center">15,000 × 1 / 10,000 = 1.4999 → 1<br>check passes</div><div style="display:flex;flex-direction:column;align-items:center;gap:8px"><span class="circ"><div style="display:inline-block"><svg width="120" height="58" viewBox="0 0 120 58" style="display:block"><path d="M4 2 H116 V20.0 a9 9 0 0 0 0 18 V56 H4 V38.0 a9 9 0 0 0 0 -18 Z" fill="#eef3fb" stroke="#2a78d6" stroke-width="2.5"/><line x1="98" y1="8" x2="98" y2="50" stroke="#2a78d6" stroke-width="1.5" stroke-dasharray="3 4"/><text x="55.0" y="34.0" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="14" fill="#1d5fae">1 SHARE</text></svg></div></span><span style="font:800 24px var(--display);color:#a8401a">worth 12,500: −2,500</span></div></div><div class="note" style="margin:10px 0 0 760px;transform:rotate(-2deg)">still loses 2,500</div></div><div class="foot"><p class="src">Attack: 1 wei deposit, 10,000 token donation, 9,000 token victim deposit. Foundry 1.9.0, solc 0.8.25, OpenZeppelin Contracts 5.4.0, Web3-Hack-Analysis test suite.</p><div class="wm" style="display:flex;align-items:center;gap:8px"><svg width="30" height="30" viewBox="0 0 64 64" style="display:block" aria-hidden="true"><polygon points="9,40 55,35 56,51 11,55" fill="#ffe45c"/><path d="M36 26 V44 A9.5 9.5 0 0 1 17 44" fill="none" stroke="#0b0b0b" stroke-width="9" stroke-linecap="round"/><circle cx="36" cy="13" r="5.5" fill="#0b0b0b"/><ellipse cx="36" cy="13" rx="11.5" ry="9" fill="none" stroke="#d1203f" stroke-width="2.8" transform="rotate(-10 36 13)"/></svg><span>jorshimayor</span></div></div></div></html>
