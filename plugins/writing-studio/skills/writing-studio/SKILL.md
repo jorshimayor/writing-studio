@@ -18,6 +18,7 @@ Every piece follows the same voice rules and Web3 safety rules, and gets checked
 | File | Contains | Read at |
 |---|---|---|
 | `profiles/<name>.md` | Brand, audience, channels, links, calls to action, spelling and capitalisation | Step 0 |
+| `profiles/<name>.brand.json` | Palette, wordmark and logo for the figure kit (copy `_template.brand.json`) | Step 5 |
 | `references/fact-check.md` | Fact-checking every statement: the procedure, source hierarchy, what to check per claim type and domain, the ledger statuses and the report | Step 2, Step 6, Modes D and E |
 | `references/voice.md` | The voice rules: the three hard rules (with the reasoning behind them), domain before/after examples, defaults, terminology | Every mode |
 | `references/domains.md` | Web3, AI, ZK and Web2: sources, terminology, accuracy and safety rules, example topics | Step 0, Step 2, Step 5 |
@@ -32,9 +33,10 @@ Every piece follows the same voice rules and Web3 safety rules, and gets checked
 | `references/visuals.md` | Figures, the annotation layer for code and pictures, article headers, thumbnails and social cards, and their checks | Step 0, Step 4, Step 7 |
 | `references/youtube.md` | The full YouTube playbook: strategy, packaging, scripting, retention beats, editing, publishing, repackaging, Web3 safety on screen | YouTube work |
 | `examples/outlines/` | 8 complete outlines, one per reader need, across Web3, AI, ZK and Web2 | Step 4 |
-| `templates/` | Fill-in templates for every channel and Web3 document type | Step 5, Mode D |
+| `templates/` | Fill-in templates for every channel and Web3 document type, plus `figure.py`, a starter figure | Step 5, Mode D |
 | `scripts/keyword_ideas.py` | Free keyword and question ideas from Google and YouTube autocomplete | Step 2 |
 | `scripts/outline_check.py` | Checks an outline against its reader-need rules, and a draft against its outline | Step 4, Step 6 |
+| `scripts/figure_kit.py` | Illustrated figures as HTML and SVG rendered to 2x PNG: brand frame, cards, stamps, highlight, circle and note, coins, vaults, tickets, avatars, keycaps. Reads `profiles/<name>.brand.json` | Step 5 |
 | `scripts/claims.py` | Fact-check ledger: extracts every statement from a draft, then blocks delivery until each one is verified, corrected, softened, removed or marked as opinion | Step 6, Modes D and E |
 | `scripts/seo_check.py` | SEO, voice and Web3 safety audit for Markdown. Without `--keyword` it runs voice and safety checks only | Step 6, Modes D and E |
 

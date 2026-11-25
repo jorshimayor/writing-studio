@@ -6,6 +6,7 @@ Every piece ships with its pictures: the figures inside it and the brand assets 
 - Where the look comes from
 - Plan visuals in the outline
 - Figures inside the piece
+- The figure kit
 - The annotation layer: pointing at the one thing
 - Brand assets around the piece
 - Checks before delivery
@@ -31,6 +32,32 @@ A figure earns its place when it shows something words can't do as quickly: a fl
 - Code in a figure is real code from a tagged release or the author's repo. Name the file and lines; say if it was reflowed.
 - Screenshots: crop to the part that matters, blur anything private, use testnets and burner wallets, and never show a key, seed phrase or token.
 - Alt text states the finding in numbers and says what is marked.
+
+## The figure kit
+
+`scripts/figure_kit.py` builds illustrated figures as HTML and inline SVG and renders them to 2x PNG with headless Chrome. Use it for any figure that explains a mechanism, a flow, a comparison or a result. A plain chart from a plotting library is fine for dense data, but give it the same title, dek and source.
+
+**Brand.** The kit reads `profiles/<name>.brand.json`: palette, wordmark and an optional logo SVG. Copy `profiles/_template.brand.json` for a new profile. Fonts default to Bricolage Grotesque (titles), Geist (small headings), Newsreader (text), JetBrains Mono (code and numbers) and Caveat (the one marker note); a brand file can override any of them.
+
+**Frame.** `figure(kicker, title, dek, body, source)` gives every figure the same anatomy: a series label, a display title saying what it shows, a dek stating the finding (bold the one sentence that matters), the body, and a source line with the logo and wordmark. `render(page, "images/name.png")` writes the PNG and `name.html` beside it, the editable source.
+
+**Parts.**
+
+| Part | Call or class | Use it for |
+|---|---|---|
+| Card | `class="card"` | A panel, a step, an option |
+| Pill | `class="pill"`, `pill vic`, `pill att`, `pill ok` | State, a value, a tag |
+| Stamp | `class="stamp"` | A verdict: holds, leaks, broken, reverts |
+| Highlight | `class="hl"` | The word or term that matters |
+| Circle and note | `class="circ"`, `class="note"` | The annotation layer below |
+| Coins and vault | `coins(n, "vic" or "att")`, `vault([stacks])`, `mini_vault()` | Balances, deposits, who owns what (state the scale, such as one coin per 1,000 tokens) |
+| Ticket | `ticket(text, kind, empty=)` | Shares, receipts, claims; `empty=True` for one that wasn't minted |
+| Avatar | `avatar("att" or "vic", label)` | The actors in a flow |
+| Keycap, arrow | `keycap(label)`, `arrow()`, `hand_arrow()` | Input, steps, direction |
+
+**Layouts that work.** A storyboard of numbered step cards along a trace line for a sequence; side-by-side cards for a comparison; a scoreboard (rows with a bar, a value and a stamp) for results; a station pipeline for transformations; a receipt or ledger for costs; a dot chart for one value changing across versions. `templates/figure.py` is a starter.
+
+**Rules.** Draw the thing the reader is imagining (a vault, a token, a key), not a generic box. Keep the same scale across panels and say what a unit means. Owner colours keep their meaning across a piece: blue is normal or the victim, orange is the odd one or the attacker. One circle and one note per figure. Check the render, because overlaps don't show up in code.
 
 ## The annotation layer: pointing at the one thing
 

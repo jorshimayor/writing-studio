@@ -48,7 +48,14 @@ Use these for internal links and next-step CTAs. Add new pieces as they're publi
 
 ## Visual branding
 
-Handled by my designer. Don't invent logos, colour palettes, fonts or thumbnail designs. For YouTube thumbnails and article images, give the **text and the concept** (what the image should show), and leave the design to the designer's brand kit. If brand assets are added to this profile later, follow them.
+Brand guide: `design/BRAND_GUIDE.md` in the writing-studio repo. The look is **Paper Trace with a marker layer**: paper `#fcfcfb`, ink `#0b0b0b`, trace blue `#2a78d6`, Bricolage Grotesque 800 for titles and hooks, Inter for text, JetBrains Mono for code, and on top a marker layer (highlighter `#ffe45c`, marker red `#d1203f`, one Caveat note) that points at the exact line, value or spot that matters.
+
+- **Per piece**, deliver a brand-asset spec (`design/brand/specs/<slug>.json`) and render it with `python3 design/brand/brand_assets.py <spec>`: YouTube thumbnail, article header, social card and banner, plus the shrink test. Record the source of every number and line of code in the spec's `sources`.
+- **Illustrated figures** use the skill's figure kit (`scripts/figure_kit.py`) with `profiles/jorshimayor.brand.json` and the Marked j logo (`profiles/jorshimayor-logo.svg`). Article scripts live in `design/figures/` (`erc4626_v2.py`, `tokenisation_v2.py`) and write to `drafts/images/v2/`.
+- **Plain SVG figures**, build with `design/viz/components.py` and `design/viz/tokens.py` following `design/ILLUSTRATION_DESIGN_SYSTEM.md`. Use the marker layer (`highlight`, `marker_circle`, `note`, plus `code_block` and `image` for code and pictures) when the reader must look at one place: at most one circle and one note per figure. Never hard-code a colour or size.
+- **Export** PNGs with `python3 design/viz/export.py`, which loads the brand fonts.
+- Each figure gets a title, a caption, a footnote with the source, and alt text that states the finding in numbers and says what is marked.
+- Logo: Marked j. Still open: the tagline "Built. Run. Measured." (proposed), and a library of cut-out photos.
 
 ## House style
 
